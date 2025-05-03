@@ -208,17 +208,16 @@ backend/
 
 ## Tác giả
 
-- [Tên của bạn] - [Email hoặc thông tin liên hệ]
-- [Tên thành viên khác trong nhóm] - [Email hoặc thông tin liên hệ]
+- Mai Khoa Bách
+- Nguyễn Minh Đức
+- Đồng Văn Hảo
+- Nguyễn Văn Quang
 
-## Giấy phép
-
-Dự án này được phân phối dưới giấy phép [loại giấy phép]. Xem file `LICENSE` để biết thêm chi tiết.
 
 ## Lời cảm ơn
 
 Chúng tôi xin gửi lời cảm ơn đến:
-- [Tên giáo viên hướng dẫn] đã hỗ trợ và hướng dẫn trong quá trình thực hiện đồ án
+- Thầy giáo [Nguyễn Đình Quý] đã hỗ trợ và hướng dẫn trong quá trình thực hiện đồ án
 - Các thư viện mã nguồn mở đã được sử dụng trong dự án
 - Cộng đồng React Native và Expo đã cung cấp tài liệu và hỗ trợ
 
