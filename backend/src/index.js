@@ -19,7 +19,7 @@ const server = http.createServer(app); // gộp socket + express
 const port = process.env.PORT || 3000;
 const hostname = "localhost";
 // const frontendUrl = process.env.FRONTEND_URL || 'https://toanthaybee.edu.vn';
-const frontendUrl = process.env.FRONTEND_URL || "http://192.168.45.154:8081";
+const frontendUrl = process.env.FRONTEND_URL || "http://192.168.1.139:8081";
 
 const ngrokUrl =
   process.env.NGROK_URL || "https://4e04-14-191-32-178.ngrok-free.app";
@@ -33,8 +33,8 @@ app.use(
       frontendUrl,
       "https://toanthaybee.edu.vn",
       "http://localhost:8081",
-      "http://192.168.45.154:8081",
-      "http://192.168.45.154:8081",
+      "http://192.168.1.139:8081",
+      "http://192.168.1.139:8081",
       "https://toanthaybee.edu.vn",
       "http://localhost:4000",
       ngrokUrl,
@@ -85,7 +85,7 @@ const io = new Server(server, {
       "https://toan-thay-bee-frontend-reactjs-d5fo.vercel.app",
       "http://localhost:8081",
       "http://localhost:4000",
-      "http://192.168.45.154:8081",
+      "http://192.168.1.139:8081",
     ],
     // origin: "*",
     credentials: true,
@@ -502,5 +502,5 @@ io.on("connection", (socket) => {
 
 // Khởi chạy server
 server.listen(3000, "0.0.0.0", () => {
-  console.log("✅ Server is running at http://192.168.45.154:3000");
+  console.log("✅ Server is running at http://192.168.1.139:3000");
 });
