@@ -13,6 +13,12 @@ Toán Thầy Bee là ứng dụng di động được thiết kế để hỗ tr
 - Giao diện thân thiện, dễ sử dụng trên các thiết bị di động
 - Hỗ trợ hiển thị công thức toán học phức tạp
 
+> Đây là mô tả tổng thể dự án. Bao gồm cách setup toàn bộ frontend + backend.
+
+📂 Chi tiết:
+- [Frontend](./frontend/README.md)
+- [Backend](./backend/README.md)
+
 ## Cấu trúc dự án
 
 Dự án được chia thành hai phần chính:
@@ -217,7 +223,7 @@ backend/
 ## Lời cảm ơn
 
 Chúng tôi xin gửi lời cảm ơn đến:
-- Thầy giáo [Nguyễn Đình Quý] đã hỗ trợ và hướng dẫn trong quá trình thực hiện đồ án
+- Thầy giáo Nguyễn Đình Quý đã hỗ trợ và hướng dẫn trong quá trình thực hiện đồ án
 - Các thư viện mã nguồn mở đã được sử dụng trong dự án
 - Cộng đồng React Native và Expo đã cung cấp tài liệu và hỗ trợ
 
