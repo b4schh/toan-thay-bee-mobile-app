@@ -1,0 +1,2346 @@
+{
+	"info": {
+		"_postman_id": "4c745de4-f560-4240-88fa-99f14268de10",
+		"name": "ToanThayBeeNodeJsReactJs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "41852384"
+	},
+	"item": [
+		{
+			"name": "Exam",
+			"item": [
+				{
+					"name": "/api/v1/exam",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{api_prefix}}/exam",
+							"host": [
+								"{{api_prefix}}"
+							],
+							"path": [
+								"exam"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v1/exam/:id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_prefix}}/exam/1",
+							"host": [
+								"{{api_prefix}}"
+							],
+							"path": [
+								"exam",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v1/exam",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "data",
+									"value": "{\n    \"examData\": {\n        \"id\": 1,\n        \"name\": \"Đề thi Toán THPT\",\n        \"class\": \"l12\",\n        \"typeOfExam\": \"GK1\",\n        \"year\": \"2023-2024\",\n        \"duration\": 90\n    },\n    \"questions\": [\n        {\n            \"questionData\": {\n                \"class\": \"Math\",\n                \"content\": \"What is 2 + 2?\",\n                \"solutionUrl\": \"https://example.com/solution\",\n                \"needImage\": true,\n                \"typeOfQuestion\": \"TN\"\n            },\n            \"statements\": [\n                {\n                    \"content\": \"3\",\n                    \"isCorrect\": false,\n                    \"needImage\": false\n                },\n                {\n                    \"content\": \"4\",\n                    \"isCorrect\": true,\n                    \"needImage\": true\n                },\n                {\n                    \"content\": \"5\",\n                    \"isCorrect\": false,\n                    \"needImage\": false\n                },\n                {\n                    \"content\": \"6\",\n                    \"isCorrect\": false,\n                    \"needImage\": true\n                }\n            ]\n        },\n        {\n            \"questionData\": {\n                \"class\": \"Math\",\n                \"content\": \"What is 2 + 2?\",\n                \"solutionUrl\": \"https://example.com/solution\",\n                \"needImage\": true,\n                \"typeOfQuestion\": \"TN\"\n            },\n            \"statements\": [\n                {\n                    \"content\": \"3\",\n                    \"isCorrect\": false,\n                    \"needImage\": false\n                },\n                {\n                    \"content\": \"4\",\n                    \"isCorrect\": true,\n                    \"needImage\": true\n                },\n                {\n                    \"content\": \"5\",\n                    \"isCorrect\": false,\n                    \"needImage\": false\n                },\n                {\n                    \"content\": \"6\",\n                    \"isCorrect\": false,\n                    \"needImage\": true\n                }\n            ]\n        }\n    ]\n}",
+									"type": "text"
+								},
+								{
+									"key": "examImage",
+									"type": "file",
+									"src": "/C:/Users/nmduc/Desktop/Background/1347028.jpeg"
+								},
+								{
+									"key": "questionImages",
+									"type": "file",
+									"src": [
+										"/C:/Users/nmduc/Desktop/Background/1347028.jpeg",
+										"/C:/Users/nmduc/Desktop/Background/1347028.jpeg"
+									]
+								},
+								{
+									"key": "statementImages",
+									"type": "file",
+									"src": [
+										"/C:/Users/nmduc/Desktop/Background/1347028.jpeg",
+										"/C:/Users/nmduc/Desktop/Background/1347028.jpeg",
+										"/C:/Users/nmduc/Desktop/Background/1353834.jpeg",
+										"/C:/Users/nmduc/Desktop/Background/5029091.jpg"
+									]
+								}
+							]
+						},
+						"url": {
+							"raw": "{{api_prefix}}/exam",
+							"host": [
+								"{{api_prefix}}"
+							],
+							"path": [
+								"exam"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v1/exam/:id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{api_prefix}}/exam/3",
+							"host": [
+								"{{api_prefix}}"
+							],
+							"path": [
+								"exam",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v1/exam/:id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{api_prefix}}/exam/3",
+							"host": [
+								"{{api_prefix}}"
+							],
+							"path": [
+								"exam",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Question",
+			"item": [
+				{
+					"name": "/api/v1/admin/question",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_prefix}}/admin/question",
+							"host": [
+								"{{api_prefix}}"
+							],
+							"path": [
+								"admin",
+								"question"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v1/question/:id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_prefix}}/question/7",
+							"host": [
+								"{{api_prefix}}"
+							],
+							"path": [
+								"question",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v1/admin/question/exam/:examId",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_prefix}}/admin/question/exam/1",
+							"host": [
+								"{{api_prefix}}"
+							],
+							"path": [
+								"admin",
+								"question",
+								"exam",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v1/admin/question",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "questionImage",
+									"type": "file",
+									"src": "/C:/Users/nmduc/Desktop/Background/1347028.jpeg"
+								},
+								{
+									"key": "statementImages",
+									"type": "file",
+									"src": [
+										"/C:/Users/nmduc/Desktop/Background/1353834.jpeg",
+										"/C:/Users/nmduc/Desktop/Background/5029091.jpg"
+									]
+								},
+								{
+									"key": "data",
+									"value": "{\n  \"questionData\": {\n    \"class\": \"Math\",\n    \"content\": \"What is 2 + 2?\",\n    \"solutionUrl\": \"https://example.com/solution\",\n    \"typeOfQuestion\": \"TN\"\n  },\n  \"statementOptions\": [\n    { \"content\": \"3\", \"isCorrect\": false, \"needImage\": false },\n    { \"content\": \"4\", \"isCorrect\": true, \"needImage\": true },\n    { \"content\": \"5\", \"isCorrect\": false, \"needImage\": false },\n    { \"content\": \"6\", \"isCorrect\": false, \"needImage\": true }\n  ]\n}\n",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{api_prefix}}/admin/question",
+							"host": [
+								"{{api_prefix}}"
+							],
+							"path": [
+								"admin",
+								"question"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v1/admin/question/:id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"content\": \"What is 2 + 3?\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_prefix}}/admin/question/8",
+							"host": [
+								"{{api_prefix}}"
+							],
+							"path": [
+								"admin",
+								"question",
+								"8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v1/admin/question/:id/image",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "questionImage",
+									"type": "file",
+									"src": "/C:/Users/nmduc/Desktop/Background/1347028.jpeg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{api_prefix}}/admin/question/7/image",
+							"host": [
+								"{{api_prefix}}"
+							],
+							"path": [
+								"admin",
+								"question",
+								"7",
+								"image"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v1/admin/question/:id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{api_prefix}}/admin/question/8",
+							"host": [
+								"{{api_prefix}}"
+							],
+							"path": [
+								"admin",
+								"question",
+								"8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v1/admin/question/:id Copy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{api_prefix}}/admin/question/9/image",
+							"host": [
+								"{{api_prefix}}"
+							],
+							"path": [
+								"admin",
+								"question",
+								"9",
+								"image"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Class",
+			"item": [
+				{
+					"name": "/api/v1/user/class",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_prefix}}/user/class",
+							"host": [
+								"{{api_prefix}}"
+							],
+							"path": [
+								"user",
+								"class"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v1/admin/class",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_prefix}}/admin/class",
+							"host": [
+								"{{api_prefix}}"
+							],
+							"path": [
+								"admin",
+								"class"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v1/user/class/:id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_prefix}}/user/class/4",
+							"host": [
+								"{{api_prefix}}"
+							],
+							"path": [
+								"user",
+								"class",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v1/admin/class/:id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_prefix}}/admin/class/2",
+							"host": [
+								"{{api_prefix}}"
+							],
+							"path": [
+								"admin",
+								"class",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v1/user/class/joined",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_prefix}}/user/class/joined",
+							"host": [
+								"{{api_prefix}}"
+							],
+							"path": [
+								"user",
+								"class",
+								"joined"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v1/admin/class",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Lớp Đại 12A\",\r\n    \"academicYear\": \"2023-2024\",\r\n    \"status\": \"LDH\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_prefix}}/admin/class",
+							"host": [
+								"{{api_prefix}}"
+							],
+							"path": [
+								"admin",
+								"class"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v1/user/class/:classId/join",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{api_prefix}}/user/class/5/join",
+							"host": [
+								"{{api_prefix}}"
+							],
+							"path": [
+								"user",
+								"class",
+								"5",
+								"join"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "api/v1/admin/user/:studentId/class/:classId/accept",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{api_prefix}}/admin/user/2/class/2/accept",
+							"host": [
+								"{{api_prefix}}"
+							],
+							"path": [
+								"admin",
+								"user",
+								"2",
+								"class",
+								"2",
+								"accept"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/admin/class/:id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"public\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_prefix}}/admin/class/2",
+							"host": [
+								"{{api_prefix}}"
+							],
+							"path": [
+								"admin",
+								"class",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v1/admin/class/:id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{api_prefix}}/admin/class/4",
+							"host": [
+								"{{api_prefix}}"
+							],
+							"path": [
+								"admin",
+								"class",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v1/admin/user/:studentId/class/:classId/kick",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{api_prefix}}/admin/user/2/class/2/kick",
+							"host": [
+								"{{api_prefix}}"
+							],
+							"path": [
+								"admin",
+								"user",
+								"2",
+								"class",
+								"2",
+								"kick"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "AssistantReport",
+			"item": [
+				{
+					"name": "/api/v1/admin/assistant-report",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_prefix}}/assistant-report?search=dm",
+							"host": [
+								"{{api_prefix}}"
+							],
+							"path": [
+								"assistant-report"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "dm"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v1/admin/assistant-report/:id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_prefix}}/assistant-report/1",
+							"host": [
+								"{{api_prefix}}"
+							],
+							"path": [
+								"assistant-report",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v1/user/assistant-report",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": 2,\r\n    \"assistantId\": 3,\r\n    \"content\" : \"dmm\",\r\n    \"star\" : 4\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_prefix}}/user/assistant-report",
+							"host": [
+								"{{api_prefix}}"
+							],
+							"path": [
+								"user",
+								"assistant-report"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v1/admin/assistant-report/:id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{api_prefix}}/admin/assistant-report/1",
+							"host": [
+								"{{api_prefix}}"
+							],
+							"path": [
+								"admin",
+								"assistant-report",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "QuestionReport",
+			"item": [
+				{
+					"name": "/api/v1/question-report",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_prefix}}/question-report",
+							"host": [
+								"{{api_prefix}}"
+							],
+							"path": [
+								"question-report"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v1/question-report/:id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_prefix}}/question-report/3",
+							"host": [
+								"{{api_prefix}}"
+							],
+							"path": [
+								"question-report",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v1/question-report",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{api_prefix}}/question-report",
+							"host": [
+								"{{api_prefix}}"
+							],
+							"path": [
+								"question-report"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v1/question-report/:id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{api_prefix}}/question-report/3",
+							"host": [
+								"{{api_prefix}}"
+							],
+							"path": [
+								"question-report",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Lesson",
+			"item": [
+				{
+					"name": "/api/v1/lesson",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_prefix}}/lesson",
+							"host": [
+								"{{api_prefix}}"
+							],
+							"path": [
+								"lesson"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v1/lesson/:id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_prefix}}/lesson/3",
+							"host": [
+								"{{api_prefix}}"
+							],
+							"path": [
+								"lesson",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v1/lesson/class/:classId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_prefix}}/lesson/class/2",
+							"host": [
+								"{{api_prefix}}"
+							],
+							"path": [
+								"lesson",
+								"class",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v1/lesson",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{api_prefix}}/lesson",
+							"host": [
+								"{{api_prefix}}"
+							],
+							"path": [
+								"lesson"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v1/lesson/:id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{api_prefix}}/lesson/3",
+							"host": [
+								"{{api_prefix}}"
+							],
+							"path": [
+								"lesson",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v1/lesson/:id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{api_prefix}}/lesson/3",
+							"host": [
+								"{{api_prefix}}"
+							],
+							"path": [
+								"lesson",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Attempt",
+			"item": [
+				{
+					"name": "/api/v1/attempt",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_prefix}}/attempt",
+							"host": [
+								"{{api_prefix}}"
+							],
+							"path": [
+								"attempt"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v1/attempt/:id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_prefix}}/attempt/3",
+							"host": [
+								"{{api_prefix}}"
+							],
+							"path": [
+								"attempt",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v1/attempt/exam/:ma_de",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_prefix}}/attempt/exam/2",
+							"host": [
+								"{{api_prefix}}"
+							],
+							"path": [
+								"attempt",
+								"exam",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v1/attempt",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{api_prefix}}/attempt",
+							"host": [
+								"{{api_prefix}}"
+							],
+							"path": [
+								"attempt"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v1/attempt/:id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{api_prefix}}/attempt/3",
+							"host": [
+								"{{api_prefix}}"
+							],
+							"path": [
+								"attempt",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v1/attempt/:id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{api_prefix}}/attempt/3",
+							"host": [
+								"{{api_prefix}}"
+							],
+							"path": [
+								"attempt",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Answer",
+			"item": [
+				{
+					"name": "/api/v1/answer/:id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_prefix}}/answer/3",
+							"host": [
+								"{{api_prefix}}"
+							],
+							"path": [
+								"answer",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v1/answer/attempt/:ma_lam_bai",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_prefix}}/answer/attempt/2",
+							"host": [
+								"{{api_prefix}}"
+							],
+							"path": [
+								"answer",
+								"attempt",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v1/answer",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{api_prefix}}/answer",
+							"host": [
+								"{{api_prefix}}"
+							],
+							"path": [
+								"answer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v1/answer/:id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{api_prefix}}/answer/3",
+							"host": [
+								"{{api_prefix}}"
+							],
+							"path": [
+								"answer",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v1/answer/:id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{api_prefix}}/answer/3",
+							"host": [
+								"{{api_prefix}}"
+							],
+							"path": [
+								"answer",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cheat",
+			"item": [
+				{
+					"name": "/api/v1/cheat",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_prefix}}/cheat",
+							"host": [
+								"{{api_prefix}}"
+							],
+							"path": [
+								"cheat"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v1/cheat/attempt/:attemptId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_prefix}}/cheat/attempt/2",
+							"host": [
+								"{{api_prefix}}"
+							],
+							"path": [
+								"cheat",
+								"attempt",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v1/cheat",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"typeOfCheat\": \"CCE\",\r\n    \"attemptId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_prefix}}/cheat",
+							"host": [
+								"{{api_prefix}}"
+							],
+							"path": [
+								"cheat"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v1/cheat/:id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{api_prefix}}/cheat/3",
+							"host": [
+								"{{api_prefix}}"
+							],
+							"path": [
+								"cheat",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "LearningItem",
+			"item": [
+				{
+					"name": "/api/v1/learning-item",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_prefix}}/learning-item",
+							"host": [
+								"{{api_prefix}}"
+							],
+							"path": [
+								"learning-item"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v1/learning-item/:id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_prefix}}/learning-item/3",
+							"host": [
+								"{{api_prefix}}"
+							],
+							"path": [
+								"learning-item",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v1/learning-item/lesson/:lessonId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_prefix}}/learning-item/lesson/2",
+							"host": [
+								"{{api_prefix}}"
+							],
+							"path": [
+								"learning-item",
+								"lesson",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v1/learning-item",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{api_prefix}}/learning-item",
+							"host": [
+								"{{api_prefix}}"
+							],
+							"path": [
+								"learning-item"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v1/learning-item/:id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{api_prefix}}/learning-item/3",
+							"host": [
+								"{{api_prefix}}"
+							],
+							"path": [
+								"learning-item",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v1/learning-item/:id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{api_prefix}}/learning-item/3",
+							"host": [
+								"{{api_prefix}}"
+							],
+							"path": [
+								"learning-item",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Code",
+			"item": [
+				{
+					"name": "/api/v1/admin/code",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_prefix}}/admin/code",
+							"host": [
+								"{{api_prefix}}"
+							],
+							"path": [
+								"admin",
+								"code"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v1/admin/code/:code",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_prefix}}/admin/code/HS",
+							"host": [
+								"{{api_prefix}}"
+							],
+							"path": [
+								"admin",
+								"code",
+								"HS"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v1/admin/code",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n            \"code\": \"JS\",\n            \"type\": \"wait status\",\n            \"description\": \"đã tham gia lớp học\"\n        }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_prefix}}/admin/code",
+							"host": [
+								"{{api_prefix}}"
+							],
+							"path": [
+								"admin",
+								"code"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v1/admin/code/:code",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"description\": \"học sinh\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_prefix}}/admin/code/HS",
+							"host": [
+								"{{api_prefix}}"
+							],
+							"path": [
+								"admin",
+								"code",
+								"HS"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Statement",
+			"item": [
+				{
+					"name": "/api/v1/statement/question/:id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_prefix}}/statement/question/1",
+							"host": [
+								"{{api_prefix}}"
+							],
+							"path": [
+								"statement",
+								"question",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v1/statement/:id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_prefix}}/statement/3",
+							"host": [
+								"{{api_prefix}}"
+							],
+							"path": [
+								"statement",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v1/statement",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{api_prefix}}/statement",
+							"host": [
+								"{{api_prefix}}"
+							],
+							"path": [
+								"statement"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v1/statement/:id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{api_prefix}}/statement/3",
+							"host": [
+								"{{api_prefix}}"
+							],
+							"path": [
+								"statement",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v1/statement/:id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{api_prefix}}/learning-item/3",
+							"host": [
+								"{{api_prefix}}"
+							],
+							"path": [
+								"learning-item",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "/api/v1/user/register username",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"lastName\": \"Minh\",\r\n        \"firstName\": \"Đức\",\r\n        \"username\": \"minhduc7905\",\r\n        \"password\": \"070904\",\r\n        \"gender\": true,\r\n        \"birthDate\": \"2004-07-09\",\r\n        \"highSchool\": \"asdfasdf\",\r\n        \"class\" : \"l12\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_prefix}}/user/register",
+							"host": [
+								"{{api_prefix}}"
+							],
+							"path": [
+								"user",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v1/user/register email",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"lastName\": \"Kiasdfam\",\r\n        \"firstName\": \"Lan\",\r\n        \"email\": \"adsafasdf@gmail.com\",\r\n        \"password\": \"lansecurepass\",\r\n        \"gender\": true,\r\n        \"birthDate\": \"2006-03-05\",\r\n        \"highSchool\": \"asdfasdf\",\r\n        \"class\" : \"l12\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_prefix}}/user/register",
+							"host": [
+								"{{api_prefix}}"
+							],
+							"path": [
+								"user",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v1/user/login email",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"password\": \"lansecurepass\",\r\n        \"email\": \"adsafasdf@gmail.com\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_prefix}}/user/login",
+							"host": [
+								"{{api_prefix}}"
+							],
+							"path": [
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v1/user/login username",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"password\": \"minhduc7904\",\r\n        \"username\": \"minhduc7904\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_prefix}}/user/login",
+							"host": [
+								"{{api_prefix}}"
+							],
+							"path": [
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v1/user/logout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"password\": \"070904\",\r\n        \"username\": \"minhduc7904\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_prefix}}/user/logout",
+							"host": [
+								"{{api_prefix}}"
+							],
+							"path": [
+								"user",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v1/user/avartar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "avatar",
+									"type": "file",
+									"src": "/C:/Users/nmduc/Desktop/Background/1347028.jpeg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{api_prefix}}/user/avatar",
+							"host": [
+								"{{api_prefix}}"
+							],
+							"path": [
+								"user",
+								"avatar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v1/admin/user/:id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userType\": \"HS\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_prefix}}/admin/user/2",
+							"host": [
+								"{{api_prefix}}"
+							],
+							"path": [
+								"admin",
+								"user",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v1/admin/user/:id/user-type",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userType\": \"AD\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_prefix}}/admin/user/8/user-type",
+							"host": [
+								"{{api_prefix}}"
+							],
+							"path": [
+								"admin",
+								"user",
+								"8",
+								"user-type"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v1/user/password",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \r\n    \"oldPassword\" : \"070904\", \r\n    \"newPassword\" : \"minhduc7904\", \r\n    \"confirmPassword\" : \"minhduc7904\" \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_prefix}}/user/password",
+							"host": [
+								"{{api_prefix}}"
+							],
+							"path": [
+								"user",
+								"password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v1/admin/user/:id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_prefix}}/admin/user/2",
+							"host": [
+								"{{api_prefix}}"
+							],
+							"path": [
+								"admin",
+								"user",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v1/admin/user/:classId",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_prefix}}/admin/user/class/2",
+							"host": [
+								"{{api_prefix}}"
+							],
+							"path": [
+								"admin",
+								"user",
+								"class",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v1/admin/user",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_prefix}}/admin/user",
+							"host": [
+								"{{api_prefix}}"
+							],
+							"path": [
+								"admin",
+								"user"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Image",
+			"item": [
+				{
+					"name": "/api/v1/images/upload-single",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/nmduc/Desktop/Background/1354386.jpeg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{api_prefix}}/images/upload-single",
+							"host": [
+								"{{api_prefix}}"
+							],
+							"path": [
+								"images",
+								"upload-single"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v1//images/upload-multiple",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "images",
+									"type": "file",
+									"src": "/C:/Users/nmduc/Desktop/Background/1347028.jpeg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{api_prefix}}/images/upload-multiple",
+							"host": [
+								"{{api_prefix}}"
+							],
+							"path": [
+								"images",
+								"upload-multiple"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v1//images/google/upload-single",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/nmduc/Desktop/Background/1347028.jpeg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{api_prefix}}/images/google/upload-single",
+							"host": [
+								"{{api_prefix}}"
+							],
+							"path": [
+								"images",
+								"google",
+								"upload-single"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v1//images/google/upload-multiple",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "images",
+									"type": "file",
+									"src": [
+										"/C:/Users/nmduc/Desktop/Background/1347028.jpeg",
+										"/C:/Users/nmduc/Desktop/Background/1353834.jpeg"
+									]
+								}
+							]
+						},
+						"url": {
+							"raw": "{{api_prefix}}/images/google/upload-multiple",
+							"host": [
+								"{{api_prefix}}"
+							],
+							"path": [
+								"images",
+								"google",
+								"upload-multiple"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/images/delete google image",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"url\": \"https://firebasestorage.googleapis.com/v0/b/toan-thay-bee.firebasestorage.app/o/images%2F1739883480164-1347028.jpeg?alt=media&token=f710b6f6-19c6-4fb5-9f68-04962bae75a0\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_prefix}}/images/delete",
+							"host": [
+								"{{api_prefix}}"
+							],
+							"path": [
+								"images",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/images/delete local",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"url\": \"https://firebasestorage.googleapis.com/v0/b/toan-thay-bee.firebasestorage.app/o/images%2F1739883480164-1347028.jpeg?alt=media&token=f710b6f6-19c6-4fb5-9f68-04962bae75a0\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_prefix}}/images/delete",
+							"host": [
+								"{{api_prefix}}"
+							],
+							"path": [
+								"images",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Slide",
+			"item": [
+				{
+					"name": "/api/v1/slide",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Bài giảng Giải Tích\",\r\n    \"description\": \"Slide bài giảng về đạo hàm và tích phân.\",\r\n    \"images\": [\r\n        \"1739803220984-1347028.jpeg\",\r\n        \"1739803220984-Screenshot 2025-02-17 213015.png\"\r\n    ]\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_prefix}}/slide",
+							"host": [
+								"{{api_prefix}}"
+							],
+							"path": [
+								"slide"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "/healthcheck",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/healthcheck",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"healthcheck"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
