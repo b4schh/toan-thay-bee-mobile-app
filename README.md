@@ -158,7 +158,36 @@ Hai phần này tương tác với nhau thông qua RESTful API, đảm bảo tí
 - **Error Handling**: Xử lý và hiển thị lỗi một cách thân thiện.
 - **Loading States**: Hiển thị trạng thái đang tải dữ liệu.
 
+### 6. Tính năng backend
+#### 6.1. Xác thực và bảo mật
+- **JWT Authentication**: Xác thực người dùng bằng JSON Web Token.
+- **Bcrypt**: Mã hóa mật khẩu người dùng.
+- **Middleware xác thực**: Kiểm tra quyền truy cập API.
+
+#### 6.2. Quản lý file
+- **Upload file**: Xử lý tải lên file với Multer.
+- **Firebase Storage**: Lưu trữ và quản lý file trên Firebase.
+
+#### 6.3. API RESTful
+- **CRUD Operations**: Các endpoint API cho tất cả các tính năng.
+- **Validation**: Kiểm tra dữ liệu đầu vào.
+- **Error Handling**: Xử lý lỗi và trả về thông báo phù hợp.
+
+#### 6.4. Giao tiếp thời gian thực
+- **Socket.io**: Hỗ trợ giao tiếp thời gian thực (được đề cập trong tài liệu).
+
+#### 6.5. Xử lý dữ liệu
+- **Sequelize ORM**: Tương tác với database MySQL.
+- **XLSX**: Xử lý file Excel (có thể dùng cho import/export dữ liệu).
+
+## Kết luận
+
+Ứng dụng Toán Thầy Bee là một nền tảng học tập toán học toàn diện với nhiều tính năng phong phú. Ứng dụng không chỉ cung cấp nội dung học tập đa dạng (video, PDF, bài tập) mà còn có hệ thống kiểm tra, đánh giá và theo dõi tiến độ học tập. Giao diện người dùng được thiết kế thân thiện, dễ sử dụng với nhiều component tùy chỉnh. Backend được xây dựng vững chắc với các công nghệ hiện đại như Node.js, Express, Sequelize và JWT, đảm bảo tính bảo mật và hiệu suất cao.
+
+Ứng dụng này rõ ràng hướng đến việc tạo ra một môi trường học tập toán học hiệu quả, tương tác và thú vị cho học sinh, đồng thời cung cấp các công cụ để theo dõi và đánh giá tiến trình học tập.
+
 ## Tác giả
+
 - Mai Khoa Bách
 - Nguyễn Minh Đức
 - Đồng Văn Hảo
