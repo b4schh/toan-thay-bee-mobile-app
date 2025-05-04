@@ -5,6 +5,7 @@ Phần backend của ứng dụng Toán Thầy Bee được phát triển bằng
 ## Cài đặt và Chạy server
 
 ### Yêu cầu hệ thống
+- Hệ điều hành Window (khuyến khích)
 - Node.js (phiên bản >=22.11.0)
 - npm hoặc yarn
 - MySQL (có thể chạy qua Docker)
@@ -25,10 +26,34 @@ npm install
 
 #### 3. Cấu hình database (2 cách):
 
-#### 3.1. Cách 1: Sử dụng MySQL đã cài đặt trên máy
+#### 3.1. Cách 1: Sử dụng Docker để chạy MySQL
+
+Nếu bạn không muốn cài đặt MySQL trực tiếp trên máy hoặc muốn một môi trường cô lập:
+
+- Sử dụng Docker Compose để khởi động container MySQL:
+```bash
+docker compose -f ./deployments.yml up -d
+```
+
+- Cấu hình file .env (dựa trên file .env.example) để trỏ đến MySQL trong Docker:
+```bash
+DB_DEV_HOST=localhost
+DB_DEV_USERNAME=root
+DB_DEV_PASSWORD=070904  # Mật khẩu được định nghĩa trong deployments.yml
+DB_DEV_DATABASE=toan_thay_bee
+DB_DEV_PORT=3309  # Cổng được map trong deployments.yml
+```
+
+- Chạy migrations để tạo cấu trúc database:
+```bash
+npx sequelize-cli db:migrate
+```
+
+#### 3.2. Cách 2: Sử dụng MySQL đã cài đặt trên máy
 
 Nếu bạn đã cài đặt MySQL trên máy tính của mình:
-- Cần cấu hình file .env để trỏ đến MySQL local của bạn
+
+- Cần cấu hình file .env (dựa trên file .env.example) để trỏ đến MySQL local của bạn
 ```bash
 DB_DEV_HOST=localhost
 DB_DEV_USERNAME=root
@@ -47,23 +72,6 @@ CREATE DATABASE toan_thay_bee;
 npx sequelize-cli db:migrate
 ```
 
-# Tạo file .env từ file .env.example
-cp .env.example .env
-
-# Chỉnh sửa file .env với thông tin cấu hình của bạn
-# DB_HOST=localhost
-# DB_PORT=3306
-# DB_USER=root
-# DB_PASSWORD=your_password
-# DB_NAME=toan_thay_bee
-# JWT_SECRET=your_jwt_secret
-# ...
-```
-
-4. Khởi động MySQL bằng Docker (tùy chọn):
-```bash
-docker compose -f ./deployments.yml up -d
-```
 
 5. Chạy migrations để tạo cấu trúc database:
 ```bash
