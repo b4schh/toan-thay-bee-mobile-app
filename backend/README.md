@@ -68,12 +68,13 @@ cd src
 npx sequelize-cli db:migrate
 ```
 
-#### 5: Chạy seeders để tạo các dữ liệu cần thiết cho database:
+#### 5. Chạy seeders để tạo các dữ liệu cần thiết cho database:
 ```bash
 # Lưu ý: Đảm bảm database đang hoạt động trước khi chạy seeders
 cd src
 npx sequelize-cli db:seed:all
 ```
+
 #### 6. Khởi động server ở chế độ development:
 ```bash
 npm run dev
