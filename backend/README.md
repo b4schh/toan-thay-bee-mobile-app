@@ -12,20 +12,20 @@ Phần backend của ứng dụng Toán Thầy Bee được phát triển bằng
 
 ### Các bước cài đặt
 
-1. Clone repository và di chuyển vào thư mục backend:
+#### 1. Clone repository và di chuyển vào thư mục backend:
 ```bash
 git clone [đường dẫn repository]
 cd backend
 ```
 
-2. Cài đặt các dependencies:
+#### 2. Cài đặt các dependencies:
 ```bash
 npm install
 ```
 
-3. Cấu hình database (2 cách):
+#### 3. Cấu hình database (2 cách):
 
-  3.1. Cách 1: Sử dụng MySQL đã cài đặt trên máy
+#### 3.1. Cách 1: Sử dụng MySQL đã cài đặt trên máy
 
 Nếu bạn đã cài đặt MySQL trên máy tính của mình:
 - Cần cấu hình file .env để trỏ đến MySQL local của bạn
