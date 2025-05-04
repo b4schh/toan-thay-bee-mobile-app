@@ -42,11 +42,9 @@ Hai phần này tương tác với nhau thông qua RESTful API, đảm bảo tí
 ## Hướng dẫn cài đặt
 
 ### Frontend
-
 - [Frontend](./frontend/README.md#cài-đặt-và-chạy-server#cài-đặt-và-chạy-ứng-dụng)
 
 ### Backend
-
 - [Backend](./backend/README.md#cài-đặt-và-chạy-server)
 
 ## Công nghệ sử dụng
@@ -75,7 +73,65 @@ Hai phần này tương tác với nhau thông qua RESTful API, đảm bảo tí
 
 ## Tính năng chính
 
-- **Đăng nhập/Đăng ký**: Hệ thống xác thực người dùng với nhiều phương thức (email/password, Google, Facebook)
+### 1. Hệ thống xác thực và quản lý người dùng
+- **Đăng nhập**: Hệ thống xác thực người dùng với username và password được cung cấp từ giáo viên
+- **Xem thông tin cá nhân**: Hiển thị thông tin như họ tên, email, số điện thoại, trường học, lớp.
+- **Chỉnh sửa hồ sơ**: Người dùng có thể cập nhật thông tin cá nhân.
+- **Ảnh đại diện**: Tải lên và quản lý ảnh đại diện.
+- **Xem lịch sử học tập**: Theo dõi các bài học đã hoàn thành, bài thi đã làm.
+
+### 2. Hệ thống lớp học và bài học
+
+#### 2.1. Quản lý lớp học:
+- **Danh sách lớp học**: Hiển thị các lớp học được phân loại theo cấp độ, năm học.
+- **Chi tiết lớp học**: Xem thông tin chi tiết về lớp học, bao gồm mô tả, số buổi học.
+- **Đăng ký lớp học**: Người dùng có thể đăng ký tham gia lớp học.
+
+### 2.2. Quản lý buổi học:
+- **Danh sách buổi học**: Hiển thị các buổi học trong một lớp.
+- **Chi tiết buổi học**: Xem thông tin chi tiết về buổi học, bao gồm mô tả, các mục học tập.
+
+### 2.3. Mục học tập đa dạng:
+- **Video bài giảng**: Xem video bài giảng từ YouTube
+- **Tài liệu PDF**: Có thể tải tài liệu buổi học về máy
+- **Bài tập về nhà**: Truy cập và làm bài tập được giao.
+- **Đánh dấu hoàn thành**: Người dùng có thể đánh dấu đã hoàn thành hoặc chưa hoàn thành một mục học tập.
+
+## 3. Hệ thống bài viết chuyên sâu
+
+## 3.1. Quản lý bài viết
+- Danh sách bài viết: Hiển thị các bài viết chuyên sâu về toán học.
+- Tìm kiếm và lọc bài viết: Tìm kiếm bài viết theo tiêu đề, chủ đề.
+- Chi tiết bài viết: Xem nội dung đầy đủ của bài viết.
+ 
+## 3.2. Hiển thị nội dung toán học
+- Hỗ trợ công thức toán học: Sử dụng thư viện WebView kết hợp MathJax để hiển thị công thức toán học phức tạp.
+- Định dạng Markdown: Hỗ trợ định dạng văn bản phong phú.
+- Thông tin meta: Hiển thị thông tin tác giả, ngày đăng, mô tả ngắn.
+
+## 4. Hệ thống luyện tập và kiểm tra
+
+## 4.1. Quản lý đề thi
+
+Danh sách đề thi: Hiển thị các đề thi được phân loại theo lớp, chương, loại đề.
+Chi tiết đề thi: Xem thông tin chi tiết về đề thi, bao gồm thời gian làm bài, mô tả, tỷ lệ đạt.
+Đánh dấu đề thi: Người dùng có thể đánh dấu đề thi yêu thích.
+
+Làm bài thi
+Giao diện làm bài: Hiển thị câu hỏi và các lựa chọn trả lời.
+Đếm ngược thời gian: Hiển thị thời gian còn lại để làm bài.
+Điều hướng câu hỏi: Di chuyển giữa các câu hỏi, đánh dấu câu hỏi để xem lại.
+Nộp bài: Nộp bài thi khi hoàn thành hoặc hết thời gian.
+Kết quả và phân tích
+Hiển thị điểm số: Xem điểm số và tỷ lệ đúng sau khi làm bài.
+Xem lời giải: Xem lời giải chi tiết cho từng câu hỏi.
+Phân tích kết quả: Thống kê về thời gian làm bài, câu trả lời đúng/sai.
+Lịch sử làm bài: Xem lại các lần làm bài trước đó.
+Loại câu hỏi đa dạng
+Trắc nghiệm: Câu hỏi với nhiều lựa chọn.
+Tự luận: Câu hỏi yêu cầu nhập câu trả lời.
+Điền khuyết: Câu hỏi yêu cầu điền vào chỗ trống.
+
 - **Danh sách bài học**: Phân loại theo lớp, chương, chủ đề giúp dễ dàng tìm kiếm
 - **Học liệu đa dạng**: 
   - Tài liệu PDF với đầy đủ công thức toán học
@@ -89,96 +145,6 @@ Hai phần này tương tác với nhau thông qua RESTful API, đảm bảo tí
   - Xem lời giải chi tiết
   - Thống kê kết quả làm bài
 - **Trang cá nhân**: Quản lý thông tin cá nhân, xem lịch sử học tập
-
-## Cấu trúc thư mục
-
-### Frontend
-```
-frontend/
-├── app/                  # Các màn hình chính của ứng dụng
-│   ├── (tabs)/           # Các tab chính
-│   │   ├── account/      # Màn hình tài khoản
-│   │   ├── docs/         # Màn hình bài viết
-│   │   ├── home/         # Màn hình trang chủ
-│   │   └── practice/     # Màn hình luyện tập
-│   ├── article/          # Màn hình chi tiết bài viết
-│   ├── auth/             # Màn hình đăng nhập/đăng ký
-│   ├── class/            # Màn hình lớp học
-│   ├── exam/             # Màn hình làm bài thi
-│   └── profile/          # Màn hình hồ sơ người dùng
-├── assets/               # Hình ảnh, font chữ
-│   ├── fonts/            # Font chữ
-│   └── images/           # Hình ảnh
-├── components/           # Các component tái sử dụng
-│   ├── button/           # Component nút bấm
-│   ├── card/             # Component thẻ
-│   ├── dialog/           # Component hộp thoại
-│   ├── form/             # Component biểu mẫu
-│   ├── latex/            # Component hiển thị công thức toán
-│   ├── learning-item/    # Component mục học tập
-│   ├── pdf-viewer/       # Component xem PDF
-│   └── youtube/          # Component xem video YouTube
-├── constants/            # Các hằng số, theme, màu sắc
-│   ├── colors.js         # Màu sắc
-│   ├── layout.js         # Kích thước
-│   └── theme.js          # Theme
-├── features/             # Redux slices
-│   ├── article/          # Slice bài viết
-│   ├── auth/             # Slice xác thực
-│   ├── class/            # Slice lớp học
-│   └── exam/             # Slice bài thi
-├── hooks/                # Custom hooks
-├── navigation/           # Cấu hình điều hướng
-├── services/             # Các service gọi API
-├── store/                # Cấu hình Redux store
-├── utils/                # Các hàm tiện ích
-└── App.js                # Component gốc của ứng dụng
-```
-
-### Backend
-```
-backend/
-├── src/
-│   ├── controllers/      # Xử lý logic
-│   │   ├── authController.js     # Xử lý xác thực
-│   │   ├── userController.js     # Xử lý người dùng
-│   │   ├── classController.js    # Xử lý lớp học
-│   │   ├── examController.js     # Xử lý bài thi
-│   │   └── articleController.js  # Xử lý bài viết
-│   ├── models/           # Mô hình dữ liệu
-│   │   ├── nguoi_dung.js         # Model người dùng
-│   │   ├── lop.js                # Model lớp học
-│   │   ├── buoi_hoc.js           # Model buổi học
-│   │   ├── muc_hoc_tap.js        # Model mục học tập
-│   │   ├── de.js                 # Model đề thi
-│   │   ├── cau_hoi.js            # Model câu hỏi
-│   │   └── all_code.js           # Model mã code
-│   ├── routes/           # Định nghĩa API routes
-│   │   ├── authRoutes.js         # Routes xác thực
-│   │   ├── userRoutes.js         # Routes người dùng
-│   │   ├── classRoutes.js        # Routes lớp học
-│   │   ├── examRoutes.js         # Routes bài thi
-│   │   └── articleRoutes.js      # Routes bài viết
-│   ├── middlewares/      # Middleware
-│   │   ├── authMiddleware.js     # Middleware xác thực
-│   │   ├── errorMiddleware.js    # Middleware xử lý lỗi
-│   │   └── uploadMiddleware.js   # Middleware upload file
-│   ├── config/           # Cấu hình
-│   │   ├── database.js           # Cấu hình database
-│   │   ├── firebase.js           # Cấu hình Firebase
-│   │   └── jwt.js                # Cấu hình JWT
-│   ├── utils/            # Các hàm tiện ích
-│   │   ├── logger.js             # Ghi log
-│   │   ├── validator.js          # Kiểm tra dữ liệu
-│   │   └── helpers.js            # Hàm hỗ trợ
-│   └── index.js          # Điểm khởi đầu của ứng dụng
-├── migrations/           # Các file migration
-├── seeders/              # Dữ liệu mẫu
-├── .env                  # Biến môi trường
-├── .env.example          # Mẫu biến môi trường
-├── package.json          # Thông tin package
-└── deployments.yml       # Cấu hình Docker
-```
 
 ## Tác giả
 
