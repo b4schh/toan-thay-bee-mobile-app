@@ -65,7 +65,7 @@ DB_DEV_PORT=3306  # Cổng mặc định của MySQL
 - Tạo database toan_thay_bee (nếu chưa có):
 ```bash
 CREATE DATABASE toan_thay_bee;
-```bash
+```
 
 - Chạy migrations để tạo cấu trúc database:
 ```bash
