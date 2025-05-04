@@ -24,6 +24,7 @@ npm install
 ```
 
 3. Cấu hình database (2 cách):
+
 3.1. Cách 1: Sử dụng MySQL đã cài đặt trên máy
 
 Nếu bạn đã cài đặt MySQL trên máy tính của mình:
