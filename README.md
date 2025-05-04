@@ -43,43 +43,11 @@ Hai phần này tương tác với nhau thông qua RESTful API, đảm bảo tí
 
 ### Frontend
 
-```bash
-# Di chuyển vào thư mục frontend
-cd frontend
-
-# Cài đặt các dependencies
-npm install
-
-# Khởi động ứng dụng
-npx expo start
-```
-
-Sau khi chạy lệnh trên, Expo sẽ mở một trang web với mã QR. Bạn có thể:
-- Quét mã QR bằng ứng dụng Expo Go trên thiết bị di động
-- Nhấn 'a' để mở ứng dụng trên máy ảo Android
-- Nhấn 'i' để mở ứng dụng trên máy ảo iOS
+- [Frontend](./frontend/README.md#cài-đặt-và-chạy-server#cài-đặt-và-chạy-ứng-dụng)
 
 ### Backend
+
 - [Backend](./backend/README.md#cài-đặt-và-chạy-server)
-```bash
-# Di chuyển vào thư mục backend
-cd backend
-
-# Cài đặt các dependencies
-npm install
-
-# Cấu hình database
-# Tạo file .env dựa trên .env.example và cấu hình kết nối database
-
-# Khởi động MySQL bằng Docker (tùy chọn)
-docker compose -f ./deployments.yml up -d
-
-# Chạy migrations để tạo cấu trúc database
-npx sequelize-cli db:migrate
-
-# Khởi động server ở chế độ development
-npm run dev
-```
 
 ## Công nghệ sử dụng
 
