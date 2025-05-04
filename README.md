@@ -6,12 +6,12 @@
 
 Toán Thầy Bee là ứng dụng di động được thiết kế để hỗ trợ học sinh trong việc học toán với các tính năng:
 
-- Học lý thuyết toán qua tài liệu PDF và video bài giảng chất lượng cao
-- Làm bài tập và kiểm tra kiến thức với nhiều dạng bài khác nhau
-- Theo dõi tiến độ học tập cá nhân
-- Truy cập các bài viết chuyên sâu về toán học
-- Giao diện thân thiện, dễ sử dụng trên các thiết bị di động
-- Hỗ trợ hiển thị công thức toán học phức tạp
+- Học lý thuyết toán qua tài liệu PDF và video bài giảng chất lượng cao.
+- Làm bài tập và kiểm tra kiến thức với nhiều dạng bài khác nhau.
+- Theo dõi tiến độ học tập cá nhân.
+- Truy cập các bài viết chuyên sâu về toán học.
+- Giao diện thân thiện, dễ sử dụng trên các thiết bị di động.
+- Hỗ trợ hiển thị công thức toán học phức tạp.
 
 > Đây là mô tả tổng thể dự án. Bao gồm cách setup toàn bộ frontend + backend.
 
@@ -32,49 +32,49 @@ Hai phần này tương tác với nhau thông qua RESTful API, đảm bảo tí
 
 Để cài đặt và chạy dự án, bạn cần:
 
-- Node.js (phiên bản >=22.11.0)
-- npm hoặc yarn (trình quản lý gói)
-- Expo CLI (để phát triển và chạy ứng dụng React Native)
-- MySQL (hệ quản trị cơ sở dữ liệu)
-- Docker (tùy chọn, để chạy MySQL trong container)
-- Thiết bị di động hoặc máy ảo để chạy ứng dụng (iOS/Android)
+- Node.js (phiên bản >=22.11.0).
+- npm hoặc yarn (trình quản lý gói).
+- Expo CLI (để phát triển và chạy ứng dụng React Native).
+- MySQL (hệ quản trị cơ sở dữ liệu).
+- Docker (tùy chọn, để chạy MySQL trong container).
+- Thiết bị di động hoặc máy ảo để chạy ứng dụng (iOS/Android).
 
 ## Hướng dẫn cài đặt
 
 ### Frontend
-- [Frontend](./frontend/README.md#cài-đặt-và-chạy-server#cài-đặt-và-chạy-ứng-dụng)
+- [Frontend](./frontend/README.md#cài-đặt-và-chạy-server#cài-đặt-và-chạy-ứng-dụng).
 
 ### Backend
-- [Backend](./backend/README.md#cài-đặt-và-chạy-server)
+- [Backend](./backend/README.md#cài-đặt-và-chạy-server).
 
 ## Công nghệ sử dụng
 
 ### Frontend
-- **React Native**: Framework để xây dựng ứng dụng di động đa nền tảng
-- **Expo**: Nền tảng giúp phát triển ứng dụng React Native dễ dàng hơn
-- **Redux**: Quản lý state toàn cục của ứng dụng
-- **React Navigation**: Quản lý điều hướng trong ứng dụng
-- **Expo Router**: Hệ thống điều hướng dựa trên file
-- **MathJax**: Hiển thị công thức toán học phức tạp
-- **YouTube Player**: Tích hợp xem video từ YouTube
-- **PDF Viewer**: Hiển thị tài liệu PDF trong ứng dụng
+- **React Native**: Framework để xây dựng ứng dụng di động đa nền tảng.
+- **Expo**: Nền tảng giúp phát triển ứng dụng React Native dễ dàng hơn.
+- **Redux**: Quản lý state toàn cục của ứng dụng.
+- **React Navigation**: Quản lý điều hướng trong ứng dụng.
+- **Expo Router**: Hệ thống điều hướng dựa trên file.
+- **MathJax**: Hiển thị công thức toán học phức tạp.
+- **YouTube Player**: Tích hợp xem video từ YouTube.
+- **PDF Viewer**: Hiển thị tài liệu PDF trong ứng dụng.
 
 ### Backend
-- **Node.js**: Môi trường runtime JavaScript phía server
-- **Express**: Framework web cho Node.js
-- **Sequelize ORM**: ORM để tương tác với database
-- **MySQL**: Hệ quản trị cơ sở dữ liệu quan hệ
-- **JWT Authentication**: Xác thực người dùng bằng JSON Web Token
-- **Bcrypt**: Mã hóa mật khẩu
-- **Firebase**: Lưu trữ và quản lý file
-- **Socket.io**: Giao tiếp thời gian thực
-- **Multer**: Xử lý upload file
-- **XLSX**: Xử lý file Excel
+- **Node.js**: Môi trường runtime JavaScript phía server.
+- **Express**: Framework web cho Node.js.
+- **Sequelize ORM**: ORM để tương tác với database.
+- **MySQL**: Hệ quản trị cơ sở dữ liệu quan hệ.
+- **JWT Authentication**: Xác thực người dùng bằng JSON Web Token.
+- **Bcrypt**: Mã hóa mật khẩu.
+- **Firebase**: Lưu trữ và quản lý file.
+- **Socket.io**: Giao tiếp thời gian thực.
+- **Multer**: Xử lý upload file.
+- **XLSX**: Xử lý file Excel.
 
 ## Tính năng chính
 
 ### 1. Hệ thống xác thực và quản lý người dùng
-- **Đăng nhập**: Hệ thống xác thực người dùng với username và password được cung cấp từ giáo viên
+- **Đăng nhập**: Hệ thống xác thực người dùng với username và password được cung cấp từ giáo viên.
 - **Xem thông tin cá nhân**: Hiển thị thông tin như họ tên, email, số điện thoại, trường học, lớp.
 - **Chỉnh sửa hồ sơ**: Người dùng có thể cập nhật thông tin cá nhân.
 - **Ảnh đại diện**: Tải lên và quản lý ảnh đại diện.
@@ -87,64 +87,52 @@ Hai phần này tương tác với nhau thông qua RESTful API, đảm bảo tí
 - **Chi tiết lớp học**: Xem thông tin chi tiết về lớp học, bao gồm mô tả, số buổi học.
 - **Đăng ký lớp học**: Người dùng có thể đăng ký tham gia lớp học.
 
-### 2.2. Quản lý buổi học:
+#### 2.2. Quản lý buổi học:
 - **Danh sách buổi học**: Hiển thị các buổi học trong một lớp.
 - **Chi tiết buổi học**: Xem thông tin chi tiết về buổi học, bao gồm mô tả, các mục học tập.
 
-### 2.3. Mục học tập đa dạng:
-- **Video bài giảng**: Xem video bài giảng từ YouTube
-- **Tài liệu PDF**: Có thể tải tài liệu buổi học về máy
+#### 2.3. Mục học tập đa dạng:
+- **Video bài giảng**: Xem video bài giảng từ YouTube.
+- **Tài liệu PDF**: Có thể tải tài liệu buổi học về máy.
 - **Bài tập về nhà**: Truy cập và làm bài tập được giao.
 - **Đánh dấu hoàn thành**: Người dùng có thể đánh dấu đã hoàn thành hoặc chưa hoàn thành một mục học tập.
 
-## 3. Hệ thống bài viết chuyên sâu
+### 3. Hệ thống bài viết chuyên sâu
 
-## 3.1. Quản lý bài viết
-- Danh sách bài viết: Hiển thị các bài viết chuyên sâu về toán học.
-- Tìm kiếm và lọc bài viết: Tìm kiếm bài viết theo tiêu đề, chủ đề.
-- Chi tiết bài viết: Xem nội dung đầy đủ của bài viết.
+#### 3.1. Quản lý bài viết
+- **Danh sách bài viết**: Hiển thị các bài viết chuyên sâu về toán học.
+- **Tìm kiếm và lọc bài viết**: Tìm kiếm bài viết theo tiêu đề, chủ đề.
+- **Chi tiết bài viết**: Xem nội dung đầy đủ của bài viết.
  
-## 3.2. Hiển thị nội dung toán học
-- Hỗ trợ công thức toán học: Sử dụng thư viện WebView kết hợp MathJax để hiển thị công thức toán học phức tạp.
-- Định dạng Markdown: Hỗ trợ định dạng văn bản phong phú.
-- Thông tin meta: Hiển thị thông tin tác giả, ngày đăng, mô tả ngắn.
+#### 3.2. Hiển thị nội dung toán học
+- **Hỗ trợ công thức toán học**: Sử dụng thư viện WebView kết hợp MathJax để hiển thị công thức toán học phức tạp.
+- **Định dạng Markdown**: Hỗ trợ định dạng văn bản phong phú.
+- **Thông tin meta**: Hiển thị thông tin tác giả, ngày đăng, mô tả ngắn.
 
-## 4. Hệ thống luyện tập và kiểm tra
+### 4. Hệ thống luyện tập và kiểm tra
 
-## 4.1. Quản lý đề thi
+#### 4.1. Quản lý đề thi
+- **Danh sách đề thi**: Hiển thị các đề thi được phân loại theo lớp, chương, loại đề.
+- **Chi tiết đề thi**: Xem thông tin chi tiết về đề thi, bao gồm thời gian làm bài, mô tả, tỷ lệ đạt.
+- **Đánh dấu đề thi**: Người dùng có thể đánh dấu đề thi yêu thích.
 
-Danh sách đề thi: Hiển thị các đề thi được phân loại theo lớp, chương, loại đề.
-Chi tiết đề thi: Xem thông tin chi tiết về đề thi, bao gồm thời gian làm bài, mô tả, tỷ lệ đạt.
-Đánh dấu đề thi: Người dùng có thể đánh dấu đề thi yêu thích.
+#### 4.2. Làm bài thi
+- **Giao diện làm bài**: Hiển thị câu hỏi và các lựa chọn trả lời.
+- **Đếm ngược thời gian**: Hiển thị thời gian còn lại để làm bài.
+- **Điều hướng câu hỏi**: Di chuyển giữa các câu hỏi, đánh dấu câu hỏi để xem lại.
+- **Nộp bài**: Nộp bài thi khi hoàn thành hoặc hết thời gian.
 
-Làm bài thi
-Giao diện làm bài: Hiển thị câu hỏi và các lựa chọn trả lời.
-Đếm ngược thời gian: Hiển thị thời gian còn lại để làm bài.
-Điều hướng câu hỏi: Di chuyển giữa các câu hỏi, đánh dấu câu hỏi để xem lại.
-Nộp bài: Nộp bài thi khi hoàn thành hoặc hết thời gian.
-Kết quả và phân tích
-Hiển thị điểm số: Xem điểm số và tỷ lệ đúng sau khi làm bài.
-Xem lời giải: Xem lời giải chi tiết cho từng câu hỏi.
-Phân tích kết quả: Thống kê về thời gian làm bài, câu trả lời đúng/sai.
-Lịch sử làm bài: Xem lại các lần làm bài trước đó.
-Loại câu hỏi đa dạng
-Trắc nghiệm: Câu hỏi với nhiều lựa chọn.
-Tự luận: Câu hỏi yêu cầu nhập câu trả lời.
-Điền khuyết: Câu hỏi yêu cầu điền vào chỗ trống.
+#### 4.3. Kết quả và phân tích
+- **Hiển thị điểm số**: Xem điểm số và tỷ lệ đúng sau khi làm bài.
+- **Xem lời giải**: Xem lời giải chi tiết cho từng câu hỏi.
+- **Phân tích kết quả**: Thống kê về thời gian làm bài, câu trả lời đúng/sai.
+- **Lịch sử làm bài**: Xem lại các lần làm bài trước đó.
 
-- **Danh sách bài học**: Phân loại theo lớp, chương, chủ đề giúp dễ dàng tìm kiếm
-- **Học liệu đa dạng**: 
-  - Tài liệu PDF với đầy đủ công thức toán học
-  - Video bài giảng từ YouTube
-  - Bài tập tương tác
-- **Bài viết chuyên sâu**: Các bài viết về lý thuyết toán học, kỹ thuật giải bài tập
-- **Theo dõi tiến độ**: Đánh dấu bài học đã hoàn thành, xem lịch sử học tập
-- **Làm bài tập**: 
-  - Hệ thống bài tập đa dạng (trắc nghiệm, tự luận, điền khuyết)
-  - Kiểm tra kiến thức với thời gian giới hạn
-  - Xem lời giải chi tiết
-  - Thống kê kết quả làm bài
-- **Trang cá nhân**: Quản lý thông tin cá nhân, xem lịch sử học tập
+#### 4.4. Loại câu hỏi đa dạng
+- **Trắc nghiệm**: Câu hỏi với nhiều lựa chọn.
+- **Tự luận**: Câu hỏi yêu cầu nhập câu trả lời.
+- **Điền khuyết**: Câu hỏi yêu cầu điền vào chỗ trống.
+
 
 ## Tác giả
 
