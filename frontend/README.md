@@ -5,6 +5,7 @@ Phần frontend của ứng dụng Toán Thầy Bee được phát triển bằn
 ## Cài đặt và Chạy ứng dụng
 
 ### Yêu cầu hệ thống
+- Hệ điều hành Windows (khuyến khích)
 - Node.js (phiên bản mới nhất)
 - npm hoặc yarn
 - Expo CLI
@@ -14,7 +15,7 @@ Phần frontend của ứng dụng Toán Thầy Bee được phát triển bằn
 
 1. Clone repository và di chuyển vào thư mục frontend:
 ```bash
-git clone [đường dẫn repository]
+git clone https://github.com/b4schh/toan-thay-bee-mobile-app/
 cd frontend
 ```
 
@@ -30,6 +31,7 @@ npx expo start
 
 4. Sau khi chạy lệnh trên, Expo sẽ mở một trang web với mã QR. Bạn có thể:
    - Quét mã QR bằng ứng dụng Expo Go trên thiết bị di động
+   - Nhấn 'w' để mở ứng dụng trên máy ảo Android
    - Nhấn 'a' để mở ứng dụng trên máy ảo Android
    - Nhấn 'i' để mở ứng dụng trên máy ảo iOS
 
