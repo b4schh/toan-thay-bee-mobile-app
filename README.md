@@ -133,29 +133,32 @@ Hai phần này tương tác với nhau thông qua RESTful API, đảm bảo tí
 - **Tự luận**: Câu hỏi yêu cầu nhập câu trả lời.
 - **Điền khuyết**: Câu hỏi yêu cầu điền vào chỗ trống.
 
-#### 5. Giao diện người dùng và trải nghiệm
-Hệ thống tab chính
-Tab Trang chủ: Hiển thị tổng quan về tiến độ học tập, lớp học, bài học mới.
-Tab Bài viết: Truy cập các bài viết chuyên sâu về toán học.
-Tab Luyện tập: Truy cập các đề thi và bài tập.
-Tab Tài khoản: Quản lý thông tin cá nhân và cài đặt.
-Các component UI chung
-HeaderWithBackButton: Tiêu đề trang với nút quay lại.
-Button: Nút bấm tùy chỉnh với nhiều kiểu dáng.
-Card: Các loại thẻ hiển thị thông tin (ArticleCard, ClassCard, ExamCard).
-Dialog: Hộp thoại thông báo, xác nhận.
-FormInput/FormSelect: Các thành phần nhập liệu trong form.
-LoadingOverlay: Hiển thị khi đang tải dữ liệu.
-Pagination: Phân trang cho danh sách dài.
-EmptyView: Hiển thị khi không có dữ liệu.
-Trải nghiệm người dùng
-Responsive Design: Giao diện thích ứng với nhiều kích thước màn hình.
-Animations: Sử dụng React Native Reanimated cho các hiệu ứng mượt mà.
-Offline Support: Có khả năng lưu trữ dữ liệu local với AsyncStorage.
-Error Handling: Xử lý và hiển thị lỗi một cách thân thiện.
-Loading States: Hiển thị trạng thái đang tải dữ liệu.
-## Tác giả
+### 5. Giao diện người dùng và trải nghiệm
 
+#### 5.1. Hệ thống tab chính
+- **Tab Trang chủ**: Hiển thị tổng quan về tiến độ học tập, lớp học, bài học mới.
+- **Tab Bài viết**: Truy cập các bài viết chuyên sâu về toán học.
+- **Tab Luyện tập**: Truy cập các đề thi và bài tập.
+- **Tab Tài khoản**: Quản lý thông tin cá nhân và cài đặt.
+
+#### 5.2. Các component UI chung
+- **HeaderWithBackButton**: Tiêu đề trang với nút quay lại.
+- **AppText**: Văn bản được tùy chỉnh riêng của ứng dụng.
+- **Button**: Nút bấm tùy chỉnh với nhiều kiểu dáng.
+- **Card**: Các loại thẻ hiển thị thông tin (ArticleCard, ClassCard, ExamCard).
+- **Dialog**: Hộp thoại thông báo, xác nhận.
+- **LoadingOverlay**: Hiển thị khi đang tải dữ liệu.
+- **Pagination**: Phân trang cho danh sách dài.
+- **EmptyView**: Hiển thị khi không có dữ liệu.
+
+#### 5.3. Trải nghiệm người dùng
+- **Responsive Design**: Giao diện thích ứng với nhiều kích thước màn hình.
+- **Animations**: Sử dụng React Native Reanimated cho các hiệu ứng mượt mà.
+- **Offline Support**: Có khả năng lưu trữ dữ liệu local với AsyncStorage.
+- **Error Handling**: Xử lý và hiển thị lỗi một cách thân thiện.
+- **Loading States**: Hiển thị trạng thái đang tải dữ liệu.
+
+## Tác giả
 - Mai Khoa Bách
 - Nguyễn Minh Đức
 - Đồng Văn Hảo
