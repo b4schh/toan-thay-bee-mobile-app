@@ -15,7 +15,7 @@ Phần backend của ứng dụng Toán Thầy Bee được phát triển bằng
 
 #### 1. Clone repository và di chuyển vào thư mục backend:
 ```bash
-git clone [đường dẫn repository]
+git clone https://github.com/b4schh/toan-thay-bee-mobile-app/
 cd backend
 ```
 
