@@ -23,8 +23,29 @@ cd backend
 npm install
 ```
 
-3. Cấu hình biến môi trường:
+3. Cấu hình database (2 cách):
+3.1. Cách 1: Sử dụng MySQL đã cài đặt trên máy
+
+Nếu bạn đã cài đặt MySQL trên máy tính của mình:
+- Cần cấu hình file .env để trỏ đến MySQL local của bạn
 ```bash
+DB_DEV_HOST=localhost
+DB_DEV_USERNAME=root
+DB_DEV_PASSWORD=your_password
+DB_DEV_DATABASE=toan_thay_bee
+DB_DEV_PORT=3306  # Cổng mặc định của MySQL
+```
+
+- Tạo database toan_thay_bee (nếu chưa có):
+```bash
+CREATE DATABASE toan_thay_bee;
+```bash
+
+- Chạy migrations để tạo cấu trúc database:
+```bash
+npx sequelize-cli db:migrate
+```
+
 # Tạo file .env từ file .env.example
 cp .env.example .env
 
