@@ -60,7 +60,7 @@ Sau khi chạy lệnh trên, Expo sẽ mở một trang web với mã QR. Bạn 
 - Nhấn 'i' để mở ứng dụng trên máy ảo iOS
 
 ### Backend
-
+- [Backend](./backend/README.md#cài-đặt-và-chạy-server)
 ```bash
 # Di chuyển vào thư mục backend
 cd backend
