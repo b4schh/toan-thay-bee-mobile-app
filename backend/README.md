@@ -44,11 +44,6 @@ DB_DEV_DATABASE=toan_thay_bee
 DB_DEV_PORT=3309  # Cổng được map trong deployments.yml
 ```
 
-- Chạy migrations để tạo cấu trúc database:
-```bash
-npx sequelize-cli db:migrate
-```
-
 #### 3.2. Cách 2: Sử dụng MySQL đã cài đặt trên máy
 
 Nếu bạn đã cài đặt MySQL trên máy tính của mình:
@@ -67,25 +62,21 @@ DB_DEV_PORT=3306  # Cổng mặc định của MySQL
 CREATE DATABASE toan_thay_bee;
 ```
 
-- Chạy migrations để tạo cấu trúc database:
+#### 4. Chạy migrations để tạo cấu trúc database:
 ```bash
+cd src
 npx sequelize-cli db:migrate
 ```
 
-
-5. Chạy migrations để tạo cấu trúc database:
+#### 5: Chạy seeders để tạo các dữ liệu cần thiết cho database:
 ```bash
-npx sequelize-cli db:migrate
+# Lưu ý: Đảm bảm database đang hoạt động trước khi chạy seeders
+cd src
+npx sequelize-cli db:seed:all
 ```
-
-6. Khởi động server ở chế độ development:
+#### 6. Khởi động server ở chế độ development:
 ```bash
 npm run dev
-```
-
-7. Khởi động server ở chế độ production:
-```bash
-npm start
 ```
 
 ## Cấu trúc database
