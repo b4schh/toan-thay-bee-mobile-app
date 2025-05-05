@@ -1,0 +1,21 @@
+/* Styles for preventing translation */
+.notranslate {
+  /* Ensure the element is not translated by browser translation tools */
+  translate: no;
+  -webkit-translate: no;
+  -moz-translate: no;
+  -ms-translate: no;
+}
+
+/* Add a specific class for Google Translate */
+.notranslate {
+  /* This class is recognized by Google Translate */
+}
+
+/* Prevent translation for specific elements if needed */
+[translate="no"] {
+  translate: no;
+  -webkit-translate: no;
+  -moz-translate: no;
+  -ms-translate: no;
+}

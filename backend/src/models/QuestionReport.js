@@ -8,7 +8,8 @@ export default (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      QuestionReport.belongsTo(models.Question, { foreignKey: 'questionId', as: 'question' })
+      QuestionReport.belongsTo(models.User, { foreignKey: 'userId', as: 'user' })
     }
   }
   QuestionReport.init({

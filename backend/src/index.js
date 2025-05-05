@@ -34,8 +34,6 @@ app.use(
       "https://toanthaybee.edu.vn",
       "http://localhost:8081",
       "http://192.168.1.139:8081",
-      "http://192.168.1.139:8081",
-      "https://toanthaybee.edu.vn",
       "http://localhost:4000",
       ngrokUrl,
     ],

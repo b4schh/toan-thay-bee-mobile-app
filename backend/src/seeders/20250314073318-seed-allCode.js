@@ -4,40 +4,40 @@ export default {
   up: async (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert("allCode", [
       // 👤 User Type
-      // { code: "AD", type: "user type", description: "Admin", createdAt: new Date(), updatedAt: new Date() },
-      // { code: "HS1", type: "user type", description: "Học sinh trên lớp", createdAt: new Date(), updatedAt: new Date() },
-      // { code: "GV", type: "user type", description: "Giáo viên", createdAt: new Date(), updatedAt: new Date() },
-      // { code: "AS", type: "user type", description: "Trợ giảng", createdAt: new Date(), updatedAt: new Date() },
+      { code: "AD", type: "user type", description: "Admin", createdAt: new Date(), updatedAt: new Date() },
+      { code: "HS1", type: "user type", description: "Học sinh trên lớp", createdAt: new Date(), updatedAt: new Date() },
+      { code: "GV", type: "user type", description: "Giáo viên", createdAt: new Date(), updatedAt: new Date() },
+      { code: "AS", type: "user type", description: "Trợ giảng", createdAt: new Date(), updatedAt: new Date() },
 
       // Grade
-      // { code: "10", type: "grade", description: "Lớp 10", createdAt: new Date(), updatedAt: new Date() },
-      // { code: "11", type: "grade", description: "Lớp 11", createdAt: new Date(), updatedAt: new Date() },
-      // { code: "12", type: "grade", description: "Lớp 12", createdAt: new Date(), updatedAt: new Date() },
+      { code: "10", type: "grade", description: "Lớp 10", createdAt: new Date(), updatedAt: new Date() },
+      { code: "11", type: "grade", description: "Lớp 11", createdAt: new Date(), updatedAt: new Date() },
+      { code: "12", type: "grade", description: "Lớp 12", createdAt: new Date(), updatedAt: new Date() },
 
       // 📚 Class Status
-      // { code: "LHD", type: "class status", description: "Hoạt động", createdAt: new Date(), updatedAt: new Date() },
-      // { code: "LKT", type: "class status", description: "Kết thúc", createdAt: new Date(), updatedAt: new Date() },
+      { code: "LHD", type: "class status", description: "Hoạt động", createdAt: new Date(), updatedAt: new Date() },
+      { code: "LKT", type: "class status", description: "Kết thúc", createdAt: new Date(), updatedAt: new Date() },
 
       // 🎓 Student Status
-      // { code: "HSDH", type: "student status", description: "Học sinh đang học", createdAt: new Date(), updatedAt: new Date() },
-      // { code: "HSNH", type: "student status", description: "Học sinh nghỉ học", createdAt: new Date(), updatedAt: new Date() },
-      // { code: "HSTN", type: "student status", description: "Học sinh tốt nghiệp", createdAt: new Date(), updatedAt: new Date() },
+      { code: "HSDH", type: "student status", description: "Học sinh đang học", createdAt: new Date(), updatedAt: new Date() },
+      { code: "HSNH", type: "student status", description: "Học sinh nghỉ học", createdAt: new Date(), updatedAt: new Date() },
+      { code: "HSTN", type: "student status", description: "Học sinh tốt nghiệp", createdAt: new Date(), updatedAt: new Date() },
 
       // 🗓️ Days of Week (DOW)
-      // { code: "T2", type: "dow", description: "Thứ 2", createdAt: new Date(), updatedAt: new Date() },
-      // { code: "T3", type: "dow", description: "Thứ 3", createdAt: new Date(), updatedAt: new Date() },
-      // { code: "T4", type: "dow", description: "Thứ 4", createdAt: new Date(), updatedAt: new Date() },
-      // { code: "T5", type: "dow", description: "Thứ 5", createdAt: new Date(), updatedAt: new Date() },
-      // { code: "T6", type: "dow", description: "Thứ 6", createdAt: new Date(), updatedAt: new Date() },
-      // { code: "T7", type: "dow", description: "Thứ 7", createdAt: new Date(), updatedAt: new Date() },
-      // { code: "CN", type: "dow", description: "Chủ nhật", createdAt: new Date(), updatedAt: new Date() },
+      { code: "T2", type: "dow", description: "Thứ 2", createdAt: new Date(), updatedAt: new Date() },
+      { code: "T3", type: "dow", description: "Thứ 3", createdAt: new Date(), updatedAt: new Date() },
+      { code: "T4", type: "dow", description: "Thứ 4", createdAt: new Date(), updatedAt: new Date() },
+      { code: "T5", type: "dow", description: "Thứ 5", createdAt: new Date(), updatedAt: new Date() },
+      { code: "T6", type: "dow", description: "Thứ 6", createdAt: new Date(), updatedAt: new Date() },
+      { code: "T7", type: "dow", description: "Thứ 7", createdAt: new Date(), updatedAt: new Date() },
+      { code: "CN", type: "dow", description: "Chủ nhật", createdAt: new Date(), updatedAt: new Date() },
 
       // ⏳ Duration
-      // { code: "7:00 - 9:00", type: "duration", description: "7:00 - 9:00", createdAt: new Date(), updatedAt: new Date() },
+      { code: "7:00 - 9:00", type: "duration", description: "7:00 - 9:00", createdAt: new Date(), updatedAt: new Date() },
       { code: "7:30 - 9:30", type: "duration", description: "7:30 - 9:30", createdAt: new Date(), updatedAt: new Date() },
-      // { code: "8:00 - 10:00", type: "duration", description: "8:00 - 10:00", createdAt: new Date(), updatedAt: new Date() },
+      { code: "8:00 - 10:00", type: "duration", description: "8:00 - 10:00", createdAt: new Date(), updatedAt: new Date() },
       { code: "8:30 - 10:30", type: "duration", description: "8:30 - 10:30", createdAt: new Date(), updatedAt: new Date() },
-      // { code: "9:00 - 11:00", type: "duration", description: "9:00 - 11:00", createdAt: new Date(), updatedAt: new Date() },
+      { code: "9:00 - 11:00", type: "duration", description: "9:00 - 11:00", createdAt: new Date(), updatedAt: new Date() },
       { code: "9:30 - 11:30", type: "duration", description: "9:30 - 11:30", createdAt: new Date(), updatedAt: new Date() },
       { code: "10:00 - 12:00", type: "duration", description: "10:00 - 12:00", createdAt: new Date(), updatedAt: new Date() },
       { code: "10:30 - 12:30", type: "duration", description: "10:30 - 12:30", createdAt: new Date(), updatedAt: new Date() },
@@ -68,27 +68,27 @@ export default {
 
       // Year
       { code: "2023 - 2024", type: "year", description: "2023 - 2024", createdAt: new Date(), updatedAt: new Date() },
-      // { code: "2024 - 2025", type: "year", description: "2024 - 2025", createdAt: new Date(), updatedAt: new Date() },
+      { code: "2024 - 2025", type: "year", description: "2024 - 2025", createdAt: new Date(), updatedAt: new Date() },
       { code: "2025 - 2026", type: "year", description: "2025 - 2026", createdAt: new Date(), updatedAt: new Date() },
 
       // 📖 Study Item Type
-      // { code: "BTVN", type: "study item type", description: "Bài tập về nhà", createdAt: new Date(), updatedAt: new Date() },
-      // { code: "DOC", type: "study item type", description: "Tài liệu", createdAt: new Date(), updatedAt: new Date() },
-      // { code: "VID", type: "study item type", description: "Video", createdAt: new Date(), updatedAt: new Date() },
+      { code: "BTVN", type: "study item type", description: "Bài tập về nhà", createdAt: new Date(), updatedAt: new Date() },
+      { code: "DOC", type: "study item type", description: "Tài liệu", createdAt: new Date(), updatedAt: new Date() },
+      { code: "VID", type: "study item type", description: "Video", createdAt: new Date(), updatedAt: new Date() },
 
       // 📝 Exam Type
-      // { code: "GK1", type: "exam type", description: "Giữa kì 1", createdAt: new Date(), updatedAt: new Date() },
-      // { code: "CK1", type: "exam type", description: "Cuối kì 1", createdAt: new Date(), updatedAt: new Date() },
-      // { code: "GK2", type: "exam type", description: "Giữa kì 2", createdAt: new Date(), updatedAt: new Date() },
-      // { code: "CK2", type: "exam type", description: "Cuối kì 2", createdAt: new Date(), updatedAt: new Date() },
-      // { code: "OT", type: "exam type", description: "Ôn tập", createdAt: new Date(), updatedAt: new Date() },
-      // { code: "THPT", type: "exam type", description: "Thi THPT", createdAt: new Date(), updatedAt: new Date() },
-      // { code: "OTTHPT", type: "exam type", description: "Ôn thi THPT", createdAt: new Date(), updatedAt: new Date() },
-      // { code: "HSA", type: "exam type", description: "Đánh giá năng lực", createdAt: new Date(), updatedAt: new Date() },
-      // { code: "TSA", type: "exam type", description: "Đánh giá tư duy", createdAt: new Date(), updatedAt: new Date() },
+      { code: "GK1", type: "exam type", description: "Giữa kì 1", createdAt: new Date(), updatedAt: new Date() },
+      { code: "CK1", type: "exam type", description: "Cuối kì 1", createdAt: new Date(), updatedAt: new Date() },
+      { code: "GK2", type: "exam type", description: "Giữa kì 2", createdAt: new Date(), updatedAt: new Date() },
+      { code: "CK2", type: "exam type", description: "Cuối kì 2", createdAt: new Date(), updatedAt: new Date() },
+      { code: "OT", type: "exam type", description: "Ôn tập", createdAt: new Date(), updatedAt: new Date() },
+      { code: "THPT", type: "exam type", description: "Thi THPT", createdAt: new Date(), updatedAt: new Date() },
+      { code: "OTTHPT", type: "exam type", description: "Ôn thi THPT", createdAt: new Date(), updatedAt: new Date() },
+      { code: "HSA", type: "exam type", description: "Đánh giá năng lực", createdAt: new Date(), updatedAt: new Date() },
+      { code: "TSA", type: "exam type", description: "Đánh giá tư duy", createdAt: new Date(), updatedAt: new Date() },
 
       // 📚 Chapter
-      // { code: "10C1", type: "chapter", description: "MỆNH ĐỀ VÀ TẬP HỢP", createdAt: new Date(), updatedAt: new Date() },
+      { code: "10C1", type: "chapter", description: "MỆNH ĐỀ VÀ TẬP HỢP", createdAt: new Date(), updatedAt: new Date() },
       { code: "10C11", type: "chapter", description: "Mệnh đề", createdAt: new Date(), updatedAt: new Date() },
       { code: "10C12", type: "chapter", description: "Tập hợp và các phép toán trên tập hợp", createdAt: new Date(), updatedAt: new Date() },
       { code: "10C2", type: "chapter", description: "BẤT PHƯƠNG TRÌNH VÀ HỆ BẤT PHƯƠNG TRÌNH BẬC NHẤT HAI ẨN", createdAt: new Date(), updatedAt: new Date() },
@@ -125,7 +125,7 @@ export default {
       { code: "10C91", type: "chapter", description: "Biến cố và định nghĩa cổ điển của xác suất", createdAt: new Date(), updatedAt: new Date() },
       { code: "10C92", type: "chapter", description: "Thực hành tính xác suất theo định nghĩa cổ điển", createdAt: new Date(), updatedAt: new Date() },
 
-      // { code: "11C1", type: "chapter", description: "HÀM SỐ LƯỢNG GIÁC VÀ PHƯƠNG TRÌNH LƯỢNG GIÁC", createdAt: new Date(), updatedAt: new Date() },
+      { code: "11C1", type: "chapter", description: "HÀM SỐ LƯỢNG GIÁC VÀ PHƯƠNG TRÌNH LƯỢNG GIÁC", createdAt: new Date(), updatedAt: new Date() },
       { code: "11C11", type: "chapter", description: "Giá trị lượng giác của góc lượng giác", createdAt: new Date(), updatedAt: new Date() },
       { code: "11C12", type: "chapter", description: "Công thức lượng giác", createdAt: new Date(), updatedAt: new Date() },
       { code: "11C13", type: "chapter", description: "Hàm số lượng giác", createdAt: new Date(), updatedAt: new Date() },
@@ -168,7 +168,7 @@ export default {
       { code: "11C92", type: "chapter", description: "Các quy tắc tính đạo hàm", createdAt: new Date(), updatedAt: new Date() },
       { code: "11C93", type: "chapter", description: "Đạo hàm cấp hai", createdAt: new Date(), updatedAt: new Date() },
 
-      // { code: "12C1", type: "chapter", description: "ỨNG DỤNG ĐẠO HÀM ĐỂ KHẢO SÁT VÀ VẼ ĐỒ THỊ HÀM SỐ", createdAt: new Date(), updatedAt: new Date() },
+      { code: "12C1", type: "chapter", description: "ỨNG DỤNG ĐẠO HÀM ĐỂ KHẢO SÁT VÀ VẼ ĐỒ THỊ HÀM SỐ", createdAt: new Date(), updatedAt: new Date() },
       { code: "12C11", type: "chapter", description: "Tính đơn điệu và cực trị của hàm số", createdAt: new Date(), updatedAt: new Date() },
       { code: "12C12", type: "chapter", description: "Giá trị lớn nhất và giá trị nhỏ nhất của hàm số", createdAt: new Date(), updatedAt: new Date() },
       { code: "12C13", type: "chapter", description: "Đường tiệm cận của đồ thị hàm số", createdAt: new Date(), updatedAt: new Date() },
@@ -195,25 +195,23 @@ export default {
       { code: "12C62", type: "chapter", description: "Công thức xác suất toàn phần và công thức Bayes", createdAt: new Date(), updatedAt: new Date() },
 
       // ❓ Question Type
-      // { code: "TN", type: "question type", description: "Trắc nghiệm", createdAt: new Date(), updatedAt: new Date() },
-      // { code: "TLN", type: "question type", description: "Trả lời ngắn", createdAt: new Date(), updatedAt: new Date() },
-      // { code: "DS", type: "question type", description: "Đúng/Sai", createdAt: new Date(), updatedAt: new Date() },
+      { code: "TN", type: "question type", description: "Trắc nghiệm", createdAt: new Date(), updatedAt: new Date() },
+      { code: "TLN", type: "question type", description: "Trả lời ngắn", createdAt: new Date(), updatedAt: new Date() },
+      { code: "DS", type: "question type", description: "Đúng/Sai", createdAt: new Date(), updatedAt: new Date() },
 
       // 🎯 Difficulty
-      // { code: "NB", type: "difficulty", description: "Nhận biết", createdAt: new Date(), updatedAt: new Date() },
-      // { code: "TH", type: "difficulty", description: "Thông hiểu", createdAt: new Date(), updatedAt: new Date() },
-      // { code: "VD", type: "difficulty", description: "Vận dụng", createdAt: new Date(), updatedAt: new Date() },
-      // { code: "VDC", type: "difficulty", description: "Vận dụng cao", createdAt: new Date(), updatedAt: new Date() },
+      { code: "NB", type: "difficulty", description: "Nhận biết", createdAt: new Date(), updatedAt: new Date() },
+      { code: "TH", type: "difficulty", description: "Thông hiểu", createdAt: new Date(), updatedAt: new Date() },
+      { code: "VD", type: "difficulty", description: "Vận dụng", createdAt: new Date(), updatedAt: new Date() },
+      { code: "VDC", type: "difficulty", description: "Vận dụng cao", createdAt: new Date(), updatedAt: new Date() },
 
-      // { code: "WS", type: "wait status", description: "Đang chờ duyệt", createdAt: new Date(), updatedAt: new Date() },
-      // { code: "JS", type: "wait status", description: "Đã vào lớp", createdAt: new Date(), updatedAt: new Date() },
+      { code: "WS", type: "wait status", description: "Đang chờ duyệt", createdAt: new Date(), updatedAt: new Date() },
+      { code: "JS", type: "wait status", description: "Đã vào lớp", createdAt: new Date(), updatedAt: new Date() },
 
-      // { code: "EF", type: "cheat type", description: "Thoát chế độ toàn màn hình", createdAt: new Date(), updatedAt: new Date() },
-      // { code: "TB", type: "cheat type", description: "Chuyển tab", createdAt: new Date(), updatedAt: new Date() },
-      // { code: "COP", type: "cheat type", description: "Sao chép câu hỏi", createdAt: new Date(), updatedAt: new Date() },
-      // { code: "SK", type: "cheat type", description: "Kí tự phím tắt lạ", createdAt: new Date(), updatedAt: new Date() },
-
-
+      { code: "EF", type: "cheat type", description: "Thoát chế độ toàn màn hình", createdAt: new Date(), updatedAt: new Date() },
+      { code: "TB", type: "cheat type", description: "Chuyển tab", createdAt: new Date(), updatedAt: new Date() },
+      { code: "COP", type: "cheat type", description: "Sao chép câu hỏi", createdAt: new Date(), updatedAt: new Date() },
+      { code: "SK", type: "cheat type", description: "Kí tự phím tắt lạ", createdAt: new Date(), updatedAt: new Date() },
     ]);
   },
 

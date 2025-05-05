@@ -1,5 +1,5 @@
 "use strict";
-const bcrypt = require("bcrypt");
+import bcrypt from "bcrypt";
 
 export default {
   up: async (queryInterface, Sequelize) => {
@@ -12,7 +12,7 @@ export default {
         firstName: "Bách",
         username: "b4schh",
         email: "maikhoabach@gmail.com",
-        password: hashedPassword, // ✅ Mật khẩu đã được mã hóa
+        password: hashedPassword, // Mật khẩu đã được mã hóa
         userType: "AD", // 🔹 Đảm bảo "AD" có trong bảng allCode
         gender: true, // 🔹 BOOLEAN (true = 1, false = 0)
         phone: "0968897616",
@@ -27,6 +27,6 @@ export default {
   },
 
   down: async (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete("user", { username: "minhduc7904" });
+    return queryInterface.bulkDelete("user", { username: "b4schh" });
   },
 };
