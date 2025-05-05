@@ -130,22 +130,7 @@ npm run dev
 - Thay tất cả IP trong các file .env, index.js,... (ví dụ 192.168.1.139) thành IPv4 của máy bạn
 
 ## Cấu trúc database
-
 - [Cấu trúc Database](./src/models/README.md).
 
-Backend sử dụng Sequelize ORM với các model chính:
-
-### Nguoi_dung (User)
-Quản lý thông tin người dùng trong hệ thống.
-```
-- id: int (PK)
-- ho_ten_dem: string (Họ và tên đệm)
-- ten: string (Tên)
-- tai_khoan: string (Tài khoản)
-- mat_khau: string (Mật khẩu đã mã hóa)
-- kieu_nguoi_dung: string (Loại người dùng: học sinh, giáo viên, admin)
-- gioi_tinh: boolean (Giới tính)
-- ngay_sinh: date (Ngày sinh)
-- sdt: string (Số điện thoại, unique)
-- truong_c3: string (Trường THPT)
-- lop: string (Lớp
+## API
+- [Tài liệu về API](./src/route/README.md).
