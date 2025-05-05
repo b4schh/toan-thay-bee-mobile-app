@@ -25,3 +25,24 @@
 - **updatedAt**: Ngày cập nhật.
 ### Quan hệ:
 - User có nhiều StudentClassStatus, StudentStudyStatus, AssistantReport, StudentExamAttempt, StudentExamStatus.
+
+## 2. Bảng Class
+### Mô tả: Lưu thông tin lớp học.
+### Cột:
+- **id**: (Primary Key) ID của lớp học.
+- **name**: Tên lớp.
+- **description**: Mô tả.
+- **academic**Year: Năm học.
+- **status**: Trạng thái.
+- **slideId**: ID của slide liên kết.
+- **lessonCount**: Số lượng bài học.
+- **dayOfWeek**: Ngày học.
+- **studyTime**: Thời gian học.
+- **public**: Công khai (Boolean).
+- **studentCount**: Số lượng học sinh.
+- **class_code**: Mã lớp.
+- **createdAt**: Ngày tạo.
+- **updatedAt**: Ngày cập nhật.
+### Quan hệ:
+- Class có nhiều StudentClassStatus, Lesson.
+- Class thuộc về Slide.
