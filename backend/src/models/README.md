@@ -252,7 +252,8 @@
 - **createdAt**: Ngày tạo báo cáo.
 
 ### Quan hệ:
-- Hiện tại không có quan hệ được định nghĩa trong model, nhưng có thể liên kết với bảng User và Question qua userId và questionId.
+- QuestionReport thuộc về bảng Question qua cột questionId.
+- QuestionReport thuộc về bảng User qua cột userId.
 
 ## 18. Bảng Slide
 ### Mô tả: Lưu thông tin slide trình chiếu.
