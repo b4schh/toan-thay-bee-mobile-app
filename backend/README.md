@@ -37,11 +37,34 @@ docker compose -f ./deployments.yml up -d
 
 - Cấu hình file .env (dựa trên file .env.example) để trỏ đến MySQL trong Docker:
 ```bash
+PORT = 3000
+HOST_NAME = 192.168.1.139 // localhost hoặc thay bằng IPv4
+NODE_ENV = development
+FRONTEND_URL = http://localhost:8081
+NGROK_URL = https://4e04-14-191-32-178.ngrok-free.app
+
 DB_DEV_HOST=localhost
 DB_DEV_USERNAME=root
 DB_DEV_PASSWORD=070904  # Mật khẩu được định nghĩa trong deployments.yml
 DB_DEV_DATABASE=toan_thay_bee
 DB_DEV_PORT=3309  # Cổng được map trong deployments.yml
+
+DB_POOL_MAX=50          # Kết nối tối đa trong pool (đề xuất: 50)
+DB_POOL_MIN=10          # Kết nối tối thiểu giữ sẵn (đề xuất: 10)
+DB_POOL_ACQUIRE=20000   # Thời gian chờ tối đa (ms) khi lấy kết nối (20s)
+DB_POOL_IDLE=5000       # Ngắt kết nối sau (ms) khi không dùng (5s)
+
+FIREBASE_API_KEY=AIzaSyBIXC1qJaaTAYuJJfzYmiNQ3gm7sJ0rDmk
+FIREBASE_AUTH_DOMAIN=toan-thay-bee-dc180.firebaseapp.com
+FIREBASE_DATABASE_URL=https://toan-thay-bee-default-rtdb.asia-southeast1.firebasedatabase.app
+FIREBASE_PROJECT_ID=toan-thay-bee-dc180
+FIREBASE_STORAGE_BUCKET=toan-thay-bee-dc180.firebasestorage.app
+FIREBASE_MESSAGING_SENDER_ID=920614968946
+FIREBASE_APP_ID=1:920614968946:web:adaf62b1aedad038876ceb
+FIREBASE_MEASUREMENT_ID=G-9PL01PR5S6
+
+JWT_SECRET=qwertyuiopasdfghjklzxcvbnmqwertyuiopasdfghjklzxcvbnm
+JWT_EXPIRES_IN=30d
 ```
 
 #### 3.2. Cách 2: Sử dụng MySQL đã cài đặt trên máy
@@ -50,11 +73,34 @@ Nếu bạn đã cài đặt MySQL trên máy tính của mình:
 
 - Cần cấu hình file .env (dựa trên file .env.example) để trỏ đến MySQL local của bạn
 ```bash
+PORT = 3000
+HOST_NAME = 192.168.1.139 // localhost hoặc thay bằng IPv4
+NODE_ENV = development
+FRONTEND_URL = http://localhost:8081
+NGROK_URL = https://4e04-14-191-32-178.ngrok-free.app
+
 DB_DEV_HOST=localhost
 DB_DEV_USERNAME=root
 DB_DEV_PASSWORD=your_password
 DB_DEV_DATABASE=toan_thay_bee
 DB_DEV_PORT=3306  # Cổng mặc định của MySQL
+
+DB_POOL_MAX=50          # Kết nối tối đa trong pool (đề xuất: 50)
+DB_POOL_MIN=10          # Kết nối tối thiểu giữ sẵn (đề xuất: 10)
+DB_POOL_ACQUIRE=20000   # Thời gian chờ tối đa (ms) khi lấy kết nối (20s)
+DB_POOL_IDLE=5000       # Ngắt kết nối sau (ms) khi không dùng (5s)
+
+FIREBASE_API_KEY=AIzaSyBIXC1qJaaTAYuJJfzYmiNQ3gm7sJ0rDmk
+FIREBASE_AUTH_DOMAIN=toan-thay-bee-dc180.firebaseapp.com
+FIREBASE_DATABASE_URL=https://toan-thay-bee-default-rtdb.asia-southeast1.firebasedatabase.app
+FIREBASE_PROJECT_ID=toan-thay-bee-dc180
+FIREBASE_STORAGE_BUCKET=toan-thay-bee-dc180.firebasestorage.app
+FIREBASE_MESSAGING_SENDER_ID=920614968946
+FIREBASE_APP_ID=1:920614968946:web:adaf62b1aedad038876ceb
+FIREBASE_MEASUREMENT_ID=G-9PL01PR5S6
+
+JWT_SECRET=qwertyuiopasdfghjklzxcvbnmqwertyuiopasdfghjklzxcvbnm
+JWT_EXPIRES_IN=30d
 ```
 
 - Tạo database toan_thay_bee (nếu chưa có):
@@ -79,6 +125,9 @@ npx sequelize-cli db:seed:all
 ```bash
 npm run dev
 ```
+
+## Lưu ý:
+- Thay tất cả IP trong các file .env, index.js (ví dụ 192.168.1.139) thành IPv4 của máy bạn
 
 ## Cấu trúc database
 
