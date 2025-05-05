@@ -131,7 +131,7 @@ npm run dev
 
 ## Cấu trúc database
 
-- [Cấu trúc Database](./backend/src/models/README.md).
+- [Cấu trúc Database](./src/models/README.md).
 
 Backend sử dụng Sequelize ORM với các model chính:
 
