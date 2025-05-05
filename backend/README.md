@@ -127,9 +127,11 @@ npm run dev
 ```
 
 ## Lưu ý:
-- Thay tất cả IP trong các file .env, index.js (ví dụ 192.168.1.139) thành IPv4 của máy bạn
+- Thay tất cả IP trong các file .env, index.js,... (ví dụ 192.168.1.139) thành IPv4 của máy bạn
 
 ## Cấu trúc database
+
+- [Cấu trúc Database](./backend/src/models/README.md).
 
 Backend sử dụng Sequelize ORM với các model chính:
 
