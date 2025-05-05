@@ -133,4 +133,4 @@ npm run dev
 - [Cấu trúc Database](./src/models/README.md).
 
 ## API
-- [Tài liệu về API](./src/route/README.md).
+- [Tài liệu về API](./src/routes/README.md).
