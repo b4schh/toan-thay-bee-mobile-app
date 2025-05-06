@@ -2,7 +2,16 @@
 
 Dưới đây là bộ test cases chi tiết cho ứng dụng Toán Thầy Bee, bao gồm các tính năng chính của hệ thống. Mỗi test case được mô tả với ID, mục đích, các bước thực hiện, dữ liệu test và kết quả mong đợi.
 
-## Test Cases Đăng nhập
+## Tổng hợp các test cases
+
+| ID       | Mục đích                         | Điều kiện tiên quyết          | Kết quả mong đợi                     |
+|----------|----------------------------------|-------------------------------|--------------------------------------|
+| TC-001   | Đăng nhập thành công             | Đã có tài khoản hợp lệ        | Chuyển sang màn hình trang chủ       |
+| TC-002   | Đăng nhập sai mật khẩu           | Đã có tài khoản hợp lệ        | Hiển thị lỗi đăng nhập               |
+
+## Chi tiết test cases
+
+### Test Cases Đăng nhập
 
 1. TC-001 – Đăng nhập thành công
 
@@ -25,10 +34,5 @@ Dưới đây là bộ test cases chi tiết cho ứng dụng Toán Thầy Bee, 
 | **Dữ liệu test**        | Thông tin đăng nhập với mật khẩu không đúng.                               |
 | **Các bước thực hiện**  | 1. Mở ứng dụng Toán Thầy Bee<br> 2. Chọn "Đăng nhập" <br> 3. Nhập thông tin đăng nhập: <br> - Tên đăng nhập: `b4schhh` <br> - Mật khẩu: `123456` <br> 4. Nhấn nút "Đăng nhập" |
 | **Kết quả mong đợi**    | - Hệ thống hiển thị thông báo lỗi "Tên đăng nhập hoặc mật khẩu không đúng" <br> -	Người dùng vẫn ở màn hình đăng nhập |
-
-| **ID**     | **Tên test case**                     | **Mục đích**                                              | **Điều kiện tiên quyết**                                | **Dữ liệu test**                    | **Các bước thực hiện**                                                                                           | **Kết quả mong đợi**                                                                                                      |
-|------------|----------------------------------------|-----------------------------------------------------------|----------------------------------------------------------|-------------------------------------|--------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|
-| TC-001     | Đăng nhập thành công                   | Kiểm tra chức năng đăng nhập với thông tin hợp lệ         | Tài khoản: `b4schhh`, mật khẩu: `123123`                 | Thông tin đăng nhập hợp lệ         | 1. Mở ứng dụng Toán Thầy Bee<br>2. Chọn "Đăng nhập"<br>3. Nhập tên đăng nhập và mật khẩu<br>4. Nhấn "Đăng nhập" | - Đăng nhập thành công<br>- Chuyển đến trang chủ<br>- Hiển thị đúng thông tin người dùng                                 |
-| TC-002     | Đăng nhập sai mật khẩu                | Kiểm tra xử lý khi đăng nhập với mật khẩu không đúng      | Tài khoản: `b4schhh`, mật khẩu: `123123`                 | Mật khẩu không đúng                | 1. Mở ứng dụng Toán Thầy Bee<br>2. Chọn "Đăng nhập"<br>3. Nhập tên: `b4schhh`, mật khẩu: `123456`<br>4. Nhấn "Đăng nhập" | - Hiển thị lỗi "Tên đăng nhập hoặc mật khẩu không đúng"<br>- Người dùng vẫn ở màn hình đăng nhập                         |
 
 
