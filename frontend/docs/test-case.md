@@ -23,6 +23,7 @@ Dưới đây là bộ test cases chi tiết cho ứng dụng Toán Thầy Bee, 
 | **Mục đích**            | Kiểm tra chức năng đăng nhập với thông tin hợp lệ                            |
 | **Điều kiện tiên quyết**| Đã có tài khoản với tên đăng nhập `b4schhh` và mật khẩu `123123`             |
 | **Dữ liệu test**        | Thông tin đăng nhập hợp lệ.                                                  |
+| **Dữ liệu test**        | Thông tin đăng nhập hợp lệ.                                                  |
 | **Các bước thực hiện**  | 1. Mở ứng dụng Toán Thầy Bee<br> 2. Chọn "Đăng nhập" <br> 3. Nhập tên đăng nhập và mật khẩu <br> 4. Nhấn nút "Đăng nhập" |
 | **Kết quả mong đợi**    | - Người dùng được đăng nhập thành công <br> - Hệ thống chuyển đến màn hình trang chủ <br> - Thông tin người dùng hiển thị đúng |
 
