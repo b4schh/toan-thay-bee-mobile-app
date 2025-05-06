@@ -54,14 +54,14 @@ DB_POOL_MIN=10          # Kết nối tối thiểu giữ sẵn (đề xuất: 1
 DB_POOL_ACQUIRE=20000   # Thời gian chờ tối đa (ms) khi lấy kết nối (20s)
 DB_POOL_IDLE=5000       # Ngắt kết nối sau (ms) khi không dùng (5s)
 
-FIREBASE_API_KEY=AIzaSyBIXC1qJaaTAYuJJfzYmiNQ3gm7sJ0rDmk
-FIREBASE_AUTH_DOMAIN=toan-thay-bee-dc180.firebaseapp.com
-FIREBASE_DATABASE_URL=https://toan-thay-bee-default-rtdb.asia-southeast1.firebasedatabase.app
-FIREBASE_PROJECT_ID=toan-thay-bee-dc180
-FIREBASE_STORAGE_BUCKET=toan-thay-bee-dc180.firebasestorage.app
-FIREBASE_MESSAGING_SENDER_ID=920614968946
-FIREBASE_APP_ID=1:920614968946:web:adaf62b1aedad038876ceb
-FIREBASE_MEASUREMENT_ID=G-9PL01PR5S6
+FIREBASE_API_KEY=
+FIREBASE_AUTH_DOMAIN=
+FIREBASE_DATABASE_URL=
+FIREBASE_PROJECT_ID=
+FIREBASE_STORAGE_BUCKET=
+FIREBASE_MESSAGING_SENDER_ID=
+FIREBASE_APP_ID=
+FIREBASE_MEASUREMENT_ID=
 
 JWT_SECRET=qwertyuiopasdfghjklzxcvbnmqwertyuiopasdfghjklzxcvbnm
 JWT_EXPIRES_IN=30d
@@ -90,14 +90,14 @@ DB_POOL_MIN=10          # Kết nối tối thiểu giữ sẵn (đề xuất: 1
 DB_POOL_ACQUIRE=20000   # Thời gian chờ tối đa (ms) khi lấy kết nối (20s)
 DB_POOL_IDLE=5000       # Ngắt kết nối sau (ms) khi không dùng (5s)
 
-FIREBASE_API_KEY=AIzaSyBIXC1qJaaTAYuJJfzYmiNQ3gm7sJ0rDmk
-FIREBASE_AUTH_DOMAIN=toan-thay-bee-dc180.firebaseapp.com
-FIREBASE_DATABASE_URL=https://toan-thay-bee-default-rtdb.asia-southeast1.firebasedatabase.app
-FIREBASE_PROJECT_ID=toan-thay-bee-dc180
-FIREBASE_STORAGE_BUCKET=toan-thay-bee-dc180.firebasestorage.app
-FIREBASE_MESSAGING_SENDER_ID=920614968946
-FIREBASE_APP_ID=1:920614968946:web:adaf62b1aedad038876ceb
-FIREBASE_MEASUREMENT_ID=G-9PL01PR5S6
+FIREBASE_API_KEY=
+FIREBASE_AUTH_DOMAIN=
+FIREBASE_DATABASE_URL=
+FIREBASE_PROJECT_ID=
+FIREBASE_STORAGE_BUCKET=
+FIREBASE_MESSAGING_SENDER_ID=
+FIREBASE_APP_ID=
+FIREBASE_MEASUREMENT_ID=
 
 JWT_SECRET=qwertyuiopasdfghjklzxcvbnmqwertyuiopasdfghjklzxcvbnm
 JWT_EXPIRES_IN=30d
