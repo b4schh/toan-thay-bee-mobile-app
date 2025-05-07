@@ -200,4 +200,3 @@ Chúng tôi xin gửi lời cảm ơn đến:
 - Thầy giáo Nguyễn Đình Quý đã hỗ trợ và hướng dẫn trong quá trình thực hiện đồ án
 - Các thư viện mã nguồn mở đã được sử dụng trong dự án
 - Cộng đồng React Native và Expo đã cung cấp tài liệu và hỗ trợ
-
