@@ -63,3 +63,6 @@ frontend/
 ├── package.json          # Thông tin package và dependencies
 └── ... các file khác
 ```
+
+## Tài liệu Test Cases
+- [Test Cases](./docs/test-case.md).
