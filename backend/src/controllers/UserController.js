@@ -1,67 +1,27 @@
-import db from "../models/index.js"
-import UserResponse from "../dtos/responses/user/UserResponse.js"
-import bcrypt from "bcrypt"
-import UserType from "../constants/UserType.js"
-import UserStatus from "../constants/UserStatus.js"
-import jwt from "jsonwebtoken"
-import { ref, uploadBytesResumable, getDownloadURL, deleteObject, getStorage } from 'firebase/storage'
-import { uploadImage, cleanupUploadedFiles } from "../utils/imageUpload.js"
-import { Op } from "sequelize"
 import { parseExcel, sanitizeExcelUser } from '../utils/excelParser.js';
-import { createUserBulk } from '../services/user.service.js';
-import dotenv from 'dotenv'
-dotenv.config()
+import * as userService from '../services/user.service.js';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 
 export const registerUser = async (req, res) => {
-    const { email, username, phone } = req.body
-    if (!username && !email) {
-        return res.status(400).json({ message: 'Tài khoản không được để trống' })
+    try {
+        const user = await userService.createUser(req.body);
+        return res.status(201).json({
+            message: 'Thêm người dùng thành công',
+            user
+        });
+    } catch (error) {
+        return res.status(400).json({ message: error.message });
     }
-
-    if (username) {
-        const exitingUsernameUser = await db.User.findOne({ where: { username } })
-        if (exitingUsernameUser) {
-            return res.status(409).json({ message: 'Username đã tồn tại' })
-        }
-    }
-
-    if (email) {
-        const exitingEmailUser = await db.User.findOne({ where: { email } })
-        if (exitingEmailUser) {
-            return res.status(409).json({ message: 'Email đã tồn tại' })
-        }
-    }
-
-    if (phone) {
-        const exitingPhoneUser = await db.User.findOne({ where: { phone } })
-        if (exitingPhoneUser) {
-            return res.status(409).json({ message: 'Số điện thoại đã tồn tại' })
-        }
-    }
-
-    const hashedPassword = await bcrypt.hash(req.body.password, 10)
-    const newUser = await db.User.create({
-        ...req.body,
-        username,
-        status: UserStatus.ACTIVE,
-        password: hashedPassword
-    })
-
-    if (!newUser) {
-        return res.status(400).json({ message: 'Tạo mới người dùng thất bại' })
-    }
-    return res.status(201).json({
-        message: 'Thêm người dùng thành công',
-        user: new UserResponse(newUser)
-    })
 }
 
 export const bulkRegister = async (req, res) => {
     try {
         const rawUsers = parseExcel(req.file.path);
         const users = rawUsers.map(sanitizeExcelUser);
-        const result = await createUserBulk(users);
+        const result = await userService.createUserBulk(users);
 
         res.status(200).json({ message: 'Đăng ký hàng loạt thành công', result });
     } catch (err) {
@@ -72,154 +32,76 @@ export const bulkRegister = async (req, res) => {
 
 
 export const login = async (req, res) => {
-    const { username, email, password } = req.body;
+    try {
+        const { username, email, password } = req.body;
 
-    if ((!username && !email) || !password) {
-        return res.status(400).json({ message: 'Vui lòng nhập tài khoản và mật khẩu' });
+        // Authenticate user
+        const user = await userService.authenticateUser(username, email, password);
+
+        // Generate token
+        const token = userService.generateToken(user.id);
+
+        // Update user token
+        await userService.updateUserToken(user.id, token);
+
+        // Set token vào HttpOnly cookie
+        res.cookie('token', token, {
+            httpOnly: true,
+            secure: true, // Chỉ true khi deploy
+            sameSite: 'None', // None để cho phép cross-origin
+            maxAge: 30 * 24 * 60 * 60 * 1000, // 30 ngày
+        });
+
+        return res.status(200).json({
+            message: 'Đăng nhập thành công',
+            user: new UserResponse(user),
+            token,
+        });
+    } catch (error) {
+        return res.status(403).json({ message: error.message });
     }
-
-    const user = await db.User.findOne({
-        where: username ? { username } : { email },
-    });
-
-    if (!user) {
-        return res.status(403).json({ message: 'Tài khoản hoặc mật khẩu không đúng' });
-    }
-
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) {
-        return res.status(403).json({ message: 'Tài khoản hoặc mật khẩu không đúng' });
-    }
-
-    // Tạo token với JWT
-    const token = jwt.sign(
-        { id: user.id },
-        process.env.JWT_SECRET,
-        { expiresIn: process.env.JWT_EXPIRES_IN || '30d' }
-    );
-
-    // Cập nhật token hiện tại cho user trong database
-    await db.User.update({ currentToken: token }, { where: { id: user.id } });
-
-    // Set token vào HttpOnly cookie
-    res.cookie('token', token, {
-        httpOnly: true,
-        secure: true, // Chỉ true khi deploy
-        sameSite: 'None', // None để cho phép cross-origin
-        maxAge: 30 * 24 * 60 * 60 * 1000, // 30 ngày
-    });
-
-    // res.cookie('token', token, {
-    //     httpOnly: true,
-    //     secure: true,              // BẮT BUỘC nếu frontend chạy qua ngrok (HTTPS)
-    //     sameSite: 'None',          // Cho phép cross-origin
-    //     maxAge: 2592000000,
-    // });
-
-    return res.status(200).json({
-        message: 'Đăng nhập thành công',
-        user: new UserResponse(user),
-        token,
-    });
 };
 
 export const checkLogin = async (req, res) => {
     try {
-        // Lấy token từ cookie
         const token = req.cookies.token;
-        if (!token) {
-            return res.status(401).json({ message: 'Chưa đăng nhập' });
-        }
-
-        // Giải mã token
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);
-
-        // Tìm user trong database
-        const user = await db.User.findOne({
-            where: { id: decoded.id },
-            attributes: ['id', 'lastName', 'firstName', 'phone', 'userType', 'currentToken', 'highSchool', 'class', 'gender', 'birthDate', 'avatarUrl'], // Lấy các thông tin cần thiết
-        });
-
-        if (!user) {
-            return res.status(404).json({ message: 'Người dùng không tồn tại' });
-        }
-
-        if (user.currentToken !== token) {
-            return res.status(403).json({ message: 'Phiên đăng nhập không hợp lệ' });
-        }
+        const user = await userService.validateUserSession(token);
 
         return res.status(200).json({
             message: 'Người dùng đã đăng nhập',
-            user: {
-                id: user.id,
-                lastName: user.lastName,
-                firstName: user.firstName,
-                userType: user.userType, 
-                highSchool: user.highSchool,
-                class: user.class,
-                phone: user.phone,
-                gender: user.gender,
-                birthDate: user.birthDate,
-                avatarUrl: user.avatarUrl,
-            },
+            user,
         });
     } catch (error) {
-        return res.status(403).json({ message: 'Phiên đăng nhập không hợp lệ', error: error.message });
+        return res.status(403).json({ message: error.message });
     }
 };
 
 export const updateUserInfo = async (req, res) => {
-    const user = req.user
-    const forbiddenFields = ['username', 'password', 'userType', 'status', 'avatarUrl']
+    try {
+        const user = req.user;
+        const updatedUser = await userService.updateUser(user.id, req.body);
 
-    const updatedData = Object.keys(req.body)
-        .filter(key => !forbiddenFields.includes(key))
-        .reduce((obj, key) => {
-            obj[key] = req.body[key]
-            return obj
-        }, {})
-
-    if (Object.keys(updatedData).length === 0) {
-        return res.status(400).json({ message: 'Không có trường hợp lệ để cập nhật.' })
+        return res.status(200).json({
+            message: 'Cập nhật người dùng thành công',
+            data: updatedUser
+        });
+    } catch (error) {
+        return res.status(400).json({ message: error.message });
     }
-
-    const [updated] = await db.User.update(updatedData, { where: { id: user.id } })
-
-    if (!updated) {
-        return res.status(404).json({ message: 'Người dùng không tồn tại' })
-    }
-
-    const updatedUser = await db.User.findByPk(user.id)
-    return res.status(200).json({ message: 'Cập nhật người dùng thành công', data: new UserResponse(updatedUser) })
 }
 
 export const putUser = async (req, res) => {
-    const { id } = req.params
+    try {
+        const { id } = req.params;
+        const updatedUser = await userService.updateUser(id, req.body);
 
-    const forbiddenFields = ['username', 'password', 'userType', 'status', 'avatarUrl']
-
-    const updatedData = Object.keys(req.body)
-        .filter(key => !forbiddenFields.includes(key))
-        .reduce((obj, key) => {
-            obj[key] = req.body[key]
-            return obj
-        }, {})
-
-    if (Object.keys(updatedData).length === 0) {
-        return res.status(400).json({ message: 'Không có trường hợp lệ để cập nhật.' })
+        return res.status(200).json({
+            message: 'Cập nhật người dùng thành công',
+            data: updatedUser
+        });
+    } catch (error) {
+        return res.status(400).json({ message: error.message });
     }
-
-    const [updated] = await db.User.update(updatedData, {
-        where: { id }
-    })
-
-
-    if (!updated) {
-        return res.status(404).json({ message: 'Người dùng không tồn tại' })
-    }
-
-    const updatedUser = await db.User.findByPk(id)
-    return res.status(200).json({ message: 'Cập nhật người dùng thành công', data: new UserResponse(updatedUser) })
 }
 
 export const logout = async (req, res) => {
@@ -289,7 +171,7 @@ export const changePassword = async (req, res) => {
     if (newPassword !== confirmPassword) {
         return res.status(400).json({ message: 'Mật khẩu xác nhận không khớp.' })
     }
-    
+
     if (!isMatch) {
         return res.status(400).json({ message: 'Mật khẩu cũ không đúng.' })
     }
@@ -319,7 +201,7 @@ export const getUserById = async (req, res) => {
     return res.status(200).json({
         message: 'Chi tiết người dùng',
         user: new UserResponse(userDetail)
-        // userDetail 
+        // userDetail
     })
 }
 

@@ -1,141 +1,80 @@
-import db from "../models/index.js"
+import * as lessonService from '../services/lesson.service.js';
 
 export const getLessonById = async (req, res) => {
-    const { id } = req.params
-    const lesson = await db.Lesson.findOne({ where: { id } })
-    if (!lesson) {
+    try {
+        const { id } = req.params;
+        const lesson = await lessonService.getLessonById(id);
+
+        return res.status(200).json({
+            message: 'Lấy thông tin buổi học thành công!',
+            data: lesson
+        });
+    } catch (error) {
         return res.status(404).json({
-            message: `Không tìm thấy buổi học với ID: ${id}!`
-        })
+            message: error.message
+        });
     }
-    return res.status(200).json({
-        message: 'Lấy thông tin buổi học thành công!',
-        data: lesson
-    })
 }
 
 export const getLessonByClassId = async (req, res) => {
-    const { classId } = req.params
+    try {
+        const { classId } = req.params;
+        const lessons = await lessonService.getLessonsByClassId(classId);
 
-    const lessons = await db.Lesson.findAll({
-        where: { classId },
-        include: [
-            {
-                model: db.Class,
-                as: 'class',
-                attributes: ['id', 'name', 'description'],
-            },
-        ],
-        order: [['createdAt', 'ASC']],
-    })
-
-    return res.status(200).json({
-        message: 'Lấy danh sách buổi học thành công!',
-        data: lessons,
-    })
+        return res.status(200).json({
+            message: 'Lấy danh sách buổi học thành công!',
+            data: lessons,
+        });
+    } catch (error) {
+        return res.status(500).json({
+            message: error.message
+        });
+    }
 }
 
 export const insertLesson = async (req, res) => {
-    const t = await db.sequelize.transaction();
-
     try {
-
-
-        // Thêm classId vào body của request trước khi tạo buổi học
         const lessonData = { ...req.body };
-
-        const newLesson = await db.Lesson.create(lessonData, { transaction: t });
-
-        // Cập nhật lessonCount của lớp học
-        const classUpdated = await db.Class.increment(
-            { lessonCount: 1 },
-            {
-                where: { id: lessonData.classId },
-                transaction: t
-            }
-        );
-
-        if (!classUpdated[0]) {
-            throw new Error("Không tìm thấy lớp để cập nhật lessonCount.");
-        }
-
-        await t.commit();
+        const newLesson = await lessonService.createLesson(lessonData);
 
         return res.status(201).json({
             message: "Tạo buổi học mới thành công và cập nhật lessonCount!",
             data: newLesson,
         });
     } catch (error) {
-        await t.rollback();
-
         return res.status(500).json({
-            message: "Lỗi khi tạo buổi học hoặc cập nhật lessonCount.",
-            error: error.message,
+            message: error.message,
         });
     }
 };
 
 
 export const changeLesson = async (req, res) => {
-    const id = req.params.id
-    const lesson = await db.Lesson.findOne({ where: { id } })
-    if (!lesson) {
+    try {
+        const { id } = req.params;
+        await lessonService.updateLesson(id, req.body);
+
+        return res.status(200).json({
+            message: 'Cập nhật thông tin buổi học thành công!',
+        });
+    } catch (error) {
         return res.status(404).json({
-            message: `Không tìm thấy buổi học với ID: ${id}!`
-        })
+            message: error.message
+        });
     }
-    await lesson.update(req.body)
-    return res.status(200).json({
-        message: 'Cập nhật thông tin buổi học thành công!',
-    })
 }
 
 export const deleteLesson = async (req, res) => {
-    const t = await db.sequelize.transaction();
-
     try {
-        // Lấy ID của lesson cần xóa
         const { lessonId } = req.params;
-
-        // Tìm buổi học cần xóa
-        const lessonToDelete = await db.Lesson.findOne({
-            where: { id: lessonId },
-            transaction: t,
-        });
-
-        if (!lessonToDelete) {
-            throw new Error("Không tìm thấy buổi học để xóa.");
-        }
-
-        // Xóa buổi học
-        await lessonToDelete.destroy({ transaction: t });
-
-        // Giảm lessonCount của lớp học
-        const classUpdated = await db.Class.decrement(
-            { lessonCount: 1 },
-            {
-                where: { id: lessonToDelete.classId },
-                transaction: t,
-            }
-        );
-
-        if (!classUpdated[0]) {
-            throw new Error("Không tìm thấy lớp để cập nhật lessonCount.");
-        }
-
-        // Commit transaction
-        await t.commit();
+        await lessonService.deleteLesson(lessonId);
 
         return res.status(200).json({
             message: "Xóa buổi học thành công và cập nhật lessonCount!",
         });
     } catch (error) {
-        // Rollback transaction nếu có lỗi
-        await t.rollback();
-
         return res.status(500).json({
-            message: "Lỗi khi xóa buổi học hoặc cập nhật lessonCount.",
-            error: error.message,
+            message: error.message,
         });
     }
 };
