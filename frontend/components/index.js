@@ -1,7 +1,7 @@
-export { default as ArticleCard } from './article/ArticleCard';
 export { default as CompletedTestItem } from './attempt/CompletedTestItem';
 export { default as Button } from './button/Button';
 export { default as BackButton } from './button/BackButton';
+export { default as ArticleCard } from './card/ArticleCard';
 export { default as ClassCard } from './card/ClassCard';
 export { default as ExamCard } from './card/ExamCard';
 export { default as ExamInfoCard } from './card/ExamInfoCard';

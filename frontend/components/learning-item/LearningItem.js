@@ -50,8 +50,8 @@ export default function LearningItem({ item, isOpen, onToggle }) {
           <View>
             {isDone ? (
               <View style={styles.studyTimeContainer}>
-                <Feather name="check-circle" size={20} color={colors.success} />
                 <AppText style={styles.studyTimeText}>{new Date(studyTime).toLocaleTimeString('vi-VN', {year: 'numeric', month: 'numeric', day: 'numeric' ,hour: 'numeric', minute: 'numeric' })}</AppText>
+                <Feather name="check-circle" size={20} color={colors.success}/>
               </View>
             ) : (
               <View style={styles.studyTimeContainer}>
@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     backgroundColor: '#fff',
     borderRadius: 16,
-    elevation: 1,
+    elevation: 2,
   },
   text: {
     fontSize: 14,
@@ -87,6 +87,7 @@ const styles = StyleSheet.create({
   studyTimeContainer: {
     flexDirection: 'row',
     alignItems: 'center',
+    gap: 8
   },
   yellowIndicator: {
     width: 10,

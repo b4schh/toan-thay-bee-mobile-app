@@ -46,6 +46,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: colors.sky.white,
     borderRadius: 16,
+    elevation: 2,
   },
   lessonName: {
     fontFamily: 'Inter-Medium',

@@ -64,7 +64,7 @@ export default function DocsScreen() {
     dispatch(
       fetchAllArticle({
         search,
-        currentPage: 1,  // Reset về trang 1 khi tìm kiếm
+        currentPage: 1, // Reset về trang 1 khi tìm kiếm
         limit,
         sortOrder,
         articleType: articleTypeFilters,
@@ -180,82 +180,26 @@ export default function DocsScreen() {
         <LoadingOverlay />
 
         {/* Header */}
-        <AppText style={styles.header}>Bài viết</AppText>
+        <View style={styles.subContainer}>
+          <AppText style={styles.header}>Bài viết</AppText>
 
-        <View style={styles.row}>
-          {/* Search Bar */}
-          <SearchBar placeholder="Tìm kiếm bài viết..." screen="article" />
+          <View style={styles.row}>
+            {/* Search Bar */}
+            <SearchBar placeholder="Tìm kiếm bài viết..." screen="article" />
 
-          {/* Nút filter */}
-          <Button
-            iconComponent={
-              <Image
-                source={require('../../../assets/icons/filter-icon-primary.png')}
-                style={{ width: 24, height: 24 }}
-              />
-            }
-            style={styles.button}
-            onPress={() => setFilterDialogVisible(true)}
-          />
-        </View>
-        {/* Articles List */}
-
-        <Dialog
-          visible={filterDialogVisible}
-          title="Bộ lọc"
-          onClose={() => setFilterDialogVisible(false)}
-          actions={[
-            {
-              text: 'Đặt lại',
-              onPress: () => {
-                setGradeFilters(null);
-                setChapterFilters([]);
-                setArticleTypeFilters([]);
-              },
-              style: styles.resetButton,
-              textStyle: styles.resetButtonText,
-            },
-            {
-              text: 'Áp dụng',
-              onPress: handleApplyFilters,
-              style: styles.applyButton,
-            },
-          ]}
-        >
-          <View style={styles.filterContent}>
-            <Dropdown
-              label="Danh mục"
-              options={codes['article type']}
-              value={articleTypeFilters || []}
-              onChange={(codes) => setArticleTypeFilters(codes)}
-              placeholder="Chọn danh mục"
-              multiSelect={true} // Cho phép chọn nhiều
-            />
-            <Dropdown
-              label="Lớp"
-              options={codes['grade']}
-              value={gradeFilters}
-              onChange={(code) => setGradeFilters(code)}
-              placeholder="Chọn lớp"
-              multiSelect={false} // Chỉ chọn một
-            />
-            <Dropdown
-              label="Chương"
-              options={
-                gradeFilters && codes['chapter']
-                  ? codes['chapter'].filter((chapter) =>
-                      chapter.code.startsWith(gradeFilters),
-                    )
-                  : [] // Không hiển thị chương nếu chưa chọn lớp
+            {/* Nút filter */}
+            <Button
+              iconComponent={
+                <Image
+                  source={require('../../../assets/icons/filter-icon-primary.png')}
+                  style={{ width: 24, height: 24 }}
+                />
               }
-              value={chapterFilters || []}
-              onChange={(codes) => setChapterFilters(codes)}
-              placeholder={gradeFilters ? 'Chọn chương' : 'Vui lòng chọn lớp!'}
-              multiSelect={true} // Cho phép chọn nhiều
-              disabled={!gradeFilters || !codes?.chapter} // Vô hiệu hóa nếu chưa chọn lớp
+              style={styles.button}
+              onPress={() => setFilterDialogVisible(true)}
             />
           </View>
-        </Dialog>
+        </View>
 
         <FlatList
           data={articles}
@@ -295,17 +239,78 @@ export default function DocsScreen() {
           }
         />
       </View>
+
+      {/* Articles List */}
+      <Dialog
+        visible={filterDialogVisible}
+        title="Bộ lọc"
+        onClose={() => setFilterDialogVisible(false)}
+        actions={[
+          {
+            text: 'Đặt lại',
+            onPress: () => {
+              setGradeFilters(null);
+              setChapterFilters([]);
+              setArticleTypeFilters([]);
+            },
+            style: styles.resetButton,
+            textStyle: styles.resetButtonText,
+          },
+          {
+            text: 'Áp dụng',
+            onPress: handleApplyFilters,
+            style: styles.applyButton,
+          },
+        ]}
+      >
+        <View style={styles.filterContent}>
+          <Dropdown
+            label="Danh mục"
+            options={codes['article type']}
+            value={articleTypeFilters || []}
+            onChange={(codes) => setArticleTypeFilters(codes)}
+            placeholder="Chọn danh mục"
+            multiSelect={true} // Cho phép chọn nhiều
+          />
+          <Dropdown
+            label="Lớp"
+            options={codes['grade']}
+            value={gradeFilters}
+            onChange={(code) => setGradeFilters(code)}
+            placeholder="Chọn lớp"
+            multiSelect={false} // Chỉ chọn một
+          />
+          <Dropdown
+            label="Chương"
+            options={
+              gradeFilters && codes['chapter']
+                ? codes['chapter'].filter((chapter) =>
+                    chapter.code.startsWith(gradeFilters),
+                  )
+                : [] // Không hiển thị chương nếu chưa chọn lớp
+            }
+            value={chapterFilters || []}
+            onChange={(codes) => setChapterFilters(codes)}
+            placeholder={gradeFilters ? 'Chọn chương' : 'Vui lòng chọn lớp!'}
+            multiSelect={true} // Cho phép chọn nhiều
+            disabled={!gradeFilters || !codes?.chapter} // Vô hiệu hóa nếu chưa chọn lớp
+          />
+        </View>
+      </Dialog>
     </KeyboardAvoidingView>
   );
 }
 
 const styles = StyleSheet.create({
+  subContainer: {
+    paddingHorizontal: 20,
+  },
   container: {
     flex: 1,
     backgroundColor: colors.sky.lightest,
-    padding: 20,
     gap: 10,
-    paddingBottom: 80,
+    paddingTop: 20,
+    paddingBottom: 100,
   },
   header: {
     fontFamily: 'Inter-Bold',
@@ -323,13 +328,15 @@ const styles = StyleSheet.create({
   },
   articleList: {
     gap: 0,
+    marginHorizontal: 20,
+    marginTop: 4
   },
   articleRow: {
     justifyContent: 'space-between',
   },
-  paginationContainer: {
-    marginTop: 16,
-  },
+  // paginationContainer: {
+  //   marginTop: 16,
+  // },
   filterContent: {
     width: '100%',
     gap: 10,

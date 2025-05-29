@@ -60,7 +60,7 @@ router.get('/v1/admin/user/:id',
 
 // Route cập nhật thông tin người dùng theo ID 
 router.put('/v1/admin/user/:id', 
-    validate(PutUserRequest),
+    // validate(PutUserRequest),
     requireRoles([UserType.ADMIN, UserType.TEACHER]),
     asyncHandler(UserController.putUser)
 )

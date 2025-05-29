@@ -46,8 +46,6 @@ cd admin
 2. Cài đặt các dependencies:
 ```bash
 npm install
-# hoặc
-yarn install
 ```
 
 3. Tạo file `.env` trong thư mục admin với các biến sau:
@@ -59,8 +57,6 @@ REACT_APP_API_URL=url_api_backend_của_bạn (ví dụ: http://localhost:3000/a
 4. Khởi động server phát triển:
 ```bash
 npm start
-# hoặc
-yarn start
 ```
 
 Ứng dụng sẽ khả dụng tại [http://localhost:4000](http://localhost:4000).
@@ -79,11 +75,6 @@ yarn start
 
 - Các tuyến đường dành cho giáo viên và quản trị viên
 - Các tuyến đường dành riêng cho quản trị viên
-
-## Tài Liệu Bổ Sung
-
-- Xem `src/docs/` để biết tài liệu cụ thể cho từng component
-- Component NoTranslate (`src/docs/NoTranslateUsage.md`) cung cấp chức năng ngăn trình duyệt dịch nội dung toán học
 
 ## Dự Án Liên Quan
 

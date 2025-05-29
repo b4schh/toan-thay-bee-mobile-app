@@ -23,7 +23,6 @@ Dưới đây là bộ test cases chi tiết cho ứng dụng Toán Thầy Bee, 
 | **Mục đích**            | Kiểm tra chức năng đăng nhập với thông tin hợp lệ                            |
 | **Điều kiện tiên quyết**| Đã có tài khoản với tên đăng nhập `b4schhh` và mật khẩu `123123`             |
 | **Dữ liệu test**        | Thông tin đăng nhập hợp lệ.                                                  |
-| **Dữ liệu test**        | Thông tin đăng nhập hợp lệ.                                                  |
 | **Các bước thực hiện**  | 1. Mở ứng dụng Toán Thầy Bee<br> 2. Chọn "Đăng nhập" <br> 3. Nhập tên đăng nhập và mật khẩu <br> 4. Nhấn nút "Đăng nhập" |
 | **Kết quả mong đợi**    | - Người dùng được đăng nhập thành công <br> - Hệ thống chuyển đến màn hình trang chủ <br> - Thông tin người dùng hiển thị đúng |
 
@@ -57,7 +56,7 @@ Dưới đây là bộ test cases chi tiết cho ứng dụng Toán Thầy Bee, 
 | **Mục đích**            | Kiểm tra chức năng xem thông tin cá nhân của người dùng.                     |
 | **Điều kiện tiên quyết**| Người dùng đã đăng nhập vào hệ thống.                                        |
 | **Dữ liệu test**        | Tài khoản người dùng đã đăng nhập.                                           |
-| **Các bước thực hiện**  | 1. Mở ứng dụng Toán Thầy Bee<br> 2. Đăng nhập với tài khoản hợp lệ <br> 3. Chọn tab "Tài khoản" <br> 4. Chọn "Thông tin cá nhân"|
+| **Các bước thực hiện**  | 1. Mở ứng dụng Toán Thầy Bee<br> 2. Đăng nhập với tài khoản hợp lệ <br> 3. Chọn tab "Tài khoản" <br> 4. Chọn "Chỉnh sửa thông tin"|
 | **Kết quả mong đợi**    | Hệ thống hiển thị đầy đủ thông tin cá nhân của người dùng                    |
 
 5. TC-005 – Thay đổi ảnh đại diện
@@ -68,8 +67,8 @@ Dưới đây là bộ test cases chi tiết cho ứng dụng Toán Thầy Bee, 
 | **Mục đích**           | Kiểm tra chức năng thay đổi ảnh đại diện                                                           |
 | **Điều kiện tiên quyết** | Người dùng đã đăng nhập vào hệ thống                                                              |
 | **Dữ liệu test**       | - Tài khoản người dùng đã đăng nhập <br> - Ảnh mới từ thư viện ảnh                                 |
-| **Các bước thực hiện** | 1. Mở ứng dụng Toán Thầy Bee <br> 2. Đăng nhập với tài khoản hợp lệ <br> 3. Chọn tab "Tài khoản" <br> 4. Chọn "Thông tin cá nhân" <br> 5. Nhấn vào ảnh đại diện <br> 6. Chọn "Thay đổi ảnh" <br> 7. Chọn ảnh từ thư viện hoặc chụp ảnh mới <br> 8. Xác nhận lựa chọn |
-| **Kết quả mong đợi**   | - Hiển thị tùy chọn chọn ảnh từ thư viện hoặc chụp ảnh mới <br> - Có thể chọn và cắt ảnh <br> - Sau khi xác nhận, ảnh đại diện mới được cập nhật <br> - Ảnh mới được hiển thị trong trang thông tin cá nhân |
+| **Các bước thực hiện** | 1. Mở ứng dụng Toán Thầy Bee <br> 2. Đăng nhập với tài khoản hợp lệ <br> 3. Chọn tab "Tài khoản" <br> 4. Nhấn vào ảnh đại diện <br> 5. Chọn "Chọn ảnh" <br> 6. Chọn ảnh từ thư viện <br> 7. Chỉnh sửa ảnh và Lưu thay đổi |
+| **Kết quả mong đợi**   | - Hiển thị tùy chọn chọn ảnh từ thư viện <br> - Có thể chọn và cắt ảnh <br> - Sau khi xác nhận, ảnh đại diện mới được cập nhật <br> - Ảnh mới được hiển thị trong trang thông tin cá nhân |
 
 
 6. TC-006 – Cập nhật thông tin cá nhân
@@ -80,7 +79,7 @@ Dưới đây là bộ test cases chi tiết cho ứng dụng Toán Thầy Bee, 
 | **Mục đích**            | Kiểm tra chức năng cập nhật thông tin cá nhân của người dùng.                |
 | **Điều kiện tiên quyết**| Người dùng đã đăng nhập vào hệ thống.                                        |
 | **Dữ liệu test**        | Trường học mới: THPT Chu Văn An                                              |
-| **Các bước thực hiện**  | 1. Mở ứng dụng Toán Thầy Bee <br> 2. Đăng nhập với tài khoản hợp lệ <br> 3. Chọn tab "Tài khoản" <br> 4. Chọn "Thông tin cá nhân" <br> 5. Nhấn nút "Chỉnh sửa" <br> 6. Cập nhật số điện thoại và trường học <br> 7. Nhấn nút "Lưu"|
+| **Các bước thực hiện**  | 1. Mở ứng dụng Toán Thầy Bee <br> 2. Đăng nhập với tài khoản hợp lệ <br> 3. Chọn tab "Tài khoản" <br> 4. Chọn "Chỉnh sửa thông tin" <br> 5. Cập nhật trường học <br> 6. Nhấn nút "Lưu thay đổi"|
 | **Kết quả mong đợi**    | - Hệ thống hiển thị thông báo cập nhật thành công <br> - Thông tin cá nhân được cập nhật với trường học mới|
 
 7. TC-007 – Đổi mật khẩu
@@ -102,8 +101,8 @@ Dưới đây là bộ test cases chi tiết cho ứng dụng Toán Thầy Bee, 
 | **Mục đích**           | Kiểm tra chức năng đăng xuất                                                                       |
 | **Điều kiện tiên quyết** | Người dùng đã đăng nhập vào hệ thống                                                              |
 | **Dữ liệu test**       | Tài khoản người dùng đã đăng nhập                                                                  |
-| **Các bước thực hiện** | 1. Mở ứng dụng Toán Thầy Bee <br> 2. Đăng nhập với tài khoản hợp lệ <br> 3. Chọn tab "Tài khoản" <br> 4. Cuộn xuống cuối trang <br> 5. Nhấn nút "Đăng xuất" <br> 6. Xác nhận đăng xuất |
-| **Kết quả mong đợi**   | - Hiển thị hộp thoại xác nhận đăng xuất <br> - Sau khi xác nhận, người dùng được đăng xuất khỏi hệ thống <br> - Chuyển đến màn hình đăng nhập <br> - Không thể truy cập các tính năng yêu cầu đăng nhập |
+| **Các bước thực hiện** | 1. Mở ứng dụng Toán Thầy Bee <br> 2. Đăng nhập với tài khoản hợp lệ <br> 3. Chọn tab "Tài khoản" <br> 4. Cuộn xuống cuối trang <br> 5. Nhấn nút "Đăng xuất"|
+| **Kết quả mong đợi**   | - Người dùng được đăng xuất khỏi hệ thống <br> - Chuyển đến màn hình đăng nhập <br> - Không thể truy cập các tính năng yêu cầu đăng nhập |
 
 ### Trang chủ và Học tập
 
@@ -466,44 +465,10 @@ Dưới đây là bộ test cases chi tiết cho ứng dụng Toán Thầy Bee, 
 | **Các bước thực hiện** | 1. Mở ứng dụng Toán Thầy Bee <br> 2. Đăng nhập với tài khoản hợp lệ <br> 3. Chọn tab "Bài viết" <br> 4. Chọn bài viết bất kì |
 | **Kết quả mong đợi**   | - Hiển thị nội dung đầy đủ của bài viết <br> - Hiển thị chính xác các công thức toán học <br> - Hiển thị hình ảnh minh họa (nếu có) <br> - Có thể cuộn để đọc toàn bộ bài viết |
 
-5.  TC-041 – Tải xuống tài liệu từ bài viết
-
-| Mục                    | Nội dung                                                                                           |
-|------------------------|----------------------------------------------------------------------------------------------------|
-| **ID**                 | TC-041                                                                                             |
-| **Mục đích**           | Kiểm tra chức năng tải xuống tài liệu từ bài viết                                                 |
-| **Điều kiện tiên quyết** | Người dùng đã đăng nhập vào hệ thống <br> Bài viết có tài liệu đính kèm                          |
-| **Dữ liệu test**       | Tài khoản người dùng đã đăng nhập <br> Bài viết có tài liệu đính kèm                             |
-| **Các bước thực hiện** | 1. Mở ứng dụng Toán Thầy Bee <br> 2. Đăng nhập với tài khoản hợp lệ <br> 3. Chọn tab "Bài viết" <br> 4. Chọn một bài viết có tài liệu đính kèm <br> 5. Nhấn nút "Tải xuống" bên cạnh tài liệu |
-| **Kết quả mong đợi**   | - Hiển thị thông báo xác nhận tải xuống <br> - Bắt đầu tải xuống tài liệu <br> - Hiển thị tiến trình tải xuống <br> - Sau khi tải xuống hoàn tất, hiển thị thông báo tải xuống thành công <br> - Có thể mở tài liệu đã tải xuống |
-
-### Xác thực và quản lý token
-
-1.  TC-042 – Xử lý token hết hạn khi đang sử dụng ứng dụng
-
-| Mục                    | Nội dung                                                                                           |
-|------------------------|----------------------------------------------------------------------------------------------------|
-| **ID**                 | TC-042                                                                                             |
-| **Mục đích**           | Kiểm tra cách ứng dụng xử lý khi token JWT hết hạn trong quá trình sử                              |
-| **Điều kiện tiên quyết** | Người dùng đã đăng nhập với token có thời hạn ngắn.                          |
-| **Dữ liệu test**       | Tài khoản người dùng đã đăng nhập <br> Bài viết có tài liệu đính kèm                             |
-| **Các bước thực hiện** | 1. Đăng nhập vào ứng dụng <br> 2. Chờ đến khi token hết hạn (có thể sử dụng token với thời hạn ngắn cho mục đích test) <br> 3. Thực hiện một hành động yêu cầu xác thực  |
-| **Kết quả mong đợi**   | - Ứng dụng phát hiện token hết hạn <br> - Hệ thống tự động làm mới token hoặc yêu cầu người dùng đăng nhập lại <br> - Thông báo cho người dùng một cách rõ ràng về tình trạng|
-
-2.  TC-043 – Xử lý đăng nhập đồng thời trên 2 thiết bị
-
-| Mục                    | Nội dung                                                                                           |
-|------------------------|----------------------------------------------------------------------------------------------------|
-| **ID**                 | TC-043                                                                                             |
-| **Mục đích**           | Kiểm tra cách ứng dụng xử lý khi người dùng đăng nhập trên 2 thiết bị cùng lúc.                    |
-| **Điều kiện tiên quyết** | Có tài khoản người dùng hợp lệ                                                                   |
-| **Dữ liệu test**       | Tài khoản người dùng đã đăng nhập <br> Bài viết có tài liệu đính kèm                               |
-| **Các bước thực hiện** | 1. Đăng nhập vào ứng dụng trên thiết bị A <br> 2. Đăng nhập vào ứng dụng trên thiết bị B <br> 3. Thực hiện các hành động cần xác thực trên thiết bị A |
-| **Kết quả mong đợi**   | - Cả hai thiết bị đều có thể đăng nhập thành công <br> - Trên thiết bị A thông báo phiên đăng nhập hết hạn và yêu cầu đăng nhập lại |
 
 ### Kết nối Internet và đồng bộ hóa
 
-1. TC-044 – Kiểm tra kết nối internet trước khi thực hiện API call
+1. TC-041 – Kiểm tra kết nối internet khi thực hiện API call
 
 | Mục                     | Nội dung |
 |--------------------------|---------|
@@ -514,50 +479,24 @@ Dưới đây là bộ test cases chi tiết cho ứng dụng Toán Thầy Bee, 
 | **Các bước thực hiện**   | 1. Tắt kết nối internet trên thiết bị<br>2. Mở ứng dụng Toán Thầy Bee<br>3. Thử đăng nhập hoặc thực hiện một hành động cần kết nối internet |
 | **Kết quả mong đợi**     | - Ứng dụng hiển thị thông báo không có kết nối internet<br>- Không thực hiện API call<br>- Hiển thị gợi ý kiểm tra lại kết nối mạng |
 
-2.  TC-045 – Mất kết nối internet khi đang làm bài thi
-
-| Mục                   | Nội dung |
-|------------------------|---------|
-| **ID**                 | TC-045 |
-| **Mục đích**           | Kiểm tra cách ứng dụng xử lý khi mất kết nối internet trong quá trình làm bài thi |
-| **Điều kiện tiên quyết** | Người dùng đã đăng nhập và đang trong quá trình làm bài thi |
-| **Dữ liệu test**       | Tài khoản người dùng đã đăng nhập, một bài thi đang được thực hiện |
-| **Các bước thực hiện** | 1. Đăng nhập vào ứng dụng<br>2. Bắt đầu làm một bài thi<br>3. Trả lời một số câu hỏi<br>4. Tắt kết nối internet<br>5. Tiếp tục trả lời các câu hỏi<br>6. Bật lại kết nối internet<br>7. Hoàn thành và nộp bài thi |
-| **Kết quả mong đợi**   | - Ứng dụng phát hiện mất kết nối và hiển thị thông báo<br>- Các câu trả lời được lưu trữ cục bộ khi không có kết nối<br>- Khi kết nối được khôi phục, ứng dụng tự động đồng bộ các câu trả lời với máy chủ<br>- Quá trình làm bài không bị gián đoạn |
-
-3. TC-046 – Xử lý khi thời gian làm bài hết nhưng kết nối bị mất
-
-| Mục                     | Nội dung |
-|--------------------------|---------|
-| **ID**                   | TC-046 |
-| **Mục đích**             | Kiểm tra cách ứng dụng xử lý khi thời gian làm bài hết nhưng kết nối bị mất |
-| **Điều kiện tiên quyết** | Người dùng đã đăng nhập và đang làm bài thi |
-| **Dữ liệu test**         | Tài khoản người dùng, bài thi có thời gian ngắn |
-| **Các bước thực hiện**   | 1. Đăng nhập vào ứng dụng<br>2. Bắt đầu làm một bài thi có thời gian ngắn<br>3. Tắt kết nối internet khi gần hết thời gian<br>4. Chờ đến khi thời gian làm bài kết thúc |
-| **Kết quả mong đợi**     | - Ứng dụng phát hiện thời gian làm bài đã hết<br>- Tự động lưu các câu trả lời cục bộ<br>- Hiển thị thông báo về việc thời gian đã hết và kết nối bị mất<br>- Khi kết nối được khôi phục, tự động gửi bài thi đã hoàn thành |
-
-4. TC-047 – Lưu quá trình làm bài khi thoát ứng dụng
+2. TC-042 – Lưu quá trình làm bài khi thoát ứng dụng
 
 | Mục                     | Nội dung |
 |------------------------|----------|
-| **ID**                 | TC-047 |
+| **ID**                 | TC-042 |
 | **Mục đích**           | Kiểm tra khả năng lưu và khôi phục quá trình làm bài khi người dùng thoát ứng dụng và vào lại |
 | **Điều kiện tiên quyết** | - Người dùng đã đăng nhập vào hệ thống<br>- Có ít nhất một đề thi khả dụng |
 | **Dữ liệu test**       | - Tài khoản người dùng hợp lệ<br>- Đề thi cụ thể (ví dụ: Đề thi Toán lớp 10) |
 | **Các bước thực hiện** | 1. Mở ứng dụng Toán Thầy Bee<br>2. Đăng nhập với tài khoản hợp lệ<br>3. Chọn tab "Luyện tập"<br>4. Chọn một đề thi cụ thể<br>5. Nhấn nút "Bắt đầu làm bài"<br>6. Trả lời 5–7 câu hỏi đầu tiên<br>7. Thoát hoàn toàn khỏi ứng dụng (đóng ứng dụng)<br>8. Mở lại ứng dụng<br>9. Đăng nhập lại với cùng tài khoản<br>10. Chọn tab "Luyện tập"<br>11. Chọn lại đề thi đã làm dở |
 | **Kết quả mong đợi**   | - Hệ thống hiển thị thông báo "Bạn có muốn tiếp tục làm bài thi đang dở không?"<br>- Khi chọn "Có", hệ thống mở lại bài thi với các câu trả lời đã chọn trước đó<br>- Thời gian làm bài tiếp tục từ thời điểm còn lại<br>- Các câu hỏi đã trả lời vẫn hiển thị đáp án đã chọn<br>- Quá trình làm bài tiếp tục bình thường<br>- Khi nộp bài, tất cả các câu trả lời (cả trước và sau khi thoát ứng dụng) đều được tính điểm chính xác |
 
-5. TC-048 – Kiểm tra giới hạn số lượt làm bài thi
+3. TC-043 – Kiểm tra giới hạn số lượt làm bài thi
 
 | Mục                     | Nội dung |
 |------------------------|----------|
-| **ID**                 | TC-048 |
+| **ID**                 | TC-043 |
 | **Mục đích**           | Kiểm tra tính năng giới hạn số lượt làm bài thi |
 | **Điều kiện tiên quyết** | - Người dùng đã đăng nhập vào hệ thống<br>- Có ít nhất một đề thi có cấu hình giới hạn số lần làm bài (`attemptLimit`) |
 | **Dữ liệu test**       | - Tài khoản người dùng hợp lệ<br>- Đề thi có `attemptLimit = 1` (giới hạn 1 lần làm bài) |
 | **Các bước thực hiện** | 1. Mở ứng dụng Toán Thầy Bee<br>2. Đăng nhập với tài khoản hợp lệ<br>3. Chọn tab "Luyện tập"<br>4. Chọn đề thi có giới hạn số lần làm bài<br>5. Nhấn nút "Bắt đầu làm bài"<br>6. Làm bài và nộp bài<br>7. Quay lại danh sách đề thi<br>8. Chọn lại đề thi vừa làm<br>9. Nhấn nút "Bắt đầu làm bài" lần thứ 2 |
 | **Kết quả mong đợi**   | - Lần làm thứ nhất: hệ thống cho phép làm bài bình thường<br>- Lần làm thứ hai: hệ thống hiển thị thông báo *"Bạn đã đạt giới hạn số lần làm bài cho phép"*<br>- Nút "Bắt đầu làm bài" bị vô hiệu hóa hoặc không hiển thị<br>- Hệ thống hiển thị số lần đã làm và giới hạn số lần làm bài<br>- Người dùng vẫn có thể xem lại kết quả các lần làm bài trước đó |
-
-<!-- ### Tính năng Báo cáo lỗi
-
-### Tính năng Thông báo -->

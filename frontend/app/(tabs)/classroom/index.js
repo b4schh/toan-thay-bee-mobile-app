@@ -55,7 +55,7 @@ const useFilteredClasses = (classes, status, search, currentPage, limit) => {
     const totalPages = Math.ceil(totalItems / limit);
     const startIndex = (currentPage - 1) * limit;
     const paginatedData = filteredData.slice(startIndex, startIndex + limit);
-    
+
     return {
       paginatedClasses: paginatedData,
       totalItems,
@@ -85,6 +85,8 @@ export default function ClassroomScreen() {
   const dispatch = useDispatch();
 
   const [successDialogVisible, setSuccessDialogVisible] = useState(false);
+  const [errorDialogVisible, setErrorDialogVisible] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
   const [classCode, setClassCode] = useState('');
   const [selectedStatus, setSelectedStatus] = useState('all');
@@ -161,7 +163,8 @@ export default function ClassroomScreen() {
   // Xử lý sự kiện tham gia lớp
   const handleJoin = useCallback(() => {
     if (!classCode.trim()) {
-      alert('⚠️ Vui lòng nhập mã lớp học!');
+      setErrorMessage('Vui lòng nhập mã lớp học!');
+      setErrorDialogVisible(true);
       return;
     }
 
@@ -173,6 +176,10 @@ export default function ClassroomScreen() {
           setModalVisible(false); // Đóng modal nhập mã
           setSuccessDialogVisible(true); // Hiển thị dialog thành công
         },
+        onError: (errorMessage) => {
+          setErrorMessage(errorMessage);
+          setErrorDialogVisible(true);
+        }
       }),
     );
   }, [classCode, dispatch]);
@@ -257,70 +264,66 @@ export default function ClassroomScreen() {
     >
       <LoadingOverlay />
       <View style={styles.container}>
-        {/* Header */}
-        <AppText style={styles.header}>Lớp của bạn</AppText>
+        <View style={styles.subContainer}>
+          {/* Header */}
+          <AppText style={styles.header}>Lớp của bạn</AppText>
 
-        {/* Ô tìm kiếm và các nút bên cạnh */}
-        <View style={styles.row}>
-          <SearchBar placeholder="Tìm kiếm lớp học..." screen="class" />
+          {/* Ô tìm kiếm và các nút bên cạnh */}
+          <View style={styles.row}>
+            <SearchBar placeholder="Tìm kiếm lớp học..." screen="class" />
 
-          {/* Nút tham gia lớp học */}
-          <Button
-            icon="plus"
-            iconLibrary="FontAwesome5"
-            iconSize={24}
-            style={styles.button}
-            onPress={() => {
-              setModalVisible(true);
-            }}
+            {/* Nút tham gia lớp học */}
+            <Button
+              icon="plus"
+              iconLibrary="FontAwesome5"
+              iconSize={24}
+              style={styles.button}
+              onPress={() => {
+                setModalVisible(true);
+              }}
+            />
+          </View>
+
+          <TabNavigation
+            tabs={tabs}
+            selectedTab={selectedStatus}
+            onTabPress={setSelectedStatus}
           />
         </View>
 
-        {/* Hiển thị lỗi nếu có */}
-        {
-          <>
-            {/* Navigation Bar */}
-            <TabNavigation
-              tabs={tabs}
-              selectedTab={selectedStatus}
-              onTabPress={setSelectedStatus}
-            />
-
-            {/* Danh sách lớp học dạng lưới */}
-            <FlatList
-              data={paginatedClasses}
-              keyExtractor={(item) => item.id.toString()}
-              numColumns={2}
-              contentContainerStyle={styles.classList}
-              columnWrapperStyle={styles.classRow}
-              ListEmptyComponent={
-                <EmptyView
-                  onRefresh={handleRefresh}
-                  isLoading={isLoading}
-                  error={error}
-                  message={
-                    search ? 'Không tìm thấy lớp học' : 'Chưa có lớp học nào'
-                  }
-                />
-              }
-              ListFooterComponent={
-                paginatedClasses.length > 0 && (
-                  <View style={styles.paginationContainer}>
-                    <Pagination
-                      currentPage={currentPage}
-                      totalPages={totalPages}
-                      onPageChange={handlePageChange}
-                    />
-                  </View>
-                )
-              }
-              renderItem={renderClassItem}
-              showsVerticalScrollIndicator={false}
-              refreshing={isLoading}
+        {/* Danh sách lớp học dạng lưới */}
+        <FlatList
+          data={paginatedClasses}
+          keyExtractor={(item) => item.id.toString()}
+          numColumns={2}
+          contentContainerStyle={styles.classList}
+          columnWrapperStyle={styles.classRow}
+          ListEmptyComponent={
+            <EmptyView
               onRefresh={handleRefresh}
+              isLoading={isLoading}
+              error={error}
+              message={
+                search ? 'Không tìm thấy lớp học' : 'Chưa có lớp học nào'
+              }
             />
-          </>
-        }
+          }
+          ListFooterComponent={
+            paginatedClasses.length > 0 && (
+              <View style={styles.paginationContainer}>
+                <Pagination
+                  currentPage={currentPage}
+                  totalPages={totalPages}
+                  onPageChange={handlePageChange}
+                />
+              </View>
+            )
+          }
+          renderItem={renderClassItem}
+          showsVerticalScrollIndicator={false}
+          refreshing={isLoading}
+          onRefresh={handleRefresh}
+        />
 
         {/* Modal nhập mã lớp học */}
         <Dialog
@@ -381,17 +384,29 @@ export default function ClassroomScreen() {
         type="alert"
         onClose={() => setSuccessDialogVisible(false)}
       />
+
+      {/* Dialog thông báo lỗi */}
+      <Dialog
+        visible={errorDialogVisible}
+        title="Không thể tham gia lớp học"
+        message={errorMessage}
+        type="alert"
+        onClose={() => setErrorDialogVisible(false)}
+      />
     </KeyboardAvoidingView>
   );
 }
 
 const styles = StyleSheet.create({
+  subContainer: {
+    paddingHorizontal: 20,
+  },
   container: {
     flex: 1,
     backgroundColor: colors.sky.lightest,
-    padding: 20,
     gap: 10,
-    paddingBottom: 80,
+    paddingTop: 20,
+    paddingBottom: 100,
   },
   header: {
     fontFamily: 'Inter-Bold',
@@ -402,6 +417,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 10,
+    marginBottom: 10
   },
   button: {
     width: 48,
@@ -447,6 +463,8 @@ const styles = StyleSheet.create({
   },
   classList: {
     gap: 0,
+    marginHorizontal: 20,
+    marginTop: 4
   },
   classRow: {
     justifyContent: 'space-between',
@@ -468,9 +486,5 @@ const styles = StyleSheet.create({
   refreshButton: {
     marginTop: 12,
     paddingHorizontal: 24,
-  },
-  paginationContainer: {
-    marginTop: 20,
-    marginBottom: 40,
   },
 });

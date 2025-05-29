@@ -13,6 +13,8 @@ export default function Dialog({
   actions = [],
   onClose,
   type = 'custom', // 'alert' | 'custom'
+  bodyStyle,
+  buttonStyle,
 }) {
   const renderActions = () => {
     if (type === 'alert') {
@@ -26,7 +28,7 @@ export default function Dialog({
     }
 
     return (
-      <View style={styles.buttonRow}>
+      <View style={[styles.buttonRow, buttonStyle]}>
         {actions.map((action, index) => (
           <Button
             key={index}
@@ -50,7 +52,8 @@ export default function Dialog({
     >
       <View style={[
         styles.modalContainer,
-        type === 'alert' && styles.alertContainer
+        type === 'alert' && styles.alertContainer,
+        bodyStyle
       ]}>
         {title && (
           <AppText style={styles.title}>{title}</AppText>
@@ -76,7 +79,8 @@ const styles = StyleSheet.create({
   modalContainer: {
     backgroundColor: colors.sky.white,
     borderRadius: 16,
-    padding: 20,
+    paddingVertical: 20,
+    paddingHorizontal: 20,
     alignItems: 'center',
     width: '90%',
     alignSelf: 'center',
@@ -105,8 +109,5 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     width: '100%',
     gap: 10,
-  },
-  button: {
-    
   },
 });

@@ -167,24 +167,61 @@ Chapter: ${JSON.stringify(chapterFilters)}`);
 
   return (
     <View style={styles.container}>
-      {/* Header */}
-      <AppText style={styles.header}>Luyện đề</AppText>
+      {/* Overlay loading mờ (hiển thị nếu loading=true) */}
+      {loading && <LoadingOverlay />}
 
-      <View style={styles.row}>
-        <SearchBar placeholder="Tìm kiếm đề thi..." screen="exam" />
+      <View style={styles.subContainer}>
+        {/* Header */}
+        <AppText style={styles.header}>Luyện đề</AppText>
 
-        {/* Nút filter */}
-        <Button
-          iconComponent={
-            <Image
-              source={require('../../../assets/icons/filter-icon-primary.png')}
-              style={{ width: 24, height: 24 }}
-            />
-          }
-          style={styles.button}
-          onPress={() => setFilterDialogVisible(true)}
-        />
+        <View style={styles.row}>
+          <SearchBar placeholder="Tìm kiếm đề thi..." screen="exam" />
+
+          {/* Nút filter */}
+          <Button
+            iconComponent={
+              <Image
+                source={require('../../../assets/icons/filter-icon-primary.png')}
+                style={{ width: 24, height: 24 }}
+              />
+            }
+            style={styles.button}
+            onPress={() => setFilterDialogVisible(true)}
+          />
+        </View>
       </View>
+
+      {/* Danh sách lớp học dạng lưới */}
+      <FlatList
+        data={exams}
+        keyExtractor={(item) => item.id.toString()}
+        numColumns={2}
+        contentContainerStyle={styles.classList}
+        columnWrapperStyle={styles.classRow}
+        ListEmptyComponent={
+          <EmptyView
+            onRefresh={handleRefresh}
+            isLoading={isLoading}
+            error={error}
+            message="Không có đề thi"
+          />
+        }
+        ListFooterComponent={
+          exams.length > 0 && (
+            <View style={styles.paginationContainer}>
+              <Pagination
+                currentPage={currentPage}
+                totalPages={Math.ceil(totalItems / limit)}
+                onPageChange={handlePageChange}
+              />
+            </View>
+          )
+        }
+        renderItem={renderExamItem}
+        showsVerticalScrollIndicator={false}
+        refreshing={isLoading}
+        onRefresh={handleRefresh}
+      />
 
       <Dialog
         visible={filterDialogVisible}
@@ -235,52 +272,20 @@ Chapter: ${JSON.stringify(chapterFilters)}`);
           />
         </View>
       </Dialog>
-
-      {/* Danh sách lớp học dạng lưới */}
-      <FlatList
-        data={exams}
-        keyExtractor={(item) => item.id.toString()}
-        numColumns={2}
-        contentContainerStyle={styles.classList}
-        columnWrapperStyle={styles.classRow}
-        ListEmptyComponent={
-          <EmptyView
-            onRefresh={handleRefresh}
-            isLoading={isLoading}
-            error={error}
-            message="Không có đề thi"
-          />
-        }
-        ListFooterComponent={
-          exams.length > 0 && (
-            <View style={styles.paginationContainer}>
-              <Pagination
-                currentPage={currentPage}
-                totalPages={Math.ceil(totalItems / limit)}
-                onPageChange={handlePageChange}
-              />
-            </View>
-          )
-        }
-        renderItem={renderExamItem}
-        showsVerticalScrollIndicator={false}
-        refreshing={isLoading}
-        onRefresh={handleRefresh}
-      />
-
-      {/* Overlay loading mờ (hiển thị nếu loading=true) */}
-      {loading && <LoadingOverlay />}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  subContainer: {
+    paddingHorizontal: 20,
+  },
   container: {
     flex: 1,
     backgroundColor: colors.sky.lightest,
-    padding: 20,
-    paddingBottom: 80,
     gap: 10,
+    paddingTop: 20,
+    paddingBottom: 100,
   },
   header: {
     fontFamily: 'Inter-Bold',
@@ -298,6 +303,8 @@ const styles = StyleSheet.create({
   },
   classList: {
     gap: 0,
+    marginHorizontal: 20,
+    marginTop: 4
   },
   classRow: {
     justifyContent: 'space-between',

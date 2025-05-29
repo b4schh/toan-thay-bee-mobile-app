@@ -575,13 +575,33 @@ export const joinClass = async (req, res) => {
             transaction
         });
 
-        // Không tìm thấy hoặc lớp không công khai
-        if (!classInfo || !classInfo.public) {
+        // Kiểm tra lớp có tồn tại không
+        if (!classInfo) {
+            await transaction.rollback();
+            return res.status(404).json({ message: "Lớp học không tồn tại!" });
+        }
+
+        // Kiểm tra lớp có công khai không
+        if (!classInfo.public) {
             await transaction.rollback();
             return res.status(400).json({ message: "Không thể tham gia lớp học này!" });
         }
 
-        // 2. Thêm học sinh vào bảng StudentClassStatus
+        // 2. Kiểm tra người dùng đã tham gia lớp chưa
+        const existingStatus = await db.StudentClassStatus.findOne({
+            where: { 
+                studentId: userId,
+                classId: classInfo.id
+            },
+            transaction
+        });
+
+        if (existingStatus) {
+            await transaction.rollback();
+            return res.status(400).json({ message: "Bạn đã tham gia lớp này rồi!" });
+        }
+
+        // 3. Thêm học sinh vào bảng StudentClassStatus
         const insert = await db.StudentClassStatus.create({
             studentId: userId,
             classId: classInfo.id,
@@ -593,13 +613,13 @@ export const joinClass = async (req, res) => {
             return res.status(500).json({ message: "Tham gia lớp học không thành công!" });
         }
 
-        // 3. Cập nhật sĩ số
+        // 4. Cập nhật sĩ số
         await db.Class.update(
             { studentCount: db.sequelize.literal('studentCount + 1') },
             { where: { id: classInfo.id }, transaction }
         );
 
-        // 4. Commit transaction
+        // 5. Commit transaction
         await transaction.commit();
 
         return res.status(200).json({ message: "Tham gia lớp học thành công!" });

@@ -38,6 +38,7 @@ export const apiHandler = async (
     if (successCallback) {
       successCallback(response.data);
     }
+    
     if (returnResponse) {
       return response;
     }
@@ -48,6 +49,9 @@ export const apiHandler = async (
       : error.message;
     console.error('🚨 Có lỗi xảy ra khi gọi API:', errorMsg);
     dispatch(setErrorMessage(errorMsg));
+    
+    // Ném lỗi để có thể bắt ở các hàm gọi
+    throw error;
   } finally {
     dispatch(setLoading(false));
   }

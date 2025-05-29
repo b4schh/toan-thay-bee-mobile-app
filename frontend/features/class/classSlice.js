@@ -88,22 +88,33 @@ export const fetchDataForLearning = createAsyncThunk(
 
 export const joinClass = createAsyncThunk(
   'classes/joinClass',
-  async ({ class_code, onSuccess }, { dispatch, getState }) => {
-    return await apiHandler(
-      dispatch,
-      ClassAPI.joinClassByCode,
-      { class_code },
-      () => {
-        if (onSuccess) {
-          onSuccess();
-        }
-        const { screens } = getState().filter;
-        const { search, currentPage, limit, sortOrder } = screens.class;
-        dispatch(fetchClassesByUser({ search, currentPage, limit, sortOrder }));
-      },
-      true,
-      true,
-    );
+  async ({ class_code, onSuccess, onError }, { dispatch, getState }) => {
+    try {
+      const response = await apiHandler(
+        dispatch,
+        ClassAPI.joinClassByCode,
+        { class_code },
+        () => {
+          if (onSuccess) {
+            onSuccess();
+          }
+          const { screens } = getState().filter;
+          const { search, currentPage, limit, sortOrder } = screens.class;
+          dispatch(fetchClassesByUser({ search, currentPage, limit, sortOrder }));
+        },
+        true,
+        true,
+        true // Thêm tham số returnResponse để lấy response đầy đủ
+      );
+      
+      return response;
+    } catch (error) {
+      // Gọi callback onError nếu có
+      if (onError) {
+        onError(error.response?.data?.message || 'Có lỗi xảy ra khi tham gia lớp học');
+      }
+      throw error;
+    }
   },
 );
 

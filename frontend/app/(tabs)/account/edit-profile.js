@@ -104,9 +104,15 @@ export default function EditProfileScreen() {
       };
 
       await dispatch(updateUser(updatedData)).unwrap();
-      router.back();
+
+      // Hiển thị thông báo thành công
+      setDialogMessage('Cập nhật thông tin thành công!');
+      setDialogVisible(true);
+
     } catch (error) {
       console.error('Failed to update profile:', error);
+      setDialogMessage('Đã xảy ra lỗi khi cập nhật thông tin.');
+      setDialogVisible(true);
     } finally {
       dispatch(setLoading(false));
     }
@@ -292,7 +298,12 @@ export default function EditProfileScreen() {
         title="Thông báo"
         message={dialogMessage}
         type="alert"
-        onClose={() => setDialogVisible(false)}
+        onClose={() => {
+          setDialogVisible(false);
+          if (dialogMessage === 'Cập nhật thông tin thành công!') {
+            router.back(); // Quay lại trang trước đó
+          }
+        }}
       />
     </View>
   );

@@ -15,23 +15,18 @@ export default function EditAvatarScreen() {
   const { user } = useSelector((state) => state.auth);
   const { loading } = useSelector((state) => state.states);
 
-  // State for selected image
   const [selectedImage, setSelectedImage] = useState(null);
 
-  // Default avatar if user doesn't have one
   const currentAvatarSource = user?.avatarUrl
     ? { uri: user.avatarUrl }
     : require('../../../assets/images/default-avatar.jpg');
 
-  // Preview image (either selected new image or current avatar)
   const previewSource = selectedImage
     ? { uri: selectedImage.uri }
     : currentAvatarSource;
 
-  // Request permission and pick image from gallery
   const pickImage = async () => {
     try {
-      // Request media library permissions
       const { status } =
         await ImagePicker.requestMediaLibraryPermissionsAsync();
 
@@ -44,7 +39,6 @@ export default function EditAvatarScreen() {
         return;
       }
 
-      // Launch image picker
       const result = await ImagePicker.launchImageLibraryAsync({
         mediaTypes: ImagePicker.MediaTypeOptions.Images,
         allowsEditing: true,
@@ -65,7 +59,6 @@ export default function EditAvatarScreen() {
     }
   };
 
-  // Handle save avatar
   const handleSaveAvatar = async () => {
     if (!selectedImage) {
       Alert.alert('Thông báo', 'Vui lòng chọn ảnh đại diện mới.');
@@ -104,7 +97,6 @@ export default function EditAvatarScreen() {
       </View>
 
       <View style={styles.content}>
-        {/* Avatar Preview */}
         <View style={styles.avatarContainer}>
           <Image source={previewSource} style={styles.avatar} />
           <TouchableOpacity style={styles.editButton} onPress={pickImage}>
@@ -116,7 +108,6 @@ export default function EditAvatarScreen() {
           Nhấn vào biểu tượng máy ảnh để chọn ảnh đại diện mới từ thư viện ảnh.
         </AppText>
 
-        {/* Action Buttons */}
         <View style={styles.buttonContainer}>
           <Button
             text="Chọn ảnh"

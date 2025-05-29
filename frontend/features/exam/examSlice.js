@@ -116,7 +116,7 @@ export const submitExam = createAsyncThunk(
   async ({ attemptId }, { dispatch }) => {
     return await apiHandler(
       dispatch,
-      examApi.submitExam,
+      examApi.submitExamAPI,
       { attemptId },
       () => {},
       true,

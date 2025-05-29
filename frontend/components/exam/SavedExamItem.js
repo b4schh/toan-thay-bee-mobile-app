@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.sky.white,
     borderRadius: 12,
     marginBottom: 8,
-    elevation: 1,
+    elevation: 2,
   },
   contentContainer: {
     flexDirection: 'row',

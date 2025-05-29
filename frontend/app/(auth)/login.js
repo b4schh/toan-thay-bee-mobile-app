@@ -188,23 +188,17 @@ export default function Login() {
                 style={styles.button}
                 disabled={isSubmitting}
               />
-
-              <View style={styles.row}>
-                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                  <Checkbox
-                    label="Ghi nhớ tôi"
-                    checked={values.rememberMe}
-                    onToggle={() =>
-                      setFieldValue('rememberMe', !values.rememberMe)
-                    }
-                  />
-                </View>
-                <TouchableOpacity>
-                  <AppText style={{ color: colors.ink.dark, fontSize: 14 }}>
-                    Quên mật khẩu?
-                  </AppText>
-                </TouchableOpacity>
-              </View>
+              
+              <AppText
+                style={{
+                  color: colors.ink.dark,
+                  fontSize: 14,
+                  textAlign: 'center',
+                }}
+              >
+                Nếu bạn quên tên đăng nhập hoặc mật khẩu, hãy liên hệ với giáo
+                viên để được cung cấp lại!
+              </AppText>
             </View>
           )}
         </Formik>

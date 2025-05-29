@@ -181,40 +181,37 @@ export default function DoExamScreen() {
   };
 
   const handleAutoSubmit = () => {
-    if (!attemptId1 && !examDetail?.testDuration) return;
-
-    try {
-      setSaveQuestion(new Set());
-      setErrorQuestion(new Set());
-
-      const result = dispatch(
-        submitExam({ attemptId: attemptId1 }),
-      ).unwrap();
-
-      // Handle successful submission
-      Alert.alert('Thành công', 'Bài thi đã được nộp thành công!');
-      router.replace(`/exam/${attemptId1}/result`);
-    } catch (error) {
-      console.error('Lỗi khi nộp bài:', error);
-      Alert.alert('Lỗi', error.message || 'Có lỗi xảy ra khi nộp bài');
-    }
+    if (!attemptId1 || !examDetail?.testDuration) return;
+    setSaveQuestion(new Set());
+    setErrorQuestion(new Set());
+  
+    dispatch(submitExam({ attemptId: attemptId1 }))
+      .unwrap()
+      .then(() => {
+        Alert.alert('Thành công', 'Bài thi đã được nộp thành công!');
+        router.replace(`/exam/${attemptId1}/result`);
+      })
+      .catch((error) => {
+        console.error('Lỗi khi nộp bài:', error);
+        Alert.alert('Lỗi', error.message || 'Có lỗi xảy ra khi nộp bài');
+      });
   };
 
   const handleSubmit = () => {
     if (!attemptId1) return;
-
-    try {
-      const result = dispatch(
-        submitExam({ attemptId: attemptId1 }),
-      ).unwrap();
-
-      // Handle successful submission
-      Alert.alert('Thành công', 'Bài thi đã được nộp thành công!');
-      router.replace(`/exam/${attemptId1}/result`);
-    } catch (error) {
-      console.error('Lỗi khi nộp bài:', error);
-      Alert.alert('Lỗi', error.message || 'Có lỗi xảy ra khi nộp bài');
-    }
+    setSaveQuestion(new Set());
+    setErrorQuestion(new Set());
+    
+    dispatch(submitExam({ attemptId: attemptId1 }))
+      .unwrap()
+      .then(() => {
+        Alert.alert('Thành công', 'Bài thi đã được nộp thành công!');
+        router.replace(`/exam/${attemptId1}/result`);
+      })
+      .catch(error => {
+        console.error('Lỗi khi nộp bài:', error);
+        Alert.alert('Lỗi', error.message || 'Có lỗi xảy ra khi nộp bài');
+      });
   };
 
   useEffect(() => {
@@ -392,6 +389,7 @@ export default function DoExamScreen() {
   }, [answerTN, answerTLN, answerDS]);
 
   useEffect(() => {
+    if (!attemptId1 || !examDetail?.testDuration) return;
     if (remainingTime <= 0) return handleAutoSubmit();
     const interval = setInterval(() => {
       setRemainingTime((prev) => {
@@ -404,7 +402,7 @@ export default function DoExamScreen() {
       });
     }, 1000);
     return () => clearInterval(interval);
-  }, [remainingTime]);
+  }, [remainingTime, attemptId1, examDetail?.testDuration]);
 
   useEffect(() => {
     const cleanup = setupDebugListener();
@@ -415,8 +413,7 @@ export default function DoExamScreen() {
     if (!examDetail) return;
 
     const handleExamStartedCallback = ({ attemptId, startTime }) => {
-      console.log('Exam 2:', examDetail);
-      console.log('exam.testDuration 2:', examDetail?.testDuration);
+      console.log('Exam started:', attemptId, startTime);
       setIsStarted(true);
 
       try {

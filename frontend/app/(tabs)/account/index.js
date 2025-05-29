@@ -31,32 +31,13 @@ export default function AccountScreen() {
       console.error('Đăng xuất thất bại:', error);
     }
   };
-  
-  const codes = {
-    chapter: [
-      { code: '10C1', description: 'MỆNH ĐỀ VÀ TẬP HỢP' },
-      { code: '10C11', description: 'Mệnh đề' },
-      { code: '10C12', description: 'Tập hợp và các phép toán trên tập hợp' },
-      { code: '11C1', description: '123' },
-      { code: '11C11', description: '456' },
-      { code: '11C12', description: '789' },
-    ],
-  };
-
-  const gradeFilters = 11;
-  const filtered = codes['chapter'].filter((chapter) =>
-    chapter.code.startsWith(gradeFilters),
-  );
-
-  console.log('Chapter filtered:', filtered);
 
   return (
     <SafeAreaView style={styles.container}>
+      {/* Profile Header */}
       <ProfileHeader user={user} router={router} />
 
       <ScrollView style={styles.scrollView}>
-        {/* Profile Header */}
-
         {/* Personal Information Section */}
         <Section title="Thông tin cá nhân">
           <MenuItem

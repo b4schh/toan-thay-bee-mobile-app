@@ -15,6 +15,8 @@ export default function ExamRegulationModal({
 
   return (
     <Dialog
+      bodyStyle={{ paddingHorizontal: 0 }}
+      buttonStyle={{ paddingHorizontal: 20 }}
       visible={visible}
       title="Quy chế thi"
       type="custom"
@@ -56,7 +58,12 @@ export default function ExamRegulationModal({
 
         {/* Thời gian làm bài */}
         <AppText style={{ fontSize: 16, marginBottom: 20 }}>
-          Thời gian làm bài: {examDuration || 'Đang tải...'} phút
+          Thời gian làm bài:{' '}
+          {examDuration === undefined
+            ? 'Đang tải...'
+            : examDuration
+              ? `${examDuration} phút`
+              : 'Không có'}
         </AppText>
 
         {/* Nội dung quy chế thi */}
@@ -73,15 +80,23 @@ export default function ExamRegulationModal({
         </AppText>
 
         {/* Radio button đồng ý */}
-        <TouchableOpacity
-          style={styles.radioCircle}
-          onPress={() => setIsAgreed(!isAgreed)}
+        <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'flex-start',
+            alignContent: 'center',
+          }}
         >
-          {isAgreed && <View style={styles.innerCircle} />}
-        </TouchableOpacity>
-        <AppText style={{ marginLeft: 10, fontSize: 16 }}>
-          Tôi đồng ý với quy chế thi
-        </AppText>
+          <TouchableOpacity
+            style={styles.radioCircle}
+            onPress={() => setIsAgreed(!isAgreed)}
+          >
+            {isAgreed && <View style={styles.innerCircle} />}
+          </TouchableOpacity>
+          <AppText style={{ marginLeft: 10, fontSize: 16, lineHeight: 20 }}>
+            Tôi đồng ý với quy chế thi
+          </AppText>
+        </View>
       </View>
     </Dialog>
   );

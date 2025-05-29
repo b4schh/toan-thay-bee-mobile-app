@@ -1,15 +1,14 @@
 import React from 'react';
 import {
   View,
-  Text,
+  Image,
   StyleSheet,
-  ImageBackground,
   Dimensions,
   SafeAreaView,
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import { LinearGradient } from 'expo-linear-gradient';
-import { Button, BeeMathLogo, AppText } from '@components/index';
+import { Button, AppText } from '@components/index';
 import colors from '../constants/colors';
 
 const { width, height } = Dimensions.get('window');
@@ -19,18 +18,17 @@ export default function Welcome() {
 
   return (
     <SafeAreaView style={styles.container}>
-      {/* <ImageBackground
-        source={require('../assets/images/welcome-bg.png')}
-        style={styles.background}
-        resizeMode="cover"
-      > */}
       <LinearGradient
         colors={['rgba(255,255,255,0.9)', 'rgba(230,247,255,0.95)']}
         style={styles.gradient}
       >
         {/* Logo Section */}
         <View style={styles.logoSection}>
-          <BeeMathLogo style={styles.logo} />
+          <Image
+            source={require('../assets/images/icon.png')} // Đường dẫn đến ảnh logo
+            style={styles.logo}
+            resizeMode="contain"
+          />
           <AppText style={styles.brandName}>Toán Thầy Bee</AppText>
         </View>
 
@@ -80,8 +78,8 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   logo: {
-    width: 80,
-    height: 80,
+    width: 160,
+    height: 160,
   },
   brandName: {
     fontFamily: 'Inter-Bold',
@@ -102,14 +100,11 @@ const styles = StyleSheet.create({
   },
   mainTitle: {
     fontFamily: 'Inter-Medium',
-    fontSize: 36,
+    fontSize: 32,
     textAlign: 'center',
     color: '#1E293B',
     marginBottom: 12,
     lineHeight: 44,
-  },
-  highlight: {
-    color: colors.primary,
   },
   subtitle: {
     fontSize: 16,

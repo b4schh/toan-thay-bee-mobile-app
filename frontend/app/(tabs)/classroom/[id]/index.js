@@ -92,6 +92,7 @@ export default function ClassroomIntro() {
 const styles = StyleSheet.create({
   card: {},
   contentStyle: {
+    paddingHorizontal: 20,
     gap: 8,
   },
   title: {

@@ -106,18 +106,13 @@ const AdminSidebar = () => {
                             <Choice route={'/admin/student-management'} text={'Học sinh'} />
                             <Choice route={'/admin/class-management'} text={'Lớp học'} />
                             <Choice route={'/admin/question-management'} text={'Câu hỏi'} />
-                            <Choice route={'/admin/question-report-management'} text={'Báo cáo câu hỏi'} />
                             <Choice route={'/admin/exam-management'} text={'Đề thi'} />
                             <Choice route={'/admin/code-management'} text={'Code'} />
-                            <Choice route={'/admin/achievement-management'} text={'Thành tích'} />
-                            {/* <Choice route={'/admin/theory-management'} text={'Lý thuyết'} /> */}
+
 
                         </div>
                     )}
                     <MenuSidebar onClick={() => navigate('/admin/article-management')} route={'/admin/article-management'} icon={icon1} text={'Bài viết'} />
-                    <MenuSidebar onClick={() => navigate('/admin/homepage-management')} route={'/admin/homepage-management'} icon={icon2} text={'Trang chủ'} />
-                    {/* <MenuSidebar onClick={() => navigate('/')} icon={icon2} text={'Báo cáo thống kê'} /> */}
-
                 </div>
             </div>
             <div className="flex-col w-full justify-start items-start gap-3 inline-flex">

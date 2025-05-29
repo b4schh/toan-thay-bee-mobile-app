@@ -1,12 +1,13 @@
 import { View, ScrollView, StyleSheet } from 'react-native';
 import colors from '../constants/colors';
 
-export default function ScrollableCard({ children, cardStyle, contentStyle }) {
+export default function ScrollableCard({ children, cardStyle, contentStyle, refreshControl }) {
   return (
     <ScrollView
       showsVerticalScrollIndicator={false}
       style={[styles.scrollContainer, cardStyle]}
       contentContainerStyle={[styles.contentContainer, contentStyle]}
+      refreshControl={refreshControl}
     >
       {children}
     </ScrollView>
@@ -19,7 +20,7 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 40,
     borderTopRightRadius: 40,
     paddingTop: 24,
-    paddingHorizontal: 20,
+    // paddingHorizontal: 20,
     backgroundColor: colors.sky.lightest,
   },
   contentContainer: {

@@ -5,6 +5,7 @@ import AppText from '../AppText';
 import Solution from './Solution';
 import Button from '@components/button/Button';
 import MyMathText from '@components/latex/MyMathText';
+import MathMarkdownViewer from '@components/latex/MathMarkdownViewer';
 
 export default function TNSection({
   questions,
@@ -43,12 +44,16 @@ export default function TNSection({
               </View>
 
               {/* Nội dung câu hỏi */}
-              <MyMathText statement={question.content} />
+              {/* <MyMathText statement={question.content} /> */}
+              <MathMarkdownViewer
+                content={question.content}
+                style={styles.mathViewer}
+              />
 
               {/* <AppText style={styles.questionContent}>
                 {question.content}
               </AppText> */}
-              
+
               {question.imageUrl && (
                 <Image
                   source={{ uri: question.imageUrl }}
@@ -86,13 +91,13 @@ export default function TNSection({
                           {prefixStatement[index]}
                         </AppText>
 
-                        <MyMathText statement={statement.content} />
-
-                        {/* <AppText style={statementStyle}>
-                          {statement.content}
-                        </AppText> */}
+                        {/* <MyMathText statement={statement.content} /> */}
+                        <MathMarkdownViewer
+                          content={statement.content}
+                          style={styles.mathViewer}
+                        />
                       </View>
-                      
+
                       {icon && (
                         <AppText style={[styles.statementIcon, statementStyle]}>
                           {icon}
@@ -194,6 +199,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     gap: 8,
+    width: '90%'
   },
   statementPrefix: {
     fontWeight: 'bold',
@@ -215,5 +221,8 @@ const styles = StyleSheet.create({
     height: 40,
     borderRadius: 12,
     backgroundColor: colors.primary,
+  },
+  mathViewer: {
+    width: '100%',
   },
 });

@@ -145,6 +145,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.sky.white,
     borderRadius: 12,
     padding: 12,
+    elevation: 2
   },
   headerBase: {
     backgroundColor: '#6895D2',

@@ -21,10 +21,10 @@ Toán Thầy Bee là ứng dụng di động được thiết kế để hỗ tr
 
 ## Cấu trúc dự án
 
-Dự án được chia thành hai phần chính:
-
-1. **Frontend**: Ứng dụng di động được phát triển bằng React Native và Expo, cung cấp giao diện người dùng trực quan và đáp ứng.
-2. **Backend**: API server được phát triển bằng Node.js, Express và Sequelize, xử lý logic nghiệp vụ và quản lý dữ liệu.
+Dự án được chia thành ba phần chính:
+1. **Admin**: Giao diện quản trị hệ thống, quản lý người dùng, lớp học, bài học, bài viết, đề thi.
+2. **Frontend**: Ứng dụng di động được phát triển bằng React Native và Expo, cung cấp giao diện người dùng trực quan và đáp ứng.
+3. **Backend**: API server được phát triển bằng Node.js, Express và Sequelize, xử lý logic nghiệp vụ và quản lý dữ liệu.
 
 Hai phần này tương tác với nhau thông qua RESTful API, đảm bảo tính linh hoạt và khả năng mở rộng của hệ thống.
 
@@ -41,8 +41,11 @@ Hai phần này tương tác với nhau thông qua RESTful API, đảm bảo tí
 
 ## Hướng dẫn cài đặt
 
+### Admin
+- [Admin](./admin/README.md#cài-đặt-và-thiết-lập).
+
 ### Frontend
-- [Frontend](./frontend/README.md#cài-đặt-và-chạy-server#cài-đặt-và-chạy-ứng-dụng).
+- [Frontend](./frontend/README.md#cài-đặt-và-chạy-ứng-dụng).
 
 ### Backend
 - [Backend](./backend/README.md#cài-đặt-và-chạy-server).

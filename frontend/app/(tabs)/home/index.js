@@ -43,7 +43,6 @@ export default function HomeScreen() {
   );
 
   useEffect(() => {
-    // Fetch classes, uncompleted learning items, and completed tests when component mounts
     dispatch(
       fetchClassesByUser({
         search,
@@ -56,22 +55,37 @@ export default function HomeScreen() {
     dispatch(fetchSavedExams());
   }, []);
 
-  // Refresh saved exams when tab is selected
   useEffect(() => {
     if (selectedTab === 'saved_exams') {
-      dispatch(fetchSavedExams());
+      // Chỉ gọi API nếu dữ liệu chưa được tải
+      if (!examsSaved) {
+        dispatch(fetchSavedExams());
+      }
     } else if (selectedTab === 'exam_history') {
-      dispatch(fetchAttemptCompleted());
+      // Chỉ gọi API nếu dữ liệu chưa được tải
+      if (!completedAttempts) {
+        dispatch(fetchAttemptCompleted());
+      }
     } else {
-      dispatch(getUncompletedLearningItem());
+      // Chỉ gọi API nếu dữ liệu chưa được tải
+      if (!learningItems) {
+        dispatch(getUncompletedLearningItem());
+      }
     }
-  }, [selectedTab]);
+  }, [selectedTab, examsSaved, completedAttempts, learningItems, dispatch]);
 
   const [refreshing, setRefreshing] = useState(false);
+
   const onRefresh = useCallback(async () => {
     setRefreshing(true);
     if (user) {
-      dispatch(fetchClassesByUser());
+      dispatch(
+        fetchClassesByUser({
+          search,
+          currentPage: 1,
+          limit,
+        }),
+      );
       dispatch(getUncompletedLearningItem());
       dispatch(fetchAttemptCompleted());
       dispatch(fetchSavedExams());
@@ -90,35 +104,20 @@ export default function HomeScreen() {
     );
   }, [classes]);
 
-  // Render functions for list items
-  const renderLearningItem = useCallback(({ item }) => {
-    return <UnfinishedLearningItem item={item} />;
-  }, []);
-
-  const renderCompletedTest = useCallback(({ item }) => {
-    return <CompletedTestItem attempt={item} />;
-  }, []);
-
-  const renderSavedExam = useCallback(({ item }) => {
-    // API getSavedExams trả về các đề thi đã lưu với cấu trúc { exam: {...}, isDone: bool, isSave: bool }
-    const examData = item.exam ? { ...item.exam, isDone: item.isDone } : item;
-    return <SavedExamItem exam={examData} />;
-  }, []);
-
   const TabContent = useMemo(
     () => ({
       unfinished: (
         <View style={styles.tabContentContainer}>
           {learningItems && learningItems.length > 0 ? (
-            <FlatList
-              data={learningItems.slice(0, 5)}
-              renderItem={renderLearningItem}
-              keyExtractor={(item) =>
-                item && item.id ? item.id.toString() : Math.random().toString()
-              }
-              showsVerticalScrollIndicator={false}
-              contentContainerStyle={styles.learningItemsList}
-            />
+            <View style={styles.learningItemsList}>
+              {learningItems
+                .slice(0, 5)
+                .map((item) =>
+                  item ? (
+                    <UnfinishedLearningItem key={item.id} item={item} />
+                  ) : null,
+                )}
+            </View>
           ) : (
             <AppText style={styles.contentText}>
               Không có mục học tập nào chưa hoàn thành
@@ -129,15 +128,14 @@ export default function HomeScreen() {
       saved_exams: (
         <View style={styles.tabContentContainer}>
           {examsSaved && examsSaved.length > 0 ? (
-            <FlatList
-              data={examsSaved.slice(0, 5)}
-              renderItem={renderSavedExam}
-              keyExtractor={(item) =>
-                item && item.id ? item.id.toString() : Math.random().toString()
-              }
-              showsVerticalScrollIndicator={false}
-              contentContainerStyle={styles.learningItemsList}
-            />
+            <View style={styles.learningItemsList}>
+              {examsSaved.slice(0, 5).map((item) => {
+                const examData = item.exam
+                  ? { ...item.exam, isDone: item.isDone }
+                  : item;
+                return <SavedExamItem key={item.id} exam={examData} />;
+              })}
+            </View>
           ) : (
             <AppText style={styles.contentText}>
               Bạn chưa lưu đề thi nào
@@ -148,15 +146,15 @@ export default function HomeScreen() {
       exam_history: (
         <View style={styles.tabContentContainer}>
           {completedAttempts && completedAttempts.length > 0 ? (
-            <FlatList
-              data={completedAttempts.slice(0, 5)}
-              renderItem={renderCompletedTest}
-              keyExtractor={(item) =>
-                item && item.id ? item.id.toString() : Math.random().toString()
-              }
-              showsVerticalScrollIndicator={false}
-              contentContainerStyle={styles.learningItemsList}
-            />
+            <View style={styles.learningItemsList}>
+              {completedAttempts
+                .slice(0, 5)
+                .map((item) =>
+                  item ? (
+                    <CompletedTestItem key={item.id} attempt={item} />
+                  ) : null,
+                )}
+            </View>
           ) : (
             <AppText style={styles.contentText}>
               Chưa có bài kiểm tra nào đã hoàn thành
@@ -187,7 +185,7 @@ export default function HomeScreen() {
       />
     );
   }, []);
-  
+
   return (
     <View style={styles.container}>
       {/* Button */}
@@ -261,7 +259,11 @@ export default function HomeScreen() {
                     keyExtractor={(item) => item.id}
                     horizontal
                     showsHorizontalScrollIndicator={false}
-                    contentContainerStyle={{ gap: 16 }}
+                    contentContainerStyle={{
+                      gap: 16,
+                      marginHorizontal: 20,
+                      marginVertical: 4,
+                    }}
                     pagingEnabled={false}
                   />
                 ) : (
@@ -292,18 +294,20 @@ export default function HomeScreen() {
             </View>
 
             {/* Navigation Bar */}
-            <TabNavigation
-              tabs={[
-                { id: 'unfinished', label: 'Mục học tập chưa xong' },
-                { id: 'saved_exams', label: 'Đề đã lưu' },
-                { id: 'exam_history', label: 'Lịch sử làm bài' },
-              ]}
-              selectedTab={selectedTab}
-              onTabPress={setSelectedTab}
-            />
+            <View style={{ paddingHorizontal: 20 }}>
+              <TabNavigation
+                tabs={[
+                  { id: 'unfinished', label: 'Mục học tập chưa xong' },
+                  { id: 'saved_exams', label: 'Đề đã lưu' },
+                  { id: 'exam_history', label: 'Lịch sử làm bài' },
+                ]}
+                selectedTab={selectedTab}
+                onTabPress={setSelectedTab}
+              />
+            </View>
 
             {/* Nội dung hiển thị bên dưới */}
-            <View style={[styles.contentContainer]}>
+            <View style={styles.contentContainer}>
               {TabContent[selectedTab] || (
                 <AppText style={styles.contentText}>Chưa xử lý</AppText>
               )}
@@ -363,12 +367,13 @@ const styles = StyleSheet.create({
   card: {
     flexGrow: 1,
     gap: 12,
-    paddingBottom: 128,
+    paddingBottom: 100,
   },
   sectionHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    paddingHorizontal: 20,
   },
   viewAllButton: {
     flexDirection: 'row',
@@ -394,6 +399,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: colors.sky.lightest,
+    marginHorizontal: 20,
   },
   tabContentContainer: {
     width: '100%',

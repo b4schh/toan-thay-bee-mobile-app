@@ -3,8 +3,7 @@ import {
   View,
   StyleSheet,
   ScrollView,
-  Alert,
-  TouchableOpacity,
+  LogBox
 } from 'react-native';
 import { useRouter, useLocalSearchParams } from 'expo-router';
 import {
@@ -23,6 +22,10 @@ import {
   saveExamForUser,
 } from '../../../../features/exam/examSlice';
 import { fetchAttemptByStudentId } from '../../../../features/attempt/attemptSlice';
+
+LogBox.ignoreLogs([
+  'VirtualizedLists should never be nested',
+]);
 
 export default function ExamDetailScreen() {
   const { id } = useLocalSearchParams();
@@ -135,6 +138,7 @@ export default function ExamDetailScreen() {
           text: 'Tiếp tục',
           onPress: () => {
             setDialogVisible(false);
+            console.log("id:", id);
             router.push(`/exam/${id}/do-exam`);
           },
           style: {

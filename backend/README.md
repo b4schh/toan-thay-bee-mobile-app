@@ -25,9 +25,6 @@ npm install
 ```
 
 #### 3. Cấu hình database (2 cách):
-
-#### 3.1. Cách 1: Sử dụng Docker để chạy MySQL
-
 Nếu bạn không muốn cài đặt MySQL trực tiếp trên máy hoặc muốn một môi trường cô lập:
 
 - Sử dụng Docker Compose để khởi động container MySQL:
@@ -67,46 +64,6 @@ JWT_SECRET=qwertyuiopasdfghjklzxcvbnmqwertyuiopasdfghjklzxcvbnm
 JWT_EXPIRES_IN=30d
 ```
 
-#### 3.2. Cách 2: Sử dụng MySQL đã cài đặt trên máy
-
-Nếu bạn đã cài đặt MySQL trên máy tính của mình:
-
-- Cần cấu hình file .env (dựa trên file .env.example) để trỏ đến MySQL local của bạn
-```bash
-PORT = 3000
-HOST_NAME = 192.168.1.139 // localhost hoặc thay bằng IPv4
-NODE_ENV = development
-FRONTEND_URL = http://localhost:8081
-NGROK_URL = https://4e04-14-191-32-178.ngrok-free.app
-
-DB_DEV_HOST=localhost
-DB_DEV_USERNAME=root
-DB_DEV_PASSWORD=your_password
-DB_DEV_DATABASE=toan_thay_bee
-DB_DEV_PORT=3306  # Cổng mặc định của MySQL
-
-DB_POOL_MAX=50          # Kết nối tối đa trong pool (đề xuất: 50)
-DB_POOL_MIN=10          # Kết nối tối thiểu giữ sẵn (đề xuất: 10)
-DB_POOL_ACQUIRE=20000   # Thời gian chờ tối đa (ms) khi lấy kết nối (20s)
-DB_POOL_IDLE=5000       # Ngắt kết nối sau (ms) khi không dùng (5s)
-
-FIREBASE_API_KEY=
-FIREBASE_AUTH_DOMAIN=
-FIREBASE_DATABASE_URL=
-FIREBASE_PROJECT_ID=
-FIREBASE_STORAGE_BUCKET=
-FIREBASE_MESSAGING_SENDER_ID=
-FIREBASE_APP_ID=
-FIREBASE_MEASUREMENT_ID=
-
-JWT_SECRET=qwertyuiopasdfghjklzxcvbnmqwertyuiopasdfghjklzxcvbnm
-JWT_EXPIRES_IN=30d
-```
-
-- Tạo database toan_thay_bee (nếu chưa có):
-```bash
-CREATE DATABASE toan_thay_bee;
-```
 
 #### 4. Chạy migrations để tạo cấu trúc database:
 ```bash

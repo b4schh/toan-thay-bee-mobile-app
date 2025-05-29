@@ -21,6 +21,9 @@ export default function LearningItemContent({ item, router }) {
     dispatch(markLearningItem({ learningItemId: item.id }));
   };
 
+  if (item.typeOfLearningItem === 'DOC')
+    console.log(item.url)
+  
   return (
     <View style={styles.content}>
       <View style={styles.titleContainer}>
