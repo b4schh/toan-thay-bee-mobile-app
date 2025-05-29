@@ -7,6 +7,8 @@ export default function AccountLayout() {
       <Stack.Screen name="edit-profile" />
       <Stack.Screen name="change-password" />
       <Stack.Screen name="edit-avatar" />
+      <Stack.Screen name="privacy-policy" />
+      <Stack.Screen name="terms-of-service" />
     </Stack>
   );
 }

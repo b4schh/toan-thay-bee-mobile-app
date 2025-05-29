@@ -15,6 +15,10 @@ import {
 import colors from '../../../constants/colors';
 import { fetchPublicExams } from '../../../features/exam/examSlice';
 import { fetchCodesByType } from '../../../features/code/codeSlice';
+import {
+  setScreenTotalItems,
+  setScreenCurrentPage,
+} from '../../../features/filter/filterSlice';
 
 // Thêm component EmptyView
 const EmptyView = ({ onRefresh, isLoading, error, message }) => (
@@ -53,17 +57,10 @@ export default function PracticeScreen() {
   const { codes } = useSelector((state) => state.codes);
 
   useEffect(() => {
-    // dispatch(fetchCodesByType(['exam type', 'grade', 'chapter']));
-
     if (!codes || !codes['exam type'] || !codes['grade'] || !codes['chapter']) {
       dispatch(fetchCodesByType(['exam type', 'grade', 'chapter']));
     }
   }, [dispatch, codes]);
-
-  // console.log('Code practice:', codes);
-  // console.log('Type of exam code:', typeOfExamCodes);
-  // console.log('Grade code:', gradeCodes);
-  // console.log('Chapter code:', chapterCodes);
 
   // Thêm state và options cho filters
   const [filterDialogVisible, setFilterDialogVisible] = useState(false);
@@ -139,23 +136,15 @@ Chapter: ${JSON.stringify(chapterFilters)}`);
   const renderExamItem = useCallback(
     ({ item }) => (
       <ExamCard
-        name={item.name}
-        imageUrl={item.imageUrl}
+        exam={item}
         onPress={() =>
           router.push({
             pathname: `/practice/${item.id}`,
-            params: {
-              name: item.name,
-              createdAt: item.createdAt,
-              isDone: item.isDone,
-              testDuration: item.testDuration,
-              passRate: item.passRate,
-            },
           })
         }
       />
     ),
-    [],
+    [router],
   );
 
   // Thêm hàm xử lý thay đổi trang
@@ -166,11 +155,10 @@ Chapter: ${JSON.stringify(chapterFilters)}`);
           search,
           currentPage: newPage,
           limit,
-          sortOrder,
         }),
       );
     },
-    [search, limit, sortOrder],
+    [dispatch, search, limit],
   );
 
   if (!codes || !codes['grade'] || !codes['exam type'] || !codes['chapter']) {
@@ -181,6 +169,7 @@ Chapter: ${JSON.stringify(chapterFilters)}`);
     <View style={styles.container}>
       {/* Header */}
       <AppText style={styles.header}>Luyện đề</AppText>
+
       <View style={styles.row}>
         <SearchBar placeholder="Tìm kiếm đề thi..." screen="exam" />
 
@@ -290,6 +279,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.sky.lightest,
     padding: 20,
+    paddingBottom: 80,
     gap: 10,
   },
   header: {
@@ -325,7 +315,7 @@ const styles = StyleSheet.create({
   resetButton: {
     backgroundColor: colors.sky.white,
     borderWidth: 1,
-    borderColor: colors.primary.default,
+    borderColor: colors.primary,
     flex: 1,
   },
   resetButtonText: {

@@ -1,4 +1,4 @@
-class responseUser {
+class UserResponse {
     constructor(user, status=null) {
         this.id = user.id
         this.email = user.email
@@ -20,4 +20,4 @@ class responseUser {
     }
 }
 
-export default responseUser
+export default UserResponse

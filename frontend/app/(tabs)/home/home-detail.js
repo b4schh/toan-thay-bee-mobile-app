@@ -1,10 +1,5 @@
 import React, { useState, useMemo, useCallback, useEffect } from 'react';
-import {
-  View,
-  StyleSheet,
-  FlatList,
-  RefreshControl,
-} from 'react-native';
+import { View, StyleSheet, FlatList, RefreshControl } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -18,15 +13,9 @@ import {
   SavedExamItem,
 } from '@components/index';
 
-import {
-  getUncompletedLearningItem,
-} from '../../../features/class/classSlice';
-import {
-  fetchAttemptCompleted,
-} from '../../../features/attempt/attemptSlice';
-import {
-  fetchSavedExams,
-} from '../../../features/exam/examSlice';
+import { getUncompletedLearningItem } from '../../../features/class/classSlice';
+import { fetchAttemptCompleted } from '../../../features/attempt/attemptSlice';
+import { fetchSavedExams } from '../../../features/exam/examSlice';
 
 import colors from '../../../constants/colors';
 
@@ -74,7 +63,9 @@ export default function HomeDetailScreen() {
         <FlatList
           data={learningItems}
           renderItem={renderLearningItem}
-          keyExtractor={(item) => item.id?.toString() || Math.random().toString()}
+          keyExtractor={(item) =>
+            item.id?.toString() || Math.random().toString()
+          }
           refreshControl={
             <RefreshControl
               refreshing={refreshing}
@@ -82,6 +73,7 @@ export default function HomeDetailScreen() {
               tintColor={colors.primary}
             />
           }
+          showsVerticalScrollIndicator={false}
         />
       ) : (
         <AppText style={styles.emptyText}>
@@ -95,7 +87,9 @@ export default function HomeDetailScreen() {
         <FlatList
           data={examsSaved}
           renderItem={renderSavedExam}
-          keyExtractor={(item) => item.id?.toString() || Math.random().toString()}
+          keyExtractor={(item) =>
+            item.id?.toString() || Math.random().toString()
+          }
           refreshControl={
             <RefreshControl
               refreshing={refreshing}
@@ -103,6 +97,7 @@ export default function HomeDetailScreen() {
               tintColor={colors.primary}
             />
           }
+          showsVerticalScrollIndicator={false}
         />
       ) : (
         <AppText style={styles.emptyText}>Bạn chưa lưu đề thi nào</AppText>
@@ -110,11 +105,14 @@ export default function HomeDetailScreen() {
     }
 
     if (selectedTab === 'exam_history') {
+      console.log("completedAttempts:", completedAttempts)
       return completedAttempts && completedAttempts.length > 0 ? (
         <FlatList
           data={completedAttempts}
           renderItem={renderCompletedTest}
-          keyExtractor={(item) => item.id?.toString() || Math.random().toString()}
+          keyExtractor={(item) =>
+            item.id?.toString() || Math.random().toString()
+          }
           refreshControl={
             <RefreshControl
               refreshing={refreshing}
@@ -122,6 +120,7 @@ export default function HomeDetailScreen() {
               tintColor={colors.primary}
             />
           }
+          showsVerticalScrollIndicator={false}
         />
       ) : (
         <AppText style={styles.emptyText}>Chưa có bài kiểm tra nào</AppText>
@@ -133,7 +132,10 @@ export default function HomeDetailScreen() {
 
   return (
     <View style={styles.container}>
-      <HeaderWithBackButton title="Tổng quan" onBackPress={() => router.back()} />
+      <HeaderWithBackButton
+        title="Tổng quan"
+        onBackPress={() => router.back()}
+      />
       <View style={styles.content}>
         <TabNavigation
           tabs={[
@@ -160,6 +162,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.sky.lightest,
     paddingHorizontal: 20,
+    marginTop: 20,
     marginBottom: 80,
     gap: 10,
   },

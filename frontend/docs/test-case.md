@@ -477,6 +477,87 @@ Dưới đây là bộ test cases chi tiết cho ứng dụng Toán Thầy Bee, 
 | **Các bước thực hiện** | 1. Mở ứng dụng Toán Thầy Bee <br> 2. Đăng nhập với tài khoản hợp lệ <br> 3. Chọn tab "Bài viết" <br> 4. Chọn một bài viết có tài liệu đính kèm <br> 5. Nhấn nút "Tải xuống" bên cạnh tài liệu |
 | **Kết quả mong đợi**   | - Hiển thị thông báo xác nhận tải xuống <br> - Bắt đầu tải xuống tài liệu <br> - Hiển thị tiến trình tải xuống <br> - Sau khi tải xuống hoàn tất, hiển thị thông báo tải xuống thành công <br> - Có thể mở tài liệu đã tải xuống |
 
+### Xác thực và quản lý token
+
+1.  TC-042 – Xử lý token hết hạn khi đang sử dụng ứng dụng
+
+| Mục                    | Nội dung                                                                                           |
+|------------------------|----------------------------------------------------------------------------------------------------|
+| **ID**                 | TC-042                                                                                             |
+| **Mục đích**           | Kiểm tra cách ứng dụng xử lý khi token JWT hết hạn trong quá trình sử                              |
+| **Điều kiện tiên quyết** | Người dùng đã đăng nhập với token có thời hạn ngắn.                          |
+| **Dữ liệu test**       | Tài khoản người dùng đã đăng nhập <br> Bài viết có tài liệu đính kèm                             |
+| **Các bước thực hiện** | 1. Đăng nhập vào ứng dụng <br> 2. Chờ đến khi token hết hạn (có thể sử dụng token với thời hạn ngắn cho mục đích test) <br> 3. Thực hiện một hành động yêu cầu xác thực  |
+| **Kết quả mong đợi**   | - Ứng dụng phát hiện token hết hạn <br> - Hệ thống tự động làm mới token hoặc yêu cầu người dùng đăng nhập lại <br> - Thông báo cho người dùng một cách rõ ràng về tình trạng|
+
+2.  TC-043 – Xử lý đăng nhập đồng thời trên 2 thiết bị
+
+| Mục                    | Nội dung                                                                                           |
+|------------------------|----------------------------------------------------------------------------------------------------|
+| **ID**                 | TC-043                                                                                             |
+| **Mục đích**           | Kiểm tra cách ứng dụng xử lý khi người dùng đăng nhập trên 2 thiết bị cùng lúc.                    |
+| **Điều kiện tiên quyết** | Có tài khoản người dùng hợp lệ                                                                   |
+| **Dữ liệu test**       | Tài khoản người dùng đã đăng nhập <br> Bài viết có tài liệu đính kèm                               |
+| **Các bước thực hiện** | 1. Đăng nhập vào ứng dụng trên thiết bị A <br> 2. Đăng nhập vào ứng dụng trên thiết bị B <br> 3. Thực hiện các hành động cần xác thực trên thiết bị A |
+| **Kết quả mong đợi**   | - Cả hai thiết bị đều có thể đăng nhập thành công <br> - Trên thiết bị A thông báo phiên đăng nhập hết hạn và yêu cầu đăng nhập lại |
+
+### Kết nối Internet và đồng bộ hóa
+
+1. TC-044 – Kiểm tra kết nối internet trước khi thực hiện API call
+
+| Mục                     | Nội dung |
+|--------------------------|---------|
+| **ID**                   | TC-044 |
+| **Mục đích**             | Kiểm tra ứng dụng xử lý khi không có kết nối internet trước khi gọi API |
+| **Điều kiện tiên quyết** | Đã cài đặt ứng dụng mobile |
+| **Dữ liệu test**         | Tài khoản người dùng hợp lệ |
+| **Các bước thực hiện**   | 1. Tắt kết nối internet trên thiết bị<br>2. Mở ứng dụng Toán Thầy Bee<br>3. Thử đăng nhập hoặc thực hiện một hành động cần kết nối internet |
+| **Kết quả mong đợi**     | - Ứng dụng hiển thị thông báo không có kết nối internet<br>- Không thực hiện API call<br>- Hiển thị gợi ý kiểm tra lại kết nối mạng |
+
+2.  TC-045 – Mất kết nối internet khi đang làm bài thi
+
+| Mục                   | Nội dung |
+|------------------------|---------|
+| **ID**                 | TC-045 |
+| **Mục đích**           | Kiểm tra cách ứng dụng xử lý khi mất kết nối internet trong quá trình làm bài thi |
+| **Điều kiện tiên quyết** | Người dùng đã đăng nhập và đang trong quá trình làm bài thi |
+| **Dữ liệu test**       | Tài khoản người dùng đã đăng nhập, một bài thi đang được thực hiện |
+| **Các bước thực hiện** | 1. Đăng nhập vào ứng dụng<br>2. Bắt đầu làm một bài thi<br>3. Trả lời một số câu hỏi<br>4. Tắt kết nối internet<br>5. Tiếp tục trả lời các câu hỏi<br>6. Bật lại kết nối internet<br>7. Hoàn thành và nộp bài thi |
+| **Kết quả mong đợi**   | - Ứng dụng phát hiện mất kết nối và hiển thị thông báo<br>- Các câu trả lời được lưu trữ cục bộ khi không có kết nối<br>- Khi kết nối được khôi phục, ứng dụng tự động đồng bộ các câu trả lời với máy chủ<br>- Quá trình làm bài không bị gián đoạn |
+
+3. TC-046 – Xử lý khi thời gian làm bài hết nhưng kết nối bị mất
+
+| Mục                     | Nội dung |
+|--------------------------|---------|
+| **ID**                   | TC-046 |
+| **Mục đích**             | Kiểm tra cách ứng dụng xử lý khi thời gian làm bài hết nhưng kết nối bị mất |
+| **Điều kiện tiên quyết** | Người dùng đã đăng nhập và đang làm bài thi |
+| **Dữ liệu test**         | Tài khoản người dùng, bài thi có thời gian ngắn |
+| **Các bước thực hiện**   | 1. Đăng nhập vào ứng dụng<br>2. Bắt đầu làm một bài thi có thời gian ngắn<br>3. Tắt kết nối internet khi gần hết thời gian<br>4. Chờ đến khi thời gian làm bài kết thúc |
+| **Kết quả mong đợi**     | - Ứng dụng phát hiện thời gian làm bài đã hết<br>- Tự động lưu các câu trả lời cục bộ<br>- Hiển thị thông báo về việc thời gian đã hết và kết nối bị mất<br>- Khi kết nối được khôi phục, tự động gửi bài thi đã hoàn thành |
+
+4. TC-047 – Lưu quá trình làm bài khi thoát ứng dụng
+
+| Mục                     | Nội dung |
+|------------------------|----------|
+| **ID**                 | TC-047 |
+| **Mục đích**           | Kiểm tra khả năng lưu và khôi phục quá trình làm bài khi người dùng thoát ứng dụng và vào lại |
+| **Điều kiện tiên quyết** | - Người dùng đã đăng nhập vào hệ thống<br>- Có ít nhất một đề thi khả dụng |
+| **Dữ liệu test**       | - Tài khoản người dùng hợp lệ<br>- Đề thi cụ thể (ví dụ: Đề thi Toán lớp 10) |
+| **Các bước thực hiện** | 1. Mở ứng dụng Toán Thầy Bee<br>2. Đăng nhập với tài khoản hợp lệ<br>3. Chọn tab "Luyện tập"<br>4. Chọn một đề thi cụ thể<br>5. Nhấn nút "Bắt đầu làm bài"<br>6. Trả lời 5–7 câu hỏi đầu tiên<br>7. Thoát hoàn toàn khỏi ứng dụng (đóng ứng dụng)<br>8. Mở lại ứng dụng<br>9. Đăng nhập lại với cùng tài khoản<br>10. Chọn tab "Luyện tập"<br>11. Chọn lại đề thi đã làm dở |
+| **Kết quả mong đợi**   | - Hệ thống hiển thị thông báo "Bạn có muốn tiếp tục làm bài thi đang dở không?"<br>- Khi chọn "Có", hệ thống mở lại bài thi với các câu trả lời đã chọn trước đó<br>- Thời gian làm bài tiếp tục từ thời điểm còn lại<br>- Các câu hỏi đã trả lời vẫn hiển thị đáp án đã chọn<br>- Quá trình làm bài tiếp tục bình thường<br>- Khi nộp bài, tất cả các câu trả lời (cả trước và sau khi thoát ứng dụng) đều được tính điểm chính xác |
+
+5. TC-048 – Kiểm tra giới hạn số lượt làm bài thi
+
+| Mục                     | Nội dung |
+|------------------------|----------|
+| **ID**                 | TC-048 |
+| **Mục đích**           | Kiểm tra tính năng giới hạn số lượt làm bài thi |
+| **Điều kiện tiên quyết** | - Người dùng đã đăng nhập vào hệ thống<br>- Có ít nhất một đề thi có cấu hình giới hạn số lần làm bài (`attemptLimit`) |
+| **Dữ liệu test**       | - Tài khoản người dùng hợp lệ<br>- Đề thi có `attemptLimit = 1` (giới hạn 1 lần làm bài) |
+| **Các bước thực hiện** | 1. Mở ứng dụng Toán Thầy Bee<br>2. Đăng nhập với tài khoản hợp lệ<br>3. Chọn tab "Luyện tập"<br>4. Chọn đề thi có giới hạn số lần làm bài<br>5. Nhấn nút "Bắt đầu làm bài"<br>6. Làm bài và nộp bài<br>7. Quay lại danh sách đề thi<br>8. Chọn lại đề thi vừa làm<br>9. Nhấn nút "Bắt đầu làm bài" lần thứ 2 |
+| **Kết quả mong đợi**   | - Lần làm thứ nhất: hệ thống cho phép làm bài bình thường<br>- Lần làm thứ hai: hệ thống hiển thị thông báo *"Bạn đã đạt giới hạn số lần làm bài cho phép"*<br>- Nút "Bắt đầu làm bài" bị vô hiệu hóa hoặc không hiển thị<br>- Hệ thống hiển thị số lần đã làm và giới hạn số lần làm bài<br>- Người dùng vẫn có thể xem lại kết quả các lần làm bài trước đó |
+
 <!-- ### Tính năng Báo cáo lỗi
 
 ### Tính năng Thông báo -->

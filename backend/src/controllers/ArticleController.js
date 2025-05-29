@@ -45,7 +45,6 @@ export const getArticle = async (req, res) => {
         [Op.or]: [
           { title: { [Op.like]: `%${search}%` } },
           { content: { [Op.like]: `%${search}%` } },
-          { description: { [Op.like]: `%${search}%` } },
         ],
       });
     }

@@ -20,24 +20,26 @@ import {
   ExamHeader,
   QuestionContent,
   QuestionStatements,
+  LoadingOverlay,
+  Dialog,
 } from '@components/index';
 
 import colors from '../../../constants/colors';
 import { fetchAnswersByAttempt } from '../../../features/answer/answerSlice';
-import { fetchPublicExamById } from '../../../features/exam/examSlice';
+import {
+  fetchPublicExamById,
+  submitExam,
+} from '../../../features/exam/examSlice';
 import {
   joinExam,
-  submitExam,
   selectAnswerTN,
   selectAnswerDS,
   selectAnswerTLN,
   onExamStarted,
-  onExamSubmitted,
-  onSubmitError,
   onAnswerSaved,
   onAnswerError,
   setupDebugListener,
-  cleanupSocketListeners
+  cleanupSocketListeners,
 } from '../../../services/socketExam';
 
 export default function DoExamScreen() {
@@ -47,8 +49,10 @@ export default function DoExamScreen() {
   const { user } = useSelector((state) => state.auth);
   const { questions } = useSelector((state) => state.questions);
   const { answers } = useSelector((state) => state.answers);
-  const { examDetail } = useSelector((state) => state.exams);
-
+  const { examDetail, isSubmitting, submitResult, submitError } = useSelector(
+    (state) => state.exams,
+  );
+  const { loading } = useSelector((state) => state.states);
 
   // Cập nhật ref mỗi khi exam thay đổi
   useEffect(() => {
@@ -58,6 +62,7 @@ export default function DoExamScreen() {
   }, [dispatch, id]);
 
   const [isStarted, setIsStarted] = useState(false);
+  const [isAgreed, setIsAgreed] = useState(false);
   const [isOverviewVisible, setIsOverviewVisible] = useState(false);
   const [remainingTime, setRemainingTime] = useState(0);
   const [attemptId1, setAttemptId1] = useState(null);
@@ -67,6 +72,7 @@ export default function DoExamScreen() {
 
   const [saveQuestion, setSaveQuestion] = useState(new Set());
   const [errorQuestion, setErrorQuestion] = useState(new Set());
+  const [markedQuestions, setMarkedQuestions] = useState(new Set());
 
   const tnQuestions = questions?.filter((q) => q.typeOfQuestion === 'TN') || [];
   const dsQuestions = questions?.filter((q) => q.typeOfQuestion === 'DS') || [];
@@ -92,6 +98,9 @@ export default function DoExamScreen() {
   const isLastQuestion =
     currentSectionIndex === sections.length - 1 &&
     currentQuestionIndex === currentSection.questions.length - 1;
+
+  const [isSubmitModalVisible, setIsSubmitModalVisible] = useState(false);
+  const [submitMessage, setSubmitMessage] = useState('');
 
   useEffect(() => {
     if (!user) {
@@ -151,6 +160,18 @@ export default function DoExamScreen() {
     });
   };
 
+  const toggleMarkQuestion = (questionId) => {
+    setMarkedQuestions((prev) => {
+      const updated = new Set(prev);
+      if (updated.has(questionId)) {
+        updated.delete(questionId); // Bỏ đánh dấu
+      } else {
+        updated.add(questionId); // Đánh dấu
+      }
+      return updated;
+    });
+  };
+
   const getQuestionNumber = () => {
     let count = 0;
     for (let i = 0; i < currentSectionIndex; i++) {
@@ -161,15 +182,46 @@ export default function DoExamScreen() {
 
   const handleAutoSubmit = () => {
     if (!attemptId1 && !examDetail?.testDuration) return;
-    setSaveQuestion(new Set());
-    setErrorQuestion(new Set());
-    submitExam({ attemptId: attemptId1 });
+
+    try {
+      setSaveQuestion(new Set());
+      setErrorQuestion(new Set());
+
+      const result = dispatch(
+        submitExam({ attemptId: attemptId1 }),
+      ).unwrap();
+
+      // Handle successful submission
+      Alert.alert('Thành công', 'Bài thi đã được nộp thành công!');
+      router.replace(`/exam/${attemptId1}/result`);
+    } catch (error) {
+      console.error('Lỗi khi nộp bài:', error);
+      Alert.alert('Lỗi', error.message || 'Có lỗi xảy ra khi nộp bài');
+    }
   };
 
   const handleSubmit = () => {
     if (!attemptId1) return;
-    submitExam({ attemptId: attemptId1 });
+
+    try {
+      const result = dispatch(
+        submitExam({ attemptId: attemptId1 }),
+      ).unwrap();
+
+      // Handle successful submission
+      Alert.alert('Thành công', 'Bài thi đã được nộp thành công!');
+      router.replace(`/exam/${attemptId1}/result`);
+    } catch (error) {
+      console.error('Lỗi khi nộp bài:', error);
+      Alert.alert('Lỗi', error.message || 'Có lỗi xảy ra khi nộp bài');
+    }
   };
+
+  useEffect(() => {
+    if (!isStarted) {
+      handleStartExam();
+    }
+  }, [isStarted]);
 
   const handleStartExam = () => {
     if (!user) {
@@ -185,8 +237,6 @@ export default function DoExamScreen() {
       Alert.alert('Lỗi', error.message);
     });
   };
-
-
 
   const handleSelectAnswerTN = (questionId, statementId, type) => {
     const payload = {
@@ -395,19 +445,6 @@ export default function DoExamScreen() {
   }, []);
 
   useEffect(() => {
-    const handleExamSubmitted = ({ message, attemptId }) => {
-      console.log('Bài thi đã được nộp:', message);
-      alert(message);
-      setSaveQuestion(new Set());
-      setErrorQuestion(new Set());
-      if (!attemptId) return;
-      router.replace(`/exam/${attemptId}/result`);
-    };
-
-    const handleSubmitError = ({ message }) => {
-      alert(message);
-    };
-
     const handleAnswerSaved = ({ questionId }) => {
       addQuestion(questionId);
       removeErrorQuestion(questionId);
@@ -419,17 +456,10 @@ export default function DoExamScreen() {
     };
 
     // Setup event listeners
-    const cleanupExamSubmitted = onExamSubmitted(handleExamSubmitted);
-    let cleanupSubmitError = null;
-    if (isStarted) {
-      cleanupSubmitError = onSubmitError(handleSubmitError);
-    }
     const cleanupAnswerSaved = onAnswerSaved(handleAnswerSaved);
     const cleanupAnswerError = onAnswerError(handleAnswerError);
 
     return () => {
-      cleanupExamSubmitted();
-      if (cleanupSubmitError) cleanupSubmitError();
       cleanupAnswerSaved();
       cleanupAnswerError();
     };
@@ -440,6 +470,13 @@ export default function DoExamScreen() {
     console.log('Đã lưu câu hỏi lỗi:', Array.from(errorQuestion));
   }, [saveQuestion, errorQuestion]);
 
+  // Close overlay when submit is successful
+  useEffect(() => {
+    if (submitResult) {
+      setIsOverviewVisible(false);
+    }
+  }, [submitResult]);
+
   // Cleanup all socket listeners when component unmounts
   useEffect(() => {
     return () => {
@@ -447,22 +484,22 @@ export default function DoExamScreen() {
     };
   }, []);
 
-  return (
-    <View style={styles.mainContainer}>
-      {!isStarted ? (
+  if (loading) {
+    return (
+      <>
+        <LoadingOverlay></LoadingOverlay>
         <View
           style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
         >
-          <Text style={{ fontSize: 20, marginBottom: 10 }}>
-            Bạn sẵn sàng bắt đầu bài thi?
-          </Text>
-          <Button
-            text="Bắt đầu làm bài"
-            onPress={handleStartExam}
-            style={{ width: '80%' }}
-          />
+          <Text style={{ fontSize: 20 }}>Đang chuẩn bị bài thi...</Text>
         </View>
-      ) : (
+      </>
+    );
+  }
+
+  return (
+    <View style={styles.mainContainer}>
+      {isStarted ? (
         <ScrollView
           style={styles.container}
           contentContainerStyle={{ paddingBottom: 50 }}
@@ -494,7 +531,7 @@ export default function DoExamScreen() {
             />
           </View> */}
           <ExamHeader
-            examName={examDetail.name}
+            examName={examDetail?.name || 'Đang tải...'}
             remainingTime={formatTime(remainingTime)}
             onMenuPress={() => setIsOverviewVisible(true)}
           />
@@ -540,7 +577,34 @@ export default function DoExamScreen() {
             tlnInput={tlnInput}
             setTlnInput={setTlnInput}
           />
+
+          {/* Nút đánh dấu câu hỏi */}
+          <Button
+            text={
+              markedQuestions.has(currentQuestion.id)
+                ? 'Bỏ đánh dấu'
+                : 'Đánh dấu'
+            }
+            style={{
+              width: 120,
+              marginVertical: 20,
+              backgroundColor: markedQuestions.has(currentQuestion.id)
+                ? '#facc15'
+                : '#10b981',
+            }}
+            onPress={() => toggleMarkQuestion(currentQuestion.id)}
+          />
         </ScrollView>
+      ) : (
+        <View
+          style={{
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          <Text style={{ fontSize: 20 }}>Đang chuẩn bị bài thi...</Text>
+        </View>
       )}
 
       <ExamOverviewOverlay
@@ -555,7 +619,37 @@ export default function DoExamScreen() {
         handleSubmit={handleSubmit}
         saveQuestion={saveQuestion}
         errorQuestion={errorQuestion} // Truyền vào danh sách câu hỏi đã lưu
+        markedQuestions={markedQuestions} // Truyền danh sách câu hỏi được đánh dấu
+        isSubmitting={isSubmitting}
       />
+
+      {isSubmitModalVisible && (
+        <Dialog
+          visible={isSubmitModalVisible}
+          title="Thông báo"
+          type="custom"
+          onClose={() => setIsSubmitModalVisible(false)}
+          actions={[
+            {
+              text: 'Đóng',
+              onPress: () => {
+                setIsSubmitModalVisible(false);
+              },
+              style: {
+                backgroundColor: colors.primary,
+                flex: 1,
+              },
+              textStyle: {
+                color: colors.sky.white,
+              },
+            },
+          ]}
+        >
+          <AppText style={{ fontSize: 16, textAlign: 'center' }}>
+            {submitMessage}
+          </AppText>
+        </Dialog>
+      )}
     </View>
   );
 }
@@ -672,5 +766,18 @@ const styles = StyleSheet.create({
     padding: 10,
     marginVertical: 10,
     fontSize: 16,
+  },
+  radioCircle: {
+    height: 20,
+    width: 20,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: colors.ink.darkest,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  selectedCircle: {
+    backgroundColor: colors.primary,
+    borderColor: colors.primary,
   },
 });

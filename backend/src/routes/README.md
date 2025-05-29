@@ -189,4 +189,5 @@ API hỗ trợ tải lên file với các middleware:
 - Các API người dùng yêu cầu người dùng đã đăng nhập
 
 ---
+
 Tài liệu này cung cấp tổng quan về các API có sẵn trong hệ thống. Để biết thêm chi tiết về cấu trúc request/response và các tham số, vui lòng tham khảo mã nguồn hoặc tài liệu API chi tiết.

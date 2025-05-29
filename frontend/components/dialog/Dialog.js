@@ -34,6 +34,7 @@ export default function Dialog({
             onPress={action.onPress}
             style={[styles.button, action.style]}
             textStyle={action.textStyle}
+            disabled={action.disabled}
           />
         ))}
       </View>

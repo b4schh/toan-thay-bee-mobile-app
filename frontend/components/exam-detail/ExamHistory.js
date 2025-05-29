@@ -27,20 +27,35 @@ export default function ExamHistory({ attempts, onViewResult }) {
           <View style={styles.tableBody}>
             <View style={[styles.row, styles.headerRow]}>
               <AppText style={[styles.headerCell, styles.idCell]}>#</AppText>
-              <AppText style={[styles.headerCell, styles.contentCell]}>Điểm</AppText>
-              <AppText style={[styles.headerCell, styles.contentCell]}>Thời gian làm</AppText>
-              <AppText style={[styles.headerCell, styles.contentCell]}>Thời gian nộp</AppText>
+              <AppText style={[styles.headerCell, styles.contentCell]}>
+                Điểm
+              </AppText>
+              <AppText style={[styles.headerCell, styles.contentCell]}>
+                Thời gian làm
+              </AppText>
+              <AppText style={[styles.headerCell, styles.contentCell]}>
+                Thời gian nộp
+              </AppText>
             </View>
             {attempts.length > 0 ? (
               <FlatList
-                data={attempts}
-                keyExtractor={(item) => item.id.toString()}
-                renderItem={({ item }) => (
+                data={attempts.slice().reverse()}
+                keyExtractor={(item, index) => index.toString()} // Sử dụng index làm key
+                renderItem={(
+                  { item, index }, // Thêm index từ FlatList
+                ) => (
                   <TouchableOpacity onPress={() => onViewResult(item.id)}>
                     <View style={styles.row}>
-                      <AppText style={[styles.cell, styles.idCell]}>{item.id}</AppText>
-                      <AppText style={[styles.cell, styles.contentCell]}>{item.score}</AppText>
-                      <AppText style={[styles.cell, styles.contentCell]}>{item.duration}</AppText>
+                      {/* Hiển thị thứ tự thực tế thay vì item.id */}
+                      <AppText style={[styles.cell, styles.idCell]}>
+                        {index + 1}
+                      </AppText>
+                      <AppText style={[styles.cell, styles.contentCell]}>
+                        {item.score }
+                      </AppText>
+                      <AppText style={[styles.cell, styles.contentCell]}>
+                        {item.duration}
+                      </AppText>
                       <AppText style={[styles.cell, styles.contentCell]}>
                         {new Date(item.endTime).toLocaleString('vi-VN')}
                       </AppText>
@@ -96,7 +111,7 @@ const styles = StyleSheet.create({
     borderColor: '#ccc',
     borderRadius: 5,
     overflow: 'hidden',
-    flex: 1, 
+    flex: 1,
   },
   row: {
     flexDirection: 'row',

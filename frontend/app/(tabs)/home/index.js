@@ -43,10 +43,6 @@ export default function HomeScreen() {
   );
 
   useEffect(() => {
-    console.log(learningItems);
-  }, [learningItems]);
-
-  useEffect(() => {
     // Fetch classes, uncompleted learning items, and completed tests when component mounts
     dispatch(
       fetchClassesByUser({

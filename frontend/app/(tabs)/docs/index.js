@@ -49,8 +49,6 @@ export default function DocsScreen() {
   const { codes } = useSelector((state) => state.codes);
 
   useEffect(() => {
-    // dispatch(fetchCodesByType(['article type', 'grade', 'chapter']));
-
     if (
       !codes ||
       !codes['article type'] ||
@@ -61,26 +59,12 @@ export default function DocsScreen() {
     }
   }, [dispatch, codes]);
 
-  //   console.log(`
-  // Article Type: ${articleTypeFilters}
-  // Grade: ${gradeFilters}
-  // Chapter: ${chapterFilters}`);
-
-  // console.log("Article type code:", codes['article type']);
-  // console.log("Grade code:", codes['grade']);
-  // console.log('Chapter code:', codes['chapter']);
-
-  // console.log(
-  //   'Chapter filtered:',
-  //   chapterCodes.filter((chapter) => chapter.code.startsWith(gradeFilters)),
-  // );
-
   // Thêm hàm xử lý áp dụng filter
   const handleApplyFilters = () => {
     dispatch(
       fetchAllArticle({
         search,
-        currentPage: 1, // Reset về trang 1 khi tìm kiếm
+        currentPage: 1,  // Reset về trang 1 khi tìm kiếm
         limit,
         sortOrder,
         articleType: articleTypeFilters,
@@ -88,10 +72,6 @@ export default function DocsScreen() {
         chapter: chapterFilters,
       }),
     );
-    console.log(`
-Article Type: ${JSON.stringify(articleTypeFilters)}
-Grade: ${JSON.stringify(gradeFilters)}
-Chapter: ${JSON.stringify(chapterFilters)}`);
 
     setFilterDialogVisible(false);
   };
@@ -107,15 +87,23 @@ Chapter: ${JSON.stringify(chapterFilters)}`);
           limit,
           sortOrder,
           articleType: articleTypeFilters,
-        grade: gradeFilters,
-        chapter: chapterFilters,
+          grade: gradeFilters,
+          chapter: chapterFilters,
         }),
       );
     } catch (err) {
       setError('Không thể tải bài viết. Vui lòng thử lại sau.');
       console.error('Error fetching articles:', err);
     }
-  }, [dispatch, search, currentPage, limit, articleTypeFilters, gradeFilters, chapterFilters]);
+  }, [
+    dispatch,
+    search,
+    currentPage,
+    limit,
+    articleTypeFilters,
+    gradeFilters,
+    chapterFilters,
+  ]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -194,9 +182,8 @@ Chapter: ${JSON.stringify(chapterFilters)}`);
         {/* Header */}
         <AppText style={styles.header}>Bài viết</AppText>
 
-        {/* Search Bar */}
-
         <View style={styles.row}>
+          {/* Search Bar */}
           <SearchBar placeholder="Tìm kiếm bài viết..." screen="article" />
 
           {/* Nút filter */}

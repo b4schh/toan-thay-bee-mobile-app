@@ -93,4 +93,9 @@ router.delete('/v1/admin/user/:studentId/class/:classId/kick',
     asyncHandler(ClassController.kickStudentFromClass)
 )
 
+router.delete('/v1/user/class/:classCode/cancel',
+    requireRoles([]), 
+    asyncHandler(ClassController.cancelJoinClass)
+)
+
 export default router

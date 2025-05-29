@@ -111,6 +111,20 @@ export const saveExamForUser = createAsyncThunk(
   },
 );
 
+export const submitExam = createAsyncThunk(
+  'exams/submitExam',
+  async ({ attemptId }, { dispatch }) => {
+    return await apiHandler(
+      dispatch,
+      examApi.submitExam,
+      { attemptId },
+      () => {},
+      true,
+      true,
+    );
+  },
+);
+
 const examSlice = createSlice({
   name: 'exams',
   initialState: {
@@ -121,6 +135,9 @@ const examSlice = createSlice({
     initialDuration: 0,
     examDetail: null,
     examsSaved: [],
+    submitResult: null,
+    isSubmitting: false,
+    submitError: null,
   },
   reducers: {
     setExam: (state, action) => {
@@ -145,6 +162,19 @@ const examSlice = createSlice({
     resetTimer: (state) => {
       state.timeLeft = state.initialDuration;
       state.isTimerRunning = false;
+    },
+    clearSubmitResult: (state) => {
+      state.submitResult = null;
+      state.submitError = null;
+      state.isSubmitting = false;
+    },
+    resetExamState: (state) => {
+      state.timeLeft = 0;
+      state.isTimerRunning = false;
+      state.initialDuration = 0;
+      state.submitResult = null;
+      state.submitError = null;
+      state.isSubmitting = false;
     },
   },
   extraReducers: (builder) => {
@@ -237,6 +267,41 @@ const examSlice = createSlice({
             });
           }
         }
+      })
+      .addCase(submitExam.pending, (state) => {
+        state.isSubmitting = true;
+        state.submitError = null;
+        state.submitResult = null;
+      })
+      .addCase(submitExam.fulfilled, (state, action) => {
+        state.isSubmitting = false;
+        if (action.payload) {
+          state.submitResult = action.payload.data;
+          // Stop timer when exam is submitted
+          state.isTimerRunning = false;
+          state.timeLeft = 0;
+
+          // Update exam status to done if we have the exam data
+          if (state.examDetail) {
+            state.examDetail.isDone = true;
+          }
+          if (state.exam) {
+            state.exam.isDone = true;
+          }
+
+          // Update exams list
+          if (state.exams && state.submitResult) {
+            state.exams = state.exams.map((exam) => {
+              // Assuming we can identify the exam by some means
+              // You might need to pass examId in the submit action
+              return exam;
+            });
+          }
+        }
+      })
+      .addCase(submitExam.rejected, (state, action) => {
+        state.isSubmitting = false;
+        state.submitError = action.error.message || 'Có lỗi xảy ra khi nộp bài';
       });
   },
 });
@@ -248,6 +313,8 @@ export const {
   pauseTimer,
   resumeTimer,
   resetTimer,
+  clearSubmitResult,
+  resetExamState,
 } = examSlice.actions;
 
 export default examSlice.reducer;

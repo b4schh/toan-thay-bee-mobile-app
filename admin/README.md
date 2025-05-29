@@ -1,70 +1,95 @@
-# Getting Started with Create React App
+# Trang Quản Trị - Toán Thầy Bee
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Đây là trang quản trị (admin dashboard) của ứng dụng Toán Thầy Bee, được xây dựng bằng React. Trang quản trị cung cấp giao diện toàn diện cho quản trị viên để quản lý nền tảng giáo dục.
 
-## Available Scripts
+## Tính Năng
 
-In the project directory, you can run:
+Trang quản trị bao gồm các tính năng chính sau:
 
-### `npm start`
+- **Quản Lý Người Dùng**
+  - Quản lý học sinh với hồ sơ chi tiết
+  - Quản lý vai trò người dùng và phân quyền
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **Quản Lý Nội Dung**
+  - Quản lý câu hỏi với hỗ trợ LaTeX
+  - Tạo và quản lý bài kiểm tra
+  - Xử lý báo cáo câu hỏi
+  - Xuất bản và quản lý bài viết
+  - Quản lý lớp học với tổ chức bài học
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **Công Cụ Giám Sát**
+  - Theo dõi và phân tích bài kiểm tra
+  - Theo dõi hiệu suất học sinh
+  - Giám sát báo cáo câu hỏi
 
-### `npm test`
+- **Tính Năng Đặc Biệt**
+  - Hiển thị công thức toán học với LaTeX
+  - Chức năng NoTranslate để bảo toàn nội dung toán học
+  - Hệ thống quản lý mã
+  - Chức năng xem trước bài kiểm tra
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Cài Đặt và Thiết Lập
 
-### `npm run build`
+### Yêu Cầu Hệ Thống
+- Node.js (khuyến nghị phiên bản >=16.x)
+- npm hoặc yarn
+- API Backend đang chạy (xem thư mục backend)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Các Bước Cài Đặt
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. Clone repository:
+```bash
+git clone https://github.com/b4schh/toan-thay-bee-mobile-app/
+cd admin
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+2. Cài đặt các dependencies:
+```bash
+npm install
+# hoặc
+yarn install
+```
 
-### `npm run eject`
+3. Tạo file `.env` trong thư mục admin với các biến sau:
+```
+PORT=4000
+REACT_APP_API_URL=url_api_backend_của_bạn (ví dụ: http://localhost:3000/api)
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+4. Khởi động server phát triển:
+```bash
+npm start
+# hoặc
+yarn start
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Ứng dụng sẽ khả dụng tại [http://localhost:4000](http://localhost:4000).
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Cấu Trúc Dự Án
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- `src/components/` - Các component UI có thể tái sử dụng
+- `src/pages/` - Các component trang cho các phần khác nhau
+- `src/pages/admin/` - Các component trang dành riêng cho admin
+- `src/components/utils/` - Các component tiện ích như NoTranslate
+- `src/components/sidebar/` - Các component thanh điều hướng
 
-## Learn More
+## Các Tuyến Đường Được Bảo Vệ
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Ứng dụng sử dụng các tuyến đường được bảo vệ để đảm bảo rằng chỉ người dùng đã xác thực với vai trò thích hợp mới có thể truy cập các trang nhất định:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Các tuyến đường dành cho giáo viên và quản trị viên
+- Các tuyến đường dành riêng cho quản trị viên
 
-### Code Splitting
+## Tài Liệu Bổ Sung
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- Xem `src/docs/` để biết tài liệu cụ thể cho từng component
+- Component NoTranslate (`src/docs/NoTranslateUsage.md`) cung cấp chức năng ngăn trình duyệt dịch nội dung toán học
 
-### Analyzing the Bundle Size
+## Dự Án Liên Quan
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- **Backend**: Server API Node.js/Express
+- **Frontend**: Ứng dụng di động React Native
 
-### Making a Progressive Web App
+## Giấy Phép
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Dự án này là một phần của nền tảng giáo dục Toán Thầy Bee.

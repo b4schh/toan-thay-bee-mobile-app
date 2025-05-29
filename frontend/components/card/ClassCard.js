@@ -45,6 +45,7 @@ const ClassCard = ({
   studentCount,
   status,
   onPressJoin,
+  onPressCancel,
   variant = 'large', // 'large' cho trang chủ, 'small' cho mục đích khác
 }) => {
   const isPending = status === 'WS';
@@ -115,6 +116,23 @@ const ClassCard = ({
           </>
         )}
       </View>
+      {/* Thêm nút hủy tham gia nếu status là WS và có onPressCancel */}
+      {status === 'WS' && onPressCancel && (
+        <TouchableOpacity
+          style={styles.cancelButton}
+          onPress={(e) => {
+            e.stopPropagation(); // Ngăn sự kiện lan tỏa lên card
+            onPressCancel();
+          }}
+        >
+          <FontAwesomeIcon
+            name="times"
+            size={16}
+            color={colors.error}
+          />
+          <AppText style={styles.cancelText}>Hủy yêu cầu</AppText>
+        </TouchableOpacity>
+      )}
     </TouchableOpacity>
   );
 };
@@ -227,5 +245,22 @@ const styles = StyleSheet.create({
   },
   membersTextSmall: {
     fontSize: 10, // Giảm font size
+  },
+  cancelButton: {
+    position: 'absolute',
+    top: 5,
+    right: 5,
+    backgroundColor: colors.sky.lightest,
+    borderRadius: 12,
+    padding: 5,
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: colors.error,
+  },
+  cancelText: {
+    fontSize: 10,
+    color: colors.error,
+    marginLeft: 3,
   },
 });

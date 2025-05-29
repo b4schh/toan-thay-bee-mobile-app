@@ -96,6 +96,12 @@ router.post(
   asyncHandler(ExamController.saveExamForUser)
 );
 
+router.post(
+  "/v1/user/exam/submit/:attemptId",
+  requireRoles([]),
+  asyncHandler(ExamController.submitExamAPI)
+);
+
 router.put(
   "/v1/admin/exam/:id",
   requireRoles([UserType.ADMIN, UserType.TEACHER, UserType.ASSISTANT]),

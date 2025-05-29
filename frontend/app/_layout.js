@@ -9,15 +9,42 @@ import { useRouter } from 'expo-router';
 import { setRouter } from '../services/RouterService';
 import { checkLogin } from '../features/auth/authSlice';
 import { View } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // Ngăn splash screen tự động ẩn
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
   const router = useRouter();
-
+  
   useEffect(() => {
-    setRouter(router); // ✅ gán router toàn cục khi App mount
+    // Set router instance
+    setRouter(router);
+    console.log('Router set in RootLayout');
+    
+    // Kiểm tra nếu cần chuyển hướng đến login
+    const checkRedirect = async () => {
+      try {
+        const needRedirect = await AsyncStorage.getItem('NEED_REDIRECT_TO_LOGIN');
+        if (needRedirect === 'true') {
+          console.log('Phát hiện cờ chuyển hướng, chuyển đến login...');
+          await AsyncStorage.removeItem('NEED_REDIRECT_TO_LOGIN');
+          router.replace('/login');
+        }
+      } catch (error) {
+        console.error('Lỗi khi kiểm tra chuyển hướng:', error);
+      }
+    };
+    
+    checkRedirect();
+    
+    // Kiểm tra định kỳ
+    const intervalId = setInterval(checkRedirect, 2000);
+    
+    return () => {
+      clearInterval(intervalId);
+      setRouter(null);
+    };
   }, [router]);
 
   return (

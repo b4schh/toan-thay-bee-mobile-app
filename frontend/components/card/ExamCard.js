@@ -6,22 +6,43 @@ import AppText from '../AppText';
 import colors from '../../constants/colors';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 
-const ExamCard = ({ imageUrl, name, participantsCount, onPress }) => {
+// Thêm ảnh mặc định nếu không có imageUrl
+// const defaultImage = '../../assets/images/default-image.jpg';
+
+const ExamCard = ({ exam, onPress }) => {
+  // Kiểm tra nếu exam là undefined hoặc null
+  if (!exam) {
+    return null;
+  }
+  
+  const { imageUrl, name, participantsCount, attemptLimit, userAttemptCount } = exam;
+  
   return (
     <TouchableOpacity style={styles.card} onPress={onPress}>
-      <Image source={{ uri: imageUrl }} style={styles.image} />
+      <Image 
+        source={imageUrl ? { uri: imageUrl } : require('../../assets/images/default-image.jpg')}
+        style={styles.image}
+      />
       <View style={styles.body}>
         <AppText
           style={styles.className}
           numberOfLines={2}
           ellipsizeMode="tail"
         >
-          {name}
+          {name || 'Không có tên'}
         </AppText>
         <View style={styles.repsContainer}>
           <FontAwesomeIcon name="user" size={12} color={colors.sky.dark} />
-          <AppText style={styles.repsText}>{`... lượt làm`}</AppText>
+          <AppText style={styles.repsText}>{`${participantsCount || 0} lượt làm`}</AppText>
         </View>
+        {attemptLimit > 0 && (
+          <View style={styles.attemptsContainer}>
+            <FontAwesomeIcon name="refresh" size={12} color={colors.sky.dark} />
+            <AppText style={styles.attemptsText}>
+              {`${userAttemptCount || 0}/${attemptLimit} lượt của bạn`}
+            </AppText>
+          </View>
+        )}
       </View>
     </TouchableOpacity>
   );
@@ -36,27 +57,21 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     padding: 10,
     gap: 8,
-    // elevation: 3,
   },
   image: {
     width: '100%',
-    resizeMode: 'stretch',
     height: 100,
-    borderWidth: 1,
-    borderColor: 'black',
-    borderRadius: 12,
-    backgroundColor: '#EAF2FF',
+    borderRadius: 8,
+    backgroundColor: colors.sky.lighter, // Thêm màu nền cho ảnh
   },
   body: {
-    gap: 12,
+    padding: 4,
   },
   className: {
     fontFamily: 'Inter-Bold',
-    fontSize: 16,
+    fontSize: 14,
     color: colors.ink.darkest,
-    lineHeight: 18,
-    maxWidth: '100%', // Đảm bảo không tràn khỏi card
-    overflow: 'hidden', // Giúp cắt bỏ phần text thừa
+    marginBottom: 4,
   },
   repsContainer: {
     flexDirection: 'row',
@@ -68,4 +83,15 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: colors.sky.dark,
   },
+  attemptsContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+    marginTop: 4,
+  },
+  attemptsText: {
+    fontFamily: 'Inter-Medium',
+    fontSize: 12,
+    color: colors.sky.dark,
+  }
 });

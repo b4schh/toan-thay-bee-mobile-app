@@ -37,7 +37,7 @@ export default function ExamInfoCard({
             <FontAwesome
               name={isBookmarked ? 'bookmark' : 'bookmark-o'}
               size={24}
-              color="black"
+              color={colors.primary}
             />
           </TouchableOpacity>
         )}
@@ -69,6 +69,23 @@ export default function ExamInfoCard({
             {examDetail?.passRate ? `${examDetail?.passRate}%` : 'Không có'}
           </AppText>
         </View>
+        {/* Thêm thông tin về số lượt làm bài */}
+        <View style={styles.rowText}>
+          <AppText style={styles.bodyText}>Tổng lượt làm</AppText>
+          <AppText style={styles.bodyText}>
+            {examDetail?.participantsCount || 0} lượt
+          </AppText>
+        </View>
+        {/* Thêm thông tin về số lượt làm bài còn lại của người dùng */}
+        {examDetail?.attemptLimit > 0 && (
+          <View style={styles.rowText}>
+            <AppText style={styles.bodyText}>Lượt làm của bạn</AppText>
+            <AppText style={styles.bodyText}>
+              {examDetail?.userAttemptCount || 0}/{examDetail?.attemptLimit}{' '}
+              lượt
+            </AppText>
+          </View>
+        )}
 
         {examDetail?.isDone && (
           <View style={styles.rowText}>

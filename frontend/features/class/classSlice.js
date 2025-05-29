@@ -135,6 +135,27 @@ export const getUncompletedLearningItem = createAsyncThunk(
   },
 );
 
+export const cancelJoinClass = createAsyncThunk(
+  'classes/cancelJoinClass',
+  async ({ class_code, onSuccess }, { dispatch, getState }) => {
+    return await apiHandler(
+      dispatch,
+      ClassAPI.cancelJoinClassByCode,
+      { class_code },
+      () => {
+        if (onSuccess) {
+          onSuccess();
+        }
+        const { screens } = getState().filter;
+        const { search, currentPage, limit, sortOrder } = screens.class;
+        dispatch(fetchClassesByUser({ search, currentPage, limit, sortOrder }));
+      },
+      true,
+      true,
+    );
+  },
+);
+
 const initialState = {
   classes: [],
   classDetail: null,

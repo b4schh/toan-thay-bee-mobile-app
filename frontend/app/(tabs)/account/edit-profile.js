@@ -13,6 +13,7 @@ import {
   CustomDropdown,
   HeaderWithBackButton,
   DatePickerField,
+  Dialog,
 } from '@components/index';
 import { setLoading } from '../../../features/state/stateApiSlice';
 
@@ -38,6 +39,10 @@ export default function EditProfileScreen() {
   const [isHighSchoolEditable, setIsHighSchoolEditable] = useState(false);
   const [isGenderEditable, setIsGenderEditable] = useState(false);
   const [isBirthDateEditable, setIsBirthDateEditable] = useState(false);
+
+  // Dialog state
+  const [dialogVisible, setDialogVisible] = useState(false);
+  const [dialogMessage, setDialogMessage] = useState('');
 
   // Class options for dropdown
   const classOptions = [
@@ -81,9 +86,16 @@ export default function EditProfileScreen() {
 
   const handleSubmit = async () => {
     try {
+      // Kiểm tra nếu trường "Trường" rỗng hoặc chỉ toàn khoảng trắng
+      if (!highSchool.trim()) {
+        setDialogMessage('Vui lòng nhập tên trường hợp lệ.');
+        setDialogVisible(true);
+        return;
+      }
+
       dispatch(setLoading(true));
 
-      // Create updated data object similar to StudentCardModal
+      // Tạo đối tượng dữ liệu cập nhật
       const updatedData = {
         class: className,
         highSchool,
@@ -109,17 +121,6 @@ export default function EditProfileScreen() {
         title="Chỉnh sửa thông tin"
         onBackPress={() => router.back()}
       />
-
-      {/* <View style={styles.header}>
-        <TouchableOpacity
-          onPress={() => router.back()}
-          style={styles.backButton}
-        >
-          <Feather name="arrow-left" size={24} color={colors.ink.dark} />
-        </TouchableOpacity>
-        <AppText style={styles.headerTitle}>Chỉnh sửa thông tin</AppText>
-        <View style={styles.placeholder} />
-      </View> */}
 
       <ScrollView
         style={styles.scrollView}
@@ -285,6 +286,14 @@ export default function EditProfileScreen() {
           style={styles.saveButton}
         />
       </ScrollView>
+
+      <Dialog
+        visible={dialogVisible}
+        title="Thông báo"
+        message={dialogMessage}
+        type="alert"
+        onClose={() => setDialogVisible(false)}
+      />
     </View>
   );
 }

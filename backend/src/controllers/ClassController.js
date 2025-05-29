@@ -679,3 +679,43 @@ export const kickStudentFromClass = async (req, res) => {
     }
     return res.status(500).json({ message: 'Xóa học viên khỏi lớp học không thành công!' })
 }
+
+export const cancelJoinClass = async (req, res) => {
+    const userId = req.user.id;
+    const { classCode } = req.params;
+
+    try {
+        // Tìm lớp theo mã lớp
+        const classInfo = await db.Class.findOne({
+            where: { class_code: classCode }
+        });
+
+        if (!classInfo) {
+            return res.status(404).json({ message: "Không tìm thấy lớp học!" });
+        }
+
+        // Xóa bản ghi trong StudentClassStatus
+        const deleted = await db.StudentClassStatus.destroy({
+            where: {
+                studentId: userId,
+                classId: classInfo.id,
+                status: 'WS' // Chỉ xóa nếu đang ở trạng thái chờ phê duyệt
+            }
+        });
+
+        if (!deleted) {
+            return res.status(400).json({ message: "Không thể hủy yêu cầu tham gia lớp học!" });
+        }
+
+        // Giảm số lượng học sinh trong lớp
+        await db.Class.update(
+            { studentCount: db.sequelize.literal('studentCount - 1') },
+            { where: { id: classInfo.id } }
+        );
+
+        return res.status(200).json({ message: "Hủy yêu cầu tham gia lớp học thành công!" });
+    } catch (error) {
+        console.error("Lỗi khi hủy tham gia lớp học:", error);
+        return res.status(500).json({ message: "Lỗi server khi hủy tham gia lớp học!" });
+    }
+};

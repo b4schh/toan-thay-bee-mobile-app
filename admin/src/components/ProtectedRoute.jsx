@@ -1,43 +1,54 @@
-import { Navigate, Outlet } from "react-router-dom";
+import { Navigate, Outlet, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { checkLogin } from "../features/auth/authSlice";
 import LoadingSpinner from "./loading/LoadingSpinner";
 
 const ProtectedRoute = ({ allowedRoles }) => {
-    const dispatch = useDispatch();
-    const user = useSelector(state => state.auth.user);
-    const isChecking = useSelector(state => state.auth.isChecking);
+  const dispatch = useDispatch();
+  const location = useLocation();
+  const user = useSelector((state) => state.auth.user);
+  const isChecking = useSelector((state) => state.auth.isChecking);
 
-    useEffect(() => {
-        if (!user) {
-            dispatch(checkLogin());
-        }
-    }, [dispatch]);
-
-    if (isChecking) {
-        return (
-            <div className="flex items-center justify-center h-screen">
-                <LoadingSpinner
-                    type="dots"
-                    color="border-blue-600"
-                    size="4rem"
-                    showText={true}
-                    text="Đang xác thực..."
-                />
-            </div>
-        )
-    }
-
+  useEffect(() => {
     if (!user) {
-        return <Navigate to="/login" replace />;
+      dispatch(checkLogin());
     }
+  }, [dispatch]);
 
-    if (allowedRoles && !allowedRoles.includes(user.userType)) {
-        return <Navigate to="/" replace />;
-    }
+  if (isChecking) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <LoadingSpinner
+          type="dots"
+          color="border-blue-600"
+          size="4rem"
+          showText={true}
+          text="Đang xác thực..."
+        />
+      </div>
+    );
+  }
 
-    return <Outlet />;
+  if (!user) {
+    // Lưu đường dẫn hiện tại để redirect sau khi login
+    localStorage.setItem(
+      "redirect_after_login",
+      location.pathname + location.search
+    );
+    return <Navigate to="/login" replace />;
+  }
+
+  if (allowedRoles && !allowedRoles.includes(user.userType)) {
+    // Lưu đường dẫn hiện tại để redirect sau khi login với quyền phù hợp
+    localStorage.setItem(
+      "redirect_after_login",
+      location.pathname + location.search
+    );
+    return <Navigate to="/login" replace />;
+  }
+
+  return <Outlet />;
 };
 
 export default ProtectedRoute;

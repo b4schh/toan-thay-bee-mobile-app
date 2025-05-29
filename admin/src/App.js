@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import Dashboard from "./pages/Dashboard";
@@ -28,53 +28,106 @@ import QuestionReportManagement from "./pages/admin/QuestionReportManagement";
 // import TestPage from "./pages/TestPage";
 
 function App() {
-    return (
-        <BrowserRouter>
-            {/* Hiển thị lỗi toàn cục */}
-            <NotificationDisplay />
+  return (
+    <BrowserRouter>
+      {/* Hiển thị lỗi toàn cục */}
+      <NotificationDisplay />
 
-            <Routes>
-                {/* Trang công khai */}
-                <Route path="/login" element={<LoginPage />} />
+      <Routes>
+        {/* Route mặc định - chuyển hướng đến login */}
+        <Route path="/" element={<Navigate to="/login" replace />} />
 
-                {/* <Route path="/admin/test" element={<TestPage />} /> */}
+        {/* Trang công khai */}
+        <Route path="/login" element={<LoginPage />} />
 
-                {/* Trang Admin chỉ dành cho người có quyền */}
-                <Route element={<ProtectedRoute allowedRoles={["AD", "AS", "GV"]} />}>
-                    <Route path="/register" element={<RegisterPage />} />
+        {/* <Route path="/admin/test" element={<TestPage />} /> */}
 
-                    <Route path="/admin/question-management" element={<QuestionManagement />} />
-                    <Route path="/admin/question-management/:questionId" element={<QuestionDetailAdmin />} />
+        {/* Trang Admin chỉ dành cho người có quyền */}
+        <Route element={<ProtectedRoute allowedRoles={["AD", "AS", "GV"]} />}>
+          <Route path="/register" element={<RegisterPage />} />
 
-                    <Route path="/admin/class-management" element={<ClassManagement />} />
-                    <Route path="/admin/class-management/:classId" element={<ClassDetailAdmin />} />
-                    <Route path="/admin/class-management/:classId/users" element={<ClassUserManagement />} />
-                    <Route path="/admin/class-management/:classId/lessons" element={<LessonManagement />} />
+          <Route
+            path="/admin/question-management"
+            element={<QuestionManagement />}
+          />
+          <Route
+            path="/admin/question-management/:questionId"
+            element={<QuestionDetailAdmin />}
+          />
 
-                    <Route path="/admin/exam-management" element={<ExamManagement />} />
-                    <Route path="/admin/exam-management/:examId" element={<ExamDetailAdmin />} />
-                    <Route path="/admin/exam-management/:examId/questions" element={<QuestionOfExamAdmin />} />
-                    <Route path="/admin/exam-management/:examId/preview" element={<PreviewExamAdmin />} />
-                    <Route path="/admin/exam-management/:examId/tracking" element={<TrackingPage />} />
-                    {/* Chỉ dành cho Admin */}
-                    <Route path="/admin/student-management" element={<StudentManagement />} />
-                    <Route path="/admin/student-management/:studentId" element={<StudentDetailAdmin />} />
-                    <Route path="/admin/homepage-management" element={<HomePageManagement />} />
-                    <Route path="/admin/achievement-management" element={<AchievementManagement />} />
-                    <Route path="/admin/question-report-management" element={<QuestionReportManagement />} />
-                </Route>
+          <Route path="/admin/class-management" element={<ClassManagement />} />
+          <Route
+            path="/admin/class-management/:classId"
+            element={<ClassDetailAdmin />}
+          />
+          <Route
+            path="/admin/class-management/:classId/users"
+            element={<ClassUserManagement />}
+          />
+          <Route
+            path="/admin/class-management/:classId/lessons"
+            element={<LessonManagement />}
+          />
 
-                <Route element={<ProtectedRoute allowedRoles={["AD"]} />}>
-                    <Route path="/admin/code-management" element={<CodeManagement />} />
-                    <Route path="/admin/article-management" element={<ArticleManagement />} />
-                    <Route path="/admin/article-post" element={<ArticlePostPage />} />
-                    <Route path="/admin/article-management/edit/:id" element={<ArticlePostPage />} />
-                    <Route path="/admin/spinner-demo" element={<SpinnerDemo />} />
-                </Route>
+          <Route path="/admin/exam-management" element={<ExamManagement />} />
+          <Route
+            path="/admin/exam-management/:examId"
+            element={<ExamDetailAdmin />}
+          />
+          <Route
+            path="/admin/exam-management/:examId/questions"
+            element={<QuestionOfExamAdmin />}
+          />
+          <Route
+            path="/admin/exam-management/:examId/preview"
+            element={<PreviewExamAdmin />}
+          />
+          <Route
+            path="/admin/exam-management/:examId/tracking"
+            element={<TrackingPage />}
+          />
+          {/* Chỉ dành cho Admin */}
+          <Route
+            path="/admin/student-management"
+            element={<StudentManagement />}
+          />
+          <Route
+            path="/admin/student-management/:studentId"
+            element={<StudentDetailAdmin />}
+          />
+          <Route
+            path="/admin/homepage-management"
+            element={<HomePageManagement />}
+          />
+          <Route
+            path="/admin/achievement-management"
+            element={<AchievementManagement />}
+          />
+          <Route
+            path="/admin/question-report-management"
+            element={<QuestionReportManagement />}
+          />
+        </Route>
 
-            </Routes>
-        </BrowserRouter>
-    );
+        <Route element={<ProtectedRoute allowedRoles={["AD"]} />}>
+          <Route path="/admin/code-management" element={<CodeManagement />} />
+          <Route
+            path="/admin/article-management"
+            element={<ArticleManagement />}
+          />
+          <Route path="/admin/article-post" element={<ArticlePostPage />} />
+          <Route
+            path="/admin/article-management/edit/:id"
+            element={<ArticlePostPage />}
+          />
+          <Route path="/admin/spinner-demo" element={<SpinnerDemo />} />
+        </Route>
+
+        {/* Route fallback cho các đường dẫn không tồn tại */}
+        <Route path="*" element={<Navigate to="/login" replace />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
 export default App;

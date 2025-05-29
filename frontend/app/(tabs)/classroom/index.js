@@ -22,6 +22,7 @@ import colors from '../../../constants/colors';
 import {
   fetchClassesByUser,
   joinClass,
+  cancelJoinClass,
 } from '../../../features/class/classSlice';
 import {
   setScreenTotalItems,
@@ -54,7 +55,7 @@ const useFilteredClasses = (classes, status, search, currentPage, limit) => {
     const totalPages = Math.ceil(totalItems / limit);
     const startIndex = (currentPage - 1) * limit;
     const paginatedData = filteredData.slice(startIndex, startIndex + limit);
-
+    
     return {
       paginatedClasses: paginatedData,
       totalItems,
@@ -89,9 +90,10 @@ export default function ClassroomScreen() {
   const [selectedStatus, setSelectedStatus] = useState('all');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [cancelDialogVisible, setCancelDialogVisible] = useState(false);
+  const [selectedClassCode, setSelectedClassCode] = useState('');
 
   const { classes } = useSelector((state) => state.classes);
-  // const filteredClasses = useFilteredClasses(classes, selectedStatus);
   const { screens } = useSelector((state) => state.filter);
   const classScreen = screens.class;
   const { search, currentPage, limit } = classScreen;
@@ -175,6 +177,21 @@ export default function ClassroomScreen() {
     );
   }, [classCode, dispatch]);
 
+  // Xử lý sự kiện hủy tham gia lớp
+  const handleCancelJoin = useCallback(() => {
+    if (!selectedClassCode) return;
+
+    dispatch(
+      cancelJoinClass({
+        class_code: selectedClassCode,
+        onSuccess: () => {
+          setCancelDialogVisible(false);
+          // Có thể thêm thông báo thành công nếu muốn
+        },
+      }),
+    );
+  }, [selectedClassCode, dispatch]);
+
   // Render item cho FlatList
   const renderClassItem = useCallback(
     ({ item }) => (
@@ -193,6 +210,14 @@ export default function ClassroomScreen() {
             },
           });
         }}
+        onPressCancel={
+          item.studentClassStatus === 'WS'
+            ? () => {
+                setSelectedClassCode(item.class_code);
+                setCancelDialogVisible(true);
+              }
+            : undefined
+        }
         variant="small"
       />
     ),
@@ -324,6 +349,28 @@ export default function ClassroomScreen() {
             style={styles.input}
           />
         </Dialog>
+
+        {/* Dialog xác nhận hủy tham gia */}
+        <Dialog
+          visible={cancelDialogVisible}
+          title="Hủy tham gia lớp học"
+          message="Bạn có chắc chắn muốn hủy tham gia lớp học này không?"
+          type="custom"
+          onClose={() => setCancelDialogVisible(false)}
+          actions={[
+            {
+              text: 'Hủy',
+              onPress: () => setCancelDialogVisible(false),
+              style: [styles.modalButton, styles.cancelButton],
+              textStyle: styles.cancelText,
+            },
+            {
+              text: 'Xác nhận',
+              onPress: handleCancelJoin,
+              style: styles.modalButton,
+            },
+          ]}
+        />
       </View>
 
       {/* Dialog thông báo thành công */}

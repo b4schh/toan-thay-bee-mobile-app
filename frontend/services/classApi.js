@@ -39,6 +39,12 @@ export const joinClassByCode = async ({ class_code }, token) => {
   });
 };
 
+export const cancelJoinClassByCode = async ({ class_code }, token) => {
+  return api.delete(`/v1/user/class/${class_code}/cancel`, { class_code }, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+};
+
 export const markLearningItemAPI = async ({ learningItemId }, token) => {
   return await api.put(`v1/user/learning-item/${learningItemId}/mark`, {
     headers: { Authorization: `Bearer ${token}` },
@@ -46,7 +52,6 @@ export const markLearningItemAPI = async ({ learningItemId }, token) => {
 }
 
 export const getUncompletedLearningItemApi = async (_, token) => {
-  console.log('getUncompletedLearningItemApi', token);
   return await api.get(`/v1/user/learning-item/uncompleted`, {
     headers: { Authorization: `Bearer ${token}` },
   });

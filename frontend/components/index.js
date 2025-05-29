@@ -13,6 +13,7 @@ export { default as QuestionContent } from './exam/QuestionContent';
 export { default as QuestionStatements } from './exam/QuestionStatements';
 export { default as SavedExamItem } from './exam/SavedExamItem';
 export { default as ExamHistory } from './exam-detail/ExamHistory';
+export { default as ExamRegulationModal } from './exam-detail/ExamRegulationModal';
 export { default as HeaderWithBackButton } from './header/HeaderWithBackButton';
 export { default as DatePickerField } from './input-field/DatePickerField';
 export { default as TextInputField } from './input-field/TextInputField';

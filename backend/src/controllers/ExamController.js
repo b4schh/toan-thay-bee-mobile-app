@@ -36,7 +36,7 @@ export const getExamPublic = async (req, res) => {
   try {
     const userId = req.user.id;
     const search = req.query.search || "";
-    const page = parseInt(req.query.page, 10) || 1;
+    const currentPage = parseInt(req.query.currentPage, 10) || 1;
     const limit = parseInt(req.query.limit, 10) || 10;
     const sortOrder = req.query.sortOrder || "DESC";
 
@@ -59,8 +59,8 @@ export const getExamPublic = async (req, res) => {
       chapterFilters,
     };
 
-    const result = await examService.getPublicExams(userId, search, page, limit, sortOrder, filters);
-
+    const result = await examService.getPublicExams(userId, search, currentPage, limit, sortOrder, filters);
+    
     return res.status(200).json({
       message: "Danh sách đề",
       ...result,
@@ -70,7 +70,7 @@ export const getExamPublic = async (req, res) => {
   }
 };
 
-// examHandlers.js
+// examHandlers.js - Socket version
 export const submitExam = async (socket, attemptId) => {
   try {
     console.log("📝 Nộp bài:", attemptId);
@@ -84,6 +84,36 @@ export const submitExam = async (socket, attemptId) => {
     });
   }
 };
+
+// API version for REST endpoint
+export const submitExamAPI = async (req, res) => {
+  try {
+    const { attemptId } = req.params;
+    const userId = req.user?.id;
+
+    console.log("📝 API Nộp bài:", { attemptId, userId });
+
+    // Validate attemptId
+    if (!attemptId) {
+      return res.status(400).json({
+        message: "attemptId là bắt buộc"
+      });
+    }
+
+    const result = await examService.submitExam(attemptId, userId);
+
+    return res.status(200).json({
+      message: "Nộp bài thành công!",
+      data: result
+    });
+  } catch (error) {
+    console.error("Lỗi khi nộp bài:", error);
+    return res.status(400).json({
+      message: error.message
+    });
+  }
+};
+
 
 export const getExamPublicById = async (req, res) => {
   try {

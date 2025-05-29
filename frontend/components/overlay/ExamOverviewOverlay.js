@@ -10,6 +10,7 @@ import {
 import { useSelector } from 'react-redux';
 import colors from '../../constants/colors';
 import Feather from '@expo/vector-icons/Feather';
+import Ionicons from '@expo/vector-icons/Ionicons';
 import AppText from '../AppText';
 import Button from '../button/Button';
 import Dialog from '../dialog/Dialog';
@@ -27,6 +28,8 @@ export default function ExamOverviewOverlay({
   handleSubmit,
   saveQuestion,
   errorQuestion,
+  markedQuestions,
+  isSubmitting = false,
 }) {
   const [isCancelModalVisible, setCancelModalVisible] = useState(false);
   const [isSubmitModalVisible, setSubmitModalVisible] = useState(false);
@@ -80,7 +83,6 @@ export default function ExamOverviewOverlay({
 
     const isDone = isQuestionDone(q);
     return isDone ? colors.success : colors.sky.white; // Đã làm hoặc Chưa làm
-    // Lưu ý: "Chưa lưu" không được áp dụng ở đây vì chưa có logic cụ thể
   };
 
   // Tính toán số liệu thống kê
@@ -93,7 +95,7 @@ export default function ExamOverviewOverlay({
 
         if (isDone) acc.done += 1; // Đã làm (dựa trên trạng thái thực tế)
         if (isCurrent) acc.inProgress += 1; // Đang làm
-        if (!isDone && !isCurrent) acc.notDone += 1; // Chưa làm
+        if (!isDone) acc.notDone += 1; // Chưa làm
         // Chưa lưu giữ nguyên 0 vì chưa có logic cụ thể
       });
       return acc;
@@ -108,6 +110,19 @@ export default function ExamOverviewOverlay({
       count += sections[i].questions.length;
     }
     return count + questionIndex + 1;
+  };
+
+  const getUnansweredQuestions = () => {
+    const unanswered = [];
+    sections.forEach((section, sIndex) => {
+      section.questions.forEach((q, qIndex) => {
+        if (!isQuestionDone(q)) {
+          const questionNumber = getQuestionNumber(sIndex, qIndex);
+          unanswered.push(questionNumber);
+        }
+      });
+    });
+    return unanswered;
   };
 
   return (
@@ -128,7 +143,9 @@ export default function ExamOverviewOverlay({
       </View>
 
       <View style={styles.timeContainer}>
-        <AppText style={{ fontFamily: 'Inter-Bold' , fontSize: 18 }}>Thời gian còn lại</AppText>
+        <AppText style={{ fontFamily: 'Inter-Bold', fontSize: 18 }}>
+          Thời gian còn lại
+        </AppText>
         <AppText style={styles.timer}>⏳ {remainingTime}</AppText>
       </View>
 
@@ -160,6 +177,17 @@ export default function ExamOverviewOverlay({
                     <AppText style={{ fontFamily: 'Inter-Medium' }}>
                       {questionNumber}
                     </AppText>
+                    {/* Hiển thị icon cờ nếu câu hỏi được đánh dấu */}
+                    {markedQuestions.has(q.id) && (
+                      <View style={styles.flagContainer}>
+                        <Ionicons
+                          name="flag"
+                          size={20}
+                          color={colors.danger}
+                          style={styles.flagIcon}
+                        />
+                      </View>
+                    )}
                   </TouchableOpacity>
                 );
               })}
@@ -183,7 +211,9 @@ export default function ExamOverviewOverlay({
             >
               <AppText style={styles.legendNumber}>{stats.inProgress}</AppText>
             </View>
-            <AppText style={{ fontFamily: 'Inter-Medium' }}>Đang làm</AppText>
+            <AppText style={{ fontFamily: 'Inter-Medium' }}>
+              Câu hiện tại
+            </AppText>
           </View>
           <View style={styles.legendItem}>
             <View
@@ -196,6 +226,14 @@ export default function ExamOverviewOverlay({
             </View>
             <AppText style={{ fontFamily: 'Inter-Medium' }}>Chưa làm</AppText>
           </View>
+          <View style={styles.legendItem}>
+            <View style={[styles.legendColor]}>
+              <Ionicons name="flag" size={24} color={colors.danger} />
+            </View>
+            <AppText style={{ fontFamily: 'Inter-Medium' }}>
+              Được đánh dấu ({Array.from(markedQuestions).length})
+            </AppText>
+          </View>
         </View>
 
         {/* Fixed Bottom Buttons */}
@@ -206,9 +244,10 @@ export default function ExamOverviewOverlay({
             onPress={() => setCancelModalVisible(true)}
           />
           <Button
-            text="Nộp bài"
-            style={styles.button}
+            text={isSubmitting ? 'Đang nộp...' : 'Nộp bài'}
+            style={[styles.button, isSubmitting && { opacity: 0.7 }]}
             onPress={() => setSubmitModalVisible(true)}
+            disabled={isSubmitting}
           />
         </View>
       </ScrollView>
@@ -268,11 +307,16 @@ export default function ExamOverviewOverlay({
             },
           },
           {
-            text: 'Nộp bài',
-            onPress: handleSubmit,
+            text: isSubmitting ? 'Đang nộp...' : 'Nộp bài',
+            onPress: () => {
+              isSubmitting ? null : handleSubmit();
+              setSubmitModalVisible(false);
+            },
+            disabled: isSubmitting,
             style: {
-              backgroundColor: colors.success,
+              backgroundColor: isSubmitting ? colors.sky.base : colors.success,
               flex: 1,
+              opacity: isSubmitting ? 0.7 : 1,
             },
             textStyle: {
               color: colors.sky.white,
@@ -281,7 +325,13 @@ export default function ExamOverviewOverlay({
         ]}
       >
         <AppText style={styles.modalMessage}>
-          Bạn có chắc chắn muốn nộp bài?
+          {(() => {
+            const unanswered = getUnansweredQuestions();
+            if (unanswered.length > 0) {
+              return `Bạn còn các câu ${unanswered.join(', ')} chưa làm, bạn có chắc chắn muốn nộp bài?`;
+            }
+            return 'Bạn có chắc chắn muốn nộp bài?';
+          })()}
         </AppText>
       </Dialog>
     </Animated.View>
@@ -311,7 +361,7 @@ const styles = StyleSheet.create({
   timeContainer: {
     alignItems: 'center',
     padding: 8,
-    gap: 4
+    gap: 4,
   },
   timer: {
     fontSize: 20,
@@ -344,7 +394,21 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     borderWidth: 1, // Thêm viền để ô trắng dễ nhìn hơn
     borderColor: '#ccc',
+    position: 'relative', // Để định vị icon cờ
   },
+  flagContainer: {
+    position: 'absolute',
+    top: -8,
+    right: -8, // Đặt icon cờ ở góc trên bên phải
+    backgroundColor: colors.sky.white,
+    width: 32,
+    height: 32,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: '50%',
+    elevation: 2,
+  },
+  flagIcon: {},
   legendContainer: {
     flexWrap: 'wrap',
     marginTop: 10,
