@@ -130,19 +130,19 @@ export const getPublicExams = async (
     // Đếm tổng số lượt làm cho mỗi đề thi
     const totalAttempts = await db.StudentExamAttempt.findAll({
       attributes: [
-        'examId',
-        [db.sequelize.fn('COUNT', db.sequelize.col('id')), 'totalCount']
+        "examId",
+        [db.sequelize.fn("COUNT", db.sequelize.col("id")), "totalCount"],
       ],
       where: {
-        examId: { [Op.in]: examIds }
+        examId: { [Op.in]: examIds },
       },
-      group: ['examId']
+      group: ["examId"],
     });
-    
+
     // Tạo map để lưu số lượt làm của mỗi đề thi
     const totalAttemptsMap = {};
-    totalAttempts.forEach(item => {
-      totalAttemptsMap[item.examId] = parseInt(item.getDataValue('totalCount'));
+    totalAttempts.forEach((item) => {
+      totalAttemptsMap[item.examId] = parseInt(item.getDataValue("totalCount"));
     });
 
     // Get status for each exam if user is logged in
@@ -164,19 +164,19 @@ export const getPublicExams = async (
     // Lấy số lượt làm của người dùng hiện tại
     const userAttempts = await db.StudentExamAttempt.findAll({
       attributes: [
-        'examId',
-        [db.sequelize.fn('COUNT', db.sequelize.col('id')), 'userCount']
+        "examId",
+        [db.sequelize.fn("COUNT", db.sequelize.col("id")), "userCount"],
       ],
       where: {
         examId: { [Op.in]: examIds },
-        studentId: userId
+        studentId: userId,
       },
-      group: ['examId']
+      group: ["examId"],
     });
-    
+
     const userAttemptsMap = {};
-    userAttempts.forEach(item => {
-      userAttemptsMap[item.examId] = parseInt(item.getDataValue('userCount'));
+    userAttempts.forEach((item) => {
+      userAttemptsMap[item.examId] = parseInt(item.getDataValue("userCount"));
     });
 
     const examListWithStatus = examList.map((exam) => {
@@ -186,7 +186,7 @@ export const getPublicExams = async (
         isDone: status.isDone,
         isSave: status.isSave,
         participantsCount: totalAttemptsMap[exam.id] || 0,
-        userAttemptCount: userAttemptsMap[exam.id] || 0
+        userAttemptCount: userAttemptsMap[exam.id] || 0,
       };
     });
 
@@ -195,13 +195,13 @@ export const getPublicExams = async (
       currentPage: currentPage,
       totalPages: Math.ceil(total / limit),
       totalItems: total,
-      limit: limit
+      limit: limit,
     };
   } catch (error) {
     console.error("Lỗi khi lấy danh sách đề thi công khai:", error);
     return res.status(500).json({
       message: "Đã xảy ra lỗi khi lấy danh sách đề thi",
-      error: error.message
+      error: error.message,
     });
   }
 };
@@ -246,10 +246,28 @@ export const getPublicExamById = async (id, userId = null) => {
     }
   }
 
+  // Đếm tổng số lượt làm của tất cả người dùng
+  const participantsCount = await db.StudentExamAttempt.count({
+    where: { examId: id },
+  });
+
+  // Đếm số lượt làm của người dùng hiện tại
+  let userAttemptCount = 0;
+  if (userId) {
+    userAttemptCount = await db.StudentExamAttempt.count({
+      where: {
+        examId: id,
+        studentId: userId,
+      },
+    });
+  }
+
   return {
     ...examDetail.toJSON(),
     isDone,
     isSave,
+    participantsCount,
+    userAttemptCount,
   };
 };
 
